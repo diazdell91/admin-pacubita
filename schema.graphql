@@ -1,0 +1,1131 @@
+"""
+Indicates exactly one field must be supplied and this field must not be `null`.
+"""
+directive @oneOf on INPUT_OBJECT
+
+enum AddonType {
+  HOME_PICKUP
+  HOME_WRAPPING
+}
+
+type Article {
+  id: UUID!
+  name: String!
+  description: String!
+  imagePath: String!
+  isEnabled: Boolean!
+  variants: [ArticleVariant!]!
+}
+
+type ArticleVariant {
+  id: UUID!
+  name: String!
+  isEnabled: Boolean!
+}
+
+input ArticleInput {
+  id: String!
+}
+
+type ArticleOutput {
+  article: Article!
+}
+
+input ArticlesInput {
+  _: String
+}
+
+type ArticlesOutput {
+  articles: [Article!]!
+}
+
+type Query {
+  article(input: ArticleInput!): ArticleOutput!
+  articles(input: ArticlesInput!): ArticlesOutput!
+  deliveryType(input: DeliveryTypeInput!): DeliveryTypeOutput!
+  deliveryTypes(input: DeliveryTypesInput!): DeliveryTypesOutput!
+  country(input: CountryInput!): CountryOutput!
+  countries(input: CountriesInput!): CountriesOutput!
+  state(input: StateInput!): StateOutput!
+  states(input: StatesInput!): StatesOutput!
+  city(input: CityInput!): CityOutput!
+  cities(input: CitiesInput!): CitiesOutput!
+  province(input: ProvinceInput!): ProvinceOutput!
+  provinces(input: ProvincesInput!): ProvincesOutput!
+  municipality(input: MunicipalityInput!): MunicipalityOutput!
+  municipalities(input: MunicipalitiesInput!): MunicipalitiesOutput!
+  neighborhood(input: NeighborhoodInput!): NeighborhoodOutput!
+  neighborhoods(input: NeighborhoodsInput!): NeighborhoodsOutput!
+  order(input: OrderInput!): OrderOutput!
+  orders(input: OrdersInput!): OrdersOutput!
+  partner(input: PartnerInput!): PartnerOutput!
+  partners(input: PartnersInput!): PartnersOutput!
+  pricingRule(input: PricingRuleInput!): PricingRuleOutput!
+  pricingRules(input: PricingRulesInput!): PricingRulesOutput!
+  _: String
+  currentUser(input: CurrentUserInput!): CurrentUserOutput!
+}
+
+input CreateArticleInput {
+  name: String!
+  description: String!
+  imagePath: String!
+  isEnabled: Boolean!
+}
+
+type CreateArticleOutput {
+  article: Article!
+}
+
+input UpdateArticleInput {
+  id: UUID!
+  name: String!
+  description: String!
+  imagePath: String!
+  isEnabled: Boolean!
+}
+
+type UpdateArticleOutput {
+  article: Article!
+}
+
+input CreateArticleVariantInput {
+  articleId: UUID!
+  name: String!
+  isEnabled: Boolean!
+}
+
+type CreateArticleVariantOutput {
+  articleVariant: ArticleVariant!
+}
+
+input UpdateArticleVariantInput {
+  id: UUID!
+  name: String!
+  isEnabled: Boolean!
+}
+
+type UpdateArticleVariantOutput {
+  articleVariant: ArticleVariant!
+}
+
+type Mutation {
+  createArticle(input: CreateArticleInput!): CreateArticleOutput!
+  updateArticle(input: UpdateArticleInput!): UpdateArticleOutput!
+  createArticleVariant(
+    input: CreateArticleVariantInput!
+  ): CreateArticleVariantOutput!
+  updateArticleVariant(
+    input: UpdateArticleVariantInput!
+  ): UpdateArticleVariantOutput!
+  createDeliveryType(input: CreateDeliveryTypeInput!): CreateDeliveryTypeOutput!
+  updateDeliveryType(input: UpdateDeliveryTypeInput!): UpdateDeliveryTypeOutput!
+  createState(input: CreateStateInput!): CreateStateOutput!
+  updateState(input: UpdateStateInput!): UpdateStateOutput!
+  createCity(input: CreateCityInput!): CreateCityOutput!
+  updateCity(input: UpdateCityInput!): UpdateCityOutput!
+  createProvince(input: CreateProvinceInput!): CreateProvinceOutput!
+  updateProvince(input: UpdateProvinceInput!): UpdateProvinceOutput!
+  createMunicipality(input: CreateMunicipalityInput!): CreateMunicipalityOutput!
+  updateMunicipality(input: UpdateMunicipalityInput!): UpdateMunicipalityOutput!
+  createNeighborhood(input: CreateNeighborhoodInput!): CreateNeighborhoodOutput!
+  updateNeighborhood(input: UpdateNeighborhoodInput!): UpdateNeighborhoodOutput!
+  dropOffOrder(input: DropOffOrderInput!): DropOffOrderOutput!
+  createArticlePricingRule(
+    input: CreateArticlePricingRuleInput!
+  ): CreateArticlePricingRuleOutput!
+  updateArticlePricingRule(
+    input: UpdateArticlePricingRuleInput!
+  ): UpdateArticlePricingRuleOutput!
+  _: String
+  signIn(input: SignInInput!): SignInOutput!
+  signOut(input: SignOutInput!): SignOutOutput!
+  refreshTokens(input: RefreshTokensInput!): RefreshTokensOutput!
+  verifyEmail(input: VerifyEmailInput!): VerifyEmailOutput!
+  verifyPhone(input: VerifyPhoneInput!): VerifyPhoneOutput!
+  sendEmailVerification(
+    input: SendEmailVerificationInput!
+  ): SendEmailVerificationOutput!
+  sendPhoneVerification(
+    input: SendPhoneVerificationInput!
+  ): SendPhoneVerificationOutput!
+  changePassword(input: ChangePasswordInput!): ChangePasswordOutput!
+  enableUser(input: EnableUserInput!): EnableUserOutput!
+  disableUser(input: DisableUserInput!): DisableUserOutput!
+  createDriverUser(input: CreateDriverUserInput!): CreateDriverUserOutput!
+  createPartnerUser(input: CreatePartnerUserInput!): CreatePartnerUserOutput!
+  createPresignPutFileUrl(
+    input: CreatePresignPutFileUrlInput!
+  ): CreatePresignPutFileUrlOutput!
+}
+
+type OrderRecipientAddress {
+  line1: String!
+  line2: String
+  neighborhood: String
+  municipality: String!
+  province: String!
+  postalCode: String!
+  coordinates: AddressCoordinates
+}
+
+type OrderRecipient {
+  firstName: String!
+  lastName: String!
+  phone: String!
+  email: String
+  identityCardNumber: String!
+  address: OrderRecipientAddress!
+  notes: String
+}
+
+type DeliveryOrder implements Order {
+  id: UUID!
+  code: String!
+  externalId: String
+  serviceType: ServiceType!
+  status: OrderStatus!
+  client: OrderClient!
+  driver: OrderDriver
+  partner: OrderPartner!
+  sender: OrderSender!
+  recipient: OrderRecipient!
+  paymentMethod: OrderPaymentMethod!
+  addons: [OrderAddon!]!
+  items: [OrderItem!]!
+  subtotal: Int!
+  discount: Int!
+  vat: Int!
+  total: Int!
+  createdAt: DateTime!
+}
+
+type DeliveryType {
+  id: UUID!
+  name: String!
+  icon: String!
+  description: String!
+  isEnabled: Boolean!
+}
+
+input DeliveryTypeInput {
+  id: UUID!
+}
+
+type DeliveryTypeOutput {
+  deliveryType: DeliveryType!
+}
+
+input DeliveryTypesInput {
+  _: String
+}
+
+type DeliveryTypesOutput {
+  deliveryTypes: [DeliveryType!]!
+}
+
+input CreateDeliveryTypeInput {
+  name: String!
+  icon: String!
+  description: String!
+  isEnabled: Boolean!
+}
+
+type CreateDeliveryTypeOutput {
+  deliveryType: DeliveryType!
+}
+
+input UpdateDeliveryTypeInput {
+  id: UUID!
+  name: String!
+  icon: String!
+  description: String!
+  isEnabled: Boolean!
+}
+
+type UpdateDeliveryTypeOutput {
+  deliveryType: DeliveryType!
+}
+
+type Country {
+  id: UUID!
+  name: String!
+}
+
+type State {
+  id: UUID!
+  name: String!
+}
+
+type City {
+  id: UUID!
+  name: String!
+  zipCodes: [String!]!
+}
+
+type Province {
+  id: UUID!
+  name: String!
+}
+
+type Municipality {
+  id: UUID!
+  name: String!
+}
+
+type Neighborhood {
+  id: UUID!
+  name: String!
+}
+
+input CountryInput {
+  id: UUID!
+}
+
+type CountryOutput {
+  country: Country!
+}
+
+input CountriesInput {
+  _: String
+}
+
+type CountriesOutput {
+  countries: [Country!]!
+}
+
+input StateInput {
+  id: UUID!
+}
+
+type StateOutput {
+  state: State!
+}
+
+input StatesInput {
+  countryId: UUID!
+}
+
+type StatesOutput {
+  states: [State!]!
+}
+
+input CityInput {
+  id: UUID!
+}
+
+type CityOutput {
+  city: City!
+}
+
+input CitiesInput {
+  stateId: UUID!
+}
+
+type CitiesOutput {
+  cities: [City!]!
+}
+
+input ProvinceInput {
+  id: UUID!
+}
+
+type ProvinceOutput {
+  province: Province!
+}
+
+input ProvincesInput {
+  countryId: UUID!
+}
+
+type ProvincesOutput {
+  provinces: [Province!]!
+}
+
+input MunicipalityInput {
+  id: UUID!
+}
+
+type MunicipalityOutput {
+  municipality: Municipality!
+}
+
+input MunicipalitiesInput {
+  provinceId: UUID!
+}
+
+type MunicipalitiesOutput {
+  municipalities: [Municipality!]!
+}
+
+input NeighborhoodInput {
+  id: UUID!
+}
+
+type NeighborhoodOutput {
+  neighborhood: Neighborhood!
+}
+
+input NeighborhoodsInput {
+  municipalityId: UUID!
+}
+
+type NeighborhoodsOutput {
+  neighborhoods: [Neighborhood!]!
+}
+
+input CreateStateInput {
+  name: String!
+  countryId: UUID!
+}
+
+type CreateStateOutput {
+  state: State!
+}
+
+input UpdateStateInput {
+  id: UUID!
+  name: String!
+  countryId: UUID!
+}
+
+type UpdateStateOutput {
+  state: State!
+}
+
+input CreateCityInput {
+  name: String!
+  stateId: UUID!
+  zipCodes: [String!]!
+}
+
+type CreateCityOutput {
+  city: City!
+}
+
+input UpdateCityInput {
+  id: UUID!
+  name: String!
+  stateId: UUID!
+  zipCodes: [String!]!
+}
+
+type UpdateCityOutput {
+  city: City!
+}
+
+input CreateProvinceInput {
+  name: String!
+  countryId: UUID!
+}
+
+type CreateProvinceOutput {
+  province: Province!
+}
+
+input UpdateProvinceInput {
+  id: UUID!
+  name: String!
+  countryId: UUID!
+}
+
+type UpdateProvinceOutput {
+  province: Province!
+}
+
+input CreateMunicipalityInput {
+  name: String!
+  provinceId: UUID!
+}
+
+type CreateMunicipalityOutput {
+  municipality: Municipality!
+}
+
+input UpdateMunicipalityInput {
+  id: UUID!
+  name: String!
+  provinceId: UUID!
+}
+
+type UpdateMunicipalityOutput {
+  municipality: Municipality!
+}
+
+input CreateNeighborhoodInput {
+  name: String!
+  municipalityId: UUID!
+}
+
+type CreateNeighborhoodOutput {
+  neighborhood: Neighborhood!
+}
+
+input UpdateNeighborhoodInput {
+  id: UUID!
+  name: String!
+  municipalityId: UUID!
+}
+
+type UpdateNeighborhoodOutput {
+  neighborhood: Neighborhood!
+}
+
+enum OrderStatus {
+  PENDING
+  FAILED
+  CONFIRMED
+  ACCEPTED
+  PICKED_UP
+  DROPPED_OFF
+  SHIPPED
+  DELIVERED
+  CANCELLED
+}
+
+enum OrderProductType {
+  PACKAGE
+  LUGGAGE
+  ARTICLE
+}
+
+interface IOrderProduct {
+  type: OrderProductType!
+  price: Int!
+}
+
+type OrderContentType {
+  id: UUID!
+  name: String!
+}
+
+type OrderDeliveryType {
+  id: UUID!
+  name: String!
+}
+
+type OrderLuggageSize {
+  id: UUID!
+  price: Int!
+}
+
+type OrderLuggage implements IOrderProduct {
+  type: OrderProductType!
+  price: Int!
+  size: OrderLuggageSize!
+}
+
+type OrderArticleVariant {
+  id: UUID!
+  name: String!
+}
+
+type OrderArticle implements IOrderProduct {
+  type: OrderProductType!
+  price: Int!
+  id: UUID!
+  name: String!
+  description: String!
+  imagePath: String!
+  variant: OrderArticleVariant!
+  deliveryType: OrderDeliveryType!
+}
+
+union OrderProduct = OrderLuggage | OrderArticle
+
+interface IOrderAddon {
+  id: UUID!
+  type: AddonType!
+  total: Int!
+}
+
+type OrderHomePickupAddonHourRange {
+  startAt: String!
+  endAt: String!
+}
+
+type OrderHomePickupAddon implements IOrderAddon {
+  id: UUID!
+  type: AddonType!
+  price: Int!
+  freeThresholdAmount: Int!
+  date: Date!
+  hourRange: OrderHomePickupAddonHourRange!
+  total: Int!
+}
+
+type OrderHomeWrappingAddonHourRange {
+  startAt: String!
+  endAt: String!
+}
+
+type OrderHomeWrappingAddon implements IOrderAddon {
+  id: UUID!
+  type: AddonType!
+  price: Int!
+  freeThresholdAmount: Int!
+  date: Date!
+  hourRange: OrderHomeWrappingAddonHourRange!
+  total: Int!
+}
+
+union OrderAddon = OrderHomePickupAddon | OrderHomeWrappingAddon
+
+type OrderClient {
+  id: UUID!
+  firstName: String!
+  lastName: String!
+}
+
+type OrderDriver {
+  id: UUID!
+  firstName: String!
+  lastName: String!
+  vehicle: OrderVehicle!
+}
+
+type OrderPartner {
+  id: UUID!
+  name: String!
+}
+
+type OrderVehicle {
+  id: UUID!
+  make: String!
+  model: String!
+  year: Int!
+  color: String!
+  plate: String!
+}
+
+type AddressCoordinates {
+  latitude: Float!
+  longitude: Float!
+}
+
+type OrderSenderAddress {
+  line1: String!
+  line2: String
+  city: String!
+  state: String!
+  zipCode: String!
+  coordinates: AddressCoordinates!
+}
+
+type OrderSender {
+  firstName: String!
+  lastName: String!
+  phone: String!
+  email: String
+  address: OrderSenderAddress!
+}
+
+interface IOrderPaymentMethod {
+  id: UUID!
+  type: PaymentMethodType!
+}
+
+type OrderCard implements IOrderPaymentMethod {
+  id: UUID!
+  type: PaymentMethodType!
+  brand: String!
+  last4: String!
+  expMonth: Int!
+  expYear: Int!
+}
+
+type OrderPartnerBalance implements IOrderPaymentMethod {
+  id: UUID!
+  type: PaymentMethodType!
+}
+
+union OrderPaymentMethod = OrderCard | OrderPartnerBalance
+
+type OrderItem {
+  id: UUID!
+  product: OrderProduct!
+  quantity: Int!
+  total: Int!
+}
+
+interface Order {
+  id: UUID!
+  code: String!
+  externalId: String
+  serviceType: ServiceType!
+  status: OrderStatus!
+  client: OrderClient!
+  driver: OrderDriver
+  partner: OrderPartner!
+  sender: OrderSender!
+  paymentMethod: OrderPaymentMethod!
+  addons: [OrderAddon!]!
+  items: [OrderItem!]!
+  subtotal: Int!
+  discount: Int!
+  vat: Int!
+  total: Int!
+  createdAt: DateTime!
+}
+
+input OrderInput {
+  id: UUID!
+}
+
+type OrderOutput {
+  order: Order!
+}
+
+input OrdersInput {
+  code: String
+  status: OrderStatus
+  serviceType: ServiceType
+  clientId: UUID
+  driverId: UUID
+  partnerId: UUID
+  externalId: String
+  sorting: Sorting
+  pagination: Pagination
+}
+
+input Sorting {
+  field: String!
+  order: Int!
+}
+
+input Pagination {
+  page: Int!
+  size: Int!
+}
+
+type OrdersOutput {
+  total: Int!
+  orders: [Order!]!
+}
+
+input DropOffOrderInput {
+  id: UUID!
+}
+
+type DropOffOrderOutput {
+  _: String
+}
+
+type Partner {
+  id: UUID!
+  name: String!
+}
+
+input PartnerInput {
+  id: UUID!
+}
+
+type PartnerOutput {
+  partner: Partner!
+}
+
+input PartnersInput {
+  _: String
+}
+
+type PartnersOutput {
+  partners: [Partner!]!
+}
+
+enum PaymentMethodType {
+  CARD
+  PARTNER_BALANCE
+}
+
+enum PricingRuleType {
+  ARTICLE
+  PACKAGE
+}
+
+enum LocationType {
+  PROVINCE
+  MUNICIPALITY
+  NEIGHBORHOOD
+}
+
+type Location {
+  id: UUID!
+  type: LocationType!
+  name: String!
+}
+
+type PricingRulePartner {
+  id: UUID!
+  name: String!
+}
+
+type PricingRuleLocation {
+  id: UUID!
+  name: String!
+}
+
+type PricingRuleDeliveryType {
+  id: UUID!
+  name: String!
+}
+
+type PricingRuleContentType {
+  id: UUID!
+  name: String!
+}
+
+type PricingRuleArticle {
+  id: UUID!
+  name: String!
+}
+
+type PricingRuleArticleVariant {
+  id: UUID!
+  name: String!
+}
+
+interface IPricingRule {
+  id: UUID!
+  type: PricingRuleType!
+  isEnabled: Boolean!
+  price: Int!
+  partner: PricingRulePartner!
+  location: PricingRuleLocation!
+  deliveryType: PricingRuleDeliveryType!
+}
+
+type ArticlePricingRule implements IPricingRule {
+  id: UUID!
+  type: PricingRuleType!
+  isEnabled: Boolean!
+  price: Int!
+  partner: PricingRulePartner!
+  location: PricingRuleLocation!
+  deliveryType: PricingRuleDeliveryType!
+  article: PricingRuleArticle!
+  articleVariant: PricingRuleArticleVariant!
+}
+
+union PricingRule = ArticlePricingRule
+
+input PricingRuleInput {
+  id: UUID!
+}
+
+type PricingRuleOutput {
+  pricingRule: PricingRule!
+}
+
+input PricingRulesInput {
+  type: PricingRuleType
+  isEnabled: Boolean
+  partnerId: UUID
+  locationId: UUID
+  contentTypeId: UUID
+  deliveryTypeId: UUID
+  articleId: UUID
+  articleVariantId: UUID
+}
+
+type PricingRulesOutput {
+  pricingRules: [PricingRule!]!
+}
+
+input CreateArticlePricingRuleInput {
+  isEnabled: Boolean!
+  price: Int!
+  partnerId: UUID!
+  locationId: UUID!
+  deliveryTypeId: UUID!
+  articleId: UUID!
+  articleVariantId: UUID!
+}
+
+type CreateArticlePricingRuleOutput {
+  articlePricingRule: ArticlePricingRule!
+}
+
+input UpdateArticlePricingRuleInput {
+  id: UUID!
+  isEnabled: Boolean!
+  price: Int!
+  partnerId: UUID!
+  locationId: UUID!
+  articleId: UUID!
+  articleVariantId: UUID!
+}
+
+type UpdateArticlePricingRuleOutput {
+  articlePricingRule: ArticlePricingRule!
+}
+
+"""
+A field whose value is a generic Universally Unique Identifier: https://en.wikipedia.org/wiki/Universally_unique_identifier.
+"""
+scalar UUID
+
+"""
+A date string, such as 2007-12-03, compliant with the `full-date` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar.
+"""
+scalar Date
+
+"""
+A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the `date-time` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar.
+"""
+scalar DateTime
+
+input SignInInput {
+  email: String
+  phone: String
+  password: String!
+}
+
+type SignInOutput {
+  tokens: Tokens!
+}
+
+input SignOutInput {
+  _: String
+}
+
+type SignOutOutput {
+  _: String
+}
+
+input RefreshTokensInput {
+  _: String
+}
+
+type RefreshTokensOutput {
+  tokens: Tokens!
+}
+
+type Tokens {
+  accessToken: String!
+  refreshToken: String!
+}
+
+input VerifyEmailInput {
+  email: String!
+  code: String!
+}
+
+type VerifyEmailOutput {
+  tokens: Tokens!
+}
+
+input VerifyPhoneInput {
+  phone: String!
+  code: String!
+}
+
+type VerifyPhoneOutput {
+  tokens: Tokens!
+}
+
+input SendEmailVerificationInput {
+  email: String!
+}
+
+type SendEmailVerificationOutput {
+  _: String
+}
+
+input SendPhoneVerificationInput {
+  phone: String!
+}
+
+type SendPhoneVerificationOutput {
+  _: String
+}
+
+input ChangePasswordInput {
+  oldPassword: String!
+  newPassword: String!
+}
+
+type ChangePasswordOutput {
+  _: String
+}
+
+enum ServiceType {
+  DELIVERY
+  WRAPPING
+}
+
+enum FileType {
+  DRIVER_PHOTO
+  DRIVER_LICENSE_FRONT
+  DRIVER_LICENSE_BACK
+}
+
+enum UserType {
+  CLIENT
+  DRIVER
+  PARTNER
+  STAFF
+}
+
+type UserPartner {
+  id: UUID!
+  name: String!
+}
+
+interface IUser {
+  id: UUID!
+  type: UserType!
+  isEnabled: Boolean!
+  partner: UserPartner!
+  firstName: String!
+  lastName: String!
+  email: String!
+  isEmailVerified: Boolean!
+  phone: String!
+  isPhoneVerified: Boolean!
+  createdAt: DateTime!
+}
+
+type ClientUser implements IUser {
+  id: UUID!
+  type: UserType!
+  isEnabled: Boolean!
+  partner: UserPartner!
+  firstName: String!
+  lastName: String!
+  email: String!
+  isEmailVerified: Boolean!
+  phone: String!
+  isPhoneVerified: Boolean!
+  createdAt: DateTime!
+}
+
+type DriverUser implements IUser {
+  id: UUID!
+  type: UserType!
+  isEnabled: Boolean!
+  partner: UserPartner!
+  firstName: String!
+  lastName: String!
+  email: String!
+  isEmailVerified: Boolean!
+  phone: String!
+  isPhoneVerified: Boolean!
+  createdAt: DateTime!
+}
+
+type PartnerUser implements IUser {
+  id: UUID!
+  type: UserType!
+  isEnabled: Boolean!
+  partner: UserPartner!
+  firstName: String!
+  lastName: String!
+  email: String!
+  isEmailVerified: Boolean!
+  phone: String!
+  isPhoneVerified: Boolean!
+  createdAt: DateTime!
+}
+
+type StaffUser implements IUser {
+  id: UUID!
+  type: UserType!
+  isEnabled: Boolean!
+  partner: UserPartner!
+  firstName: String!
+  lastName: String!
+  email: String!
+  isEmailVerified: Boolean!
+  phone: String!
+  isPhoneVerified: Boolean!
+  createdAt: DateTime!
+}
+
+type User {
+  id: UUID!
+  firstName: String!
+  lastName: String!
+  email: String!
+  phone: String!
+  createdAt: DateTime!
+}
+
+input CurrentUserInput {
+  _: String
+}
+
+type CurrentUserOutput {
+  user: User!
+}
+
+input CreatePresignPutFileUrlInput {
+  fileName: String!
+  fileType: FileType!
+}
+
+type CreatePresignPutFileUrlOutput {
+  url: String!
+  path: String!
+}
+
+input EnableUserInput {
+  id: UUID!
+}
+
+type EnableUserOutput {
+  _: String
+}
+
+input DisableUserInput {
+  id: UUID!
+}
+
+type DisableUserOutput {
+  _: String
+}
+
+input CreateDriverUserInput {
+  partnerId: UUID!
+  firstName: String!
+  lastName: String!
+  email: String!
+  phone: String!
+  password: String!
+}
+
+type CreateDriverUserOutput {
+  driverUser: DriverUser!
+}
+
+input CreatePartnerUserInput {
+  partnerId: UUID!
+  firstName: String!
+  lastName: String!
+  email: String!
+  phone: String!
+  password: String!
+}
+
+type CreatePartnerUserOutput {
+  partnerUser: PartnerUser!
+}
+
+type WrappingOrder implements Order {
+  id: UUID!
+  code: String!
+  externalId: String
+  serviceType: ServiceType!
+  status: OrderStatus!
+  client: OrderClient!
+  driver: OrderDriver
+  partner: OrderPartner!
+  sender: OrderSender!
+  paymentMethod: OrderPaymentMethod!
+  addons: [OrderAddon!]!
+  items: [OrderItem!]!
+  subtotal: Int!
+  discount: Int!
+  vat: Int!
+  total: Int!
+  createdAt: DateTime!
+}
