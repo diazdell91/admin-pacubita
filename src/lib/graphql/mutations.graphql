@@ -1,0 +1,209 @@
+# =============================================================================
+# AUTHENTICATION MUTATIONS
+# =============================================================================
+
+mutation SignIn($input: SignInInput!) {
+  signIn(input: $input) {
+    tokens {
+      accessToken
+      refreshToken
+    }
+  }
+}
+
+mutation SignOut($input: SignOutInput!) {
+  signOut(input: $input) {
+    _
+  }
+}
+
+mutation RefreshTokens($input: RefreshTokensInput!) {
+  refreshTokens(input: $input) {
+    tokens {
+      accessToken
+      refreshToken
+    }
+  }
+}
+
+# =============================================================================
+# USER MUTATIONS
+# =============================================================================
+
+mutation EnableUser($input: EnableUserInput!) {
+  enableUser(input: $input) {
+    _
+  }
+}
+
+mutation DisableUser($input: DisableUserInput!) {
+  disableUser(input: $input) {
+    _
+  }
+}
+
+# =============================================================================
+# ORDER MUTATIONS
+# =============================================================================
+
+mutation DropOffOrder($input: DropOffOrderInput!) {
+  dropOffOrder(input: $input) {
+    _
+  }
+}
+
+# =============================================================================
+# ARTICLE MUTATIONS
+# =============================================================================
+
+mutation CreateArticle($input: CreateArticleInput!) {
+  createArticle(input: $input) {
+    article {
+      id
+      name
+      description
+      imagePath
+      isEnabled
+    }
+  }
+}
+
+mutation UpdateArticle($input: UpdateArticleInput!) {
+  updateArticle(input: $input) {
+    article {
+      id
+      name
+      description
+      imagePath
+      isEnabled
+    }
+  }
+}
+
+mutation CreateDeliveryType($input: CreateDeliveryTypeInput!) {
+  createDeliveryType(input: $input) {
+    deliveryType {
+      id
+      name
+      description
+      isEnabled
+    }
+  }
+}
+
+mutation UpdateDeliveryType($input: UpdateDeliveryTypeInput!) {
+  updateDeliveryType(input: $input) {
+    deliveryType {
+      id
+      name
+      description
+      isEnabled
+    }
+  }
+}
+
+# =============================================================================
+# LOCATION MUTATIONS
+# =============================================================================
+
+mutation CreateState($input: CreateStateInput!) {
+  createState(input: $input) {
+    state {
+      id
+      name
+    }
+  }
+}
+
+mutation UpdateState($input: UpdateStateInput!) {
+  updateState(input: $input) {
+    state {
+      id
+      name
+    }
+  }
+}
+
+mutation CreateCity($input: CreateCityInput!) {
+  createCity(input: $input) {
+    city {
+      id
+      name
+      zipCodes
+    }
+  }
+}
+
+mutation UpdateCity($input: UpdateCityInput!) {
+  updateCity(input: $input) {
+    city {
+      id
+      name
+      zipCodes
+    }
+  }
+}
+
+mutation CreateProvince($input: CreateProvinceInput!) {
+  createProvince(input: $input) {
+    province {
+      id
+      name
+    }
+  }
+}
+
+mutation UpdateProvince($input: UpdateProvinceInput!) {
+  updateProvince(input: $input) {
+    province {
+      id
+      name
+    }
+  }
+}
+
+mutation CreateMunicipality($input: CreateMunicipalityInput!) {
+  createMunicipality(input: $input) {
+    municipality {
+      id
+      name
+    }
+  }
+}
+
+mutation UpdateMunicipality($input: UpdateMunicipalityInput!) {
+  updateMunicipality(input: $input) {
+    municipality {
+      id
+      name
+    }
+  }
+}
+
+mutation CreateNeighborhood($input: CreateNeighborhoodInput!) {
+  createNeighborhood(input: $input) {
+    neighborhood {
+      id
+      name
+    }
+  }
+}
+
+mutation UpdateNeighborhood($input: UpdateNeighborhoodInput!) {
+  updateNeighborhood(input: $input) {
+    neighborhood {
+      id
+      name
+    }
+  }
+}
+
+# =============================================================================
+# FILE UPLOAD MUTATIONS
+# =============================================================================
+
+mutation CreatePresignPutFileUrl($input: CreatePresignPutFileUrlInput!) {
+  createPresignPutFileUrl(input: $input) {
+    url
+  }
+}

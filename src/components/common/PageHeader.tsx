@@ -14,7 +14,7 @@ export function PageHeader({
   description,
   actionLabel,
   onAction,
-  children
+  children,
 }: PageHeaderProps) {
   return (
     <div className="flex flex-col gap-4 pb-6 border-b">
@@ -25,7 +25,7 @@ export function PageHeader({
             <p className="text-muted-foreground">{description}</p>
           )}
         </div>
-        
+
         {actionLabel && onAction && (
           <Button onClick={onAction}>
             <Plus className="mr-2 h-4 w-4" />
@@ -33,7 +33,7 @@ export function PageHeader({
           </Button>
         )}
       </div>
-      
+
       {children && (
         <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
           {children}

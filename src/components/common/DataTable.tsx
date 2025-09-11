@@ -18,18 +18,17 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { 
-  ChevronLeft, 
-  ChevronRight, 
-  ChevronsLeft, 
+import {
+  ChevronLeft,
+  ChevronRight,
+  ChevronsLeft,
   ChevronsRight,
   Search,
   ArrowUpDown,
   ArrowUp,
-  ArrowDown
+  ArrowDown,
 } from 'lucide-react';
 import { LoadingSpinner } from './LoadingSpinner';
-import { Badge } from '@/components/ui/badge';
 
 interface Column<T> {
   key: keyof T;
@@ -45,6 +44,9 @@ interface DataTableProps<T> {
   searchable?: boolean;
   searchPlaceholder?: string;
   pageSize?: number;
+  totalItems?: number;
+  currentPage?: number;
+  onPageChange?: (page: number) => void;
   onRowClick?: (row: T) => void;
 }
 
@@ -53,26 +55,32 @@ interface SortConfig<T> {
   direction: 'asc' | 'desc';
 }
 
-export function DataTable<T extends Record<string, any>>({
+export function DataTable<T extends Record<string, unknown>>({
   data,
   columns,
   loading = false,
   searchable = true,
   searchPlaceholder = 'Buscar...',
   pageSize = 10,
+  totalItems,
+  currentPage: externalCurrentPage,
+  onPageChange,
   onRowClick,
 }: DataTableProps<T>) {
   const [searchTerm, setSearchTerm] = React.useState('');
-  const [currentPage, setCurrentPage] = React.useState(1);
+  const [internalCurrentPage, setInternalCurrentPage] = React.useState(1);
   const [sortConfig, setSortConfig] = React.useState<SortConfig<T>>({
     key: null,
     direction: 'asc',
   });
 
+  const currentPage = externalCurrentPage || internalCurrentPage;
+  const handlePageChange = onPageChange || setInternalCurrentPage;
+
   // Filter data based on search term
   const filteredData = React.useMemo(() => {
     if (!searchTerm) return data;
-    
+
     return data.filter((item) =>
       Object.values(item).some((value) =>
         value?.toString().toLowerCase().includes(searchTerm.toLowerCase())
@@ -98,13 +106,18 @@ export function DataTable<T extends Record<string, any>>({
     });
   }, [filteredData, sortConfig]);
 
-  // Paginate data
-  const paginatedData = React.useMemo(() => {
+  // Use external pagination when totalItems is provided, otherwise use local pagination
+  const localPaginatedData = React.useMemo(() => {
     const startIndex = (currentPage - 1) * pageSize;
     return sortedData.slice(startIndex, startIndex + pageSize);
   }, [sortedData, currentPage, pageSize]);
 
-  const totalPages = Math.ceil(sortedData.length / pageSize);
+  const paginatedData = totalItems ? data : localPaginatedData;
+
+  const totalPages = totalItems
+    ? Math.ceil(totalItems / pageSize)
+    : Math.ceil(sortedData.length / pageSize);
+  const totalCount = totalItems || sortedData.length;
 
   const handleSort = (key: keyof T) => {
     setSortConfig((prev) => ({
@@ -130,11 +143,7 @@ export function DataTable<T extends Record<string, any>>({
         {searchable && (
           <div className="relative">
             <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
-            <Input
-              placeholder={searchPlaceholder}
-              className="pl-8"
-              disabled
-            />
+            <Input placeholder={searchPlaceholder} className="pl-8" disabled />
           </div>
         )}
         <div className="border rounded-md">
@@ -142,9 +151,7 @@ export function DataTable<T extends Record<string, any>>({
             <TableHeader>
               <TableRow>
                 {columns.map((column) => (
-                  <TableHead key={String(column.key)}>
-                    {column.label}
-                  </TableHead>
+                  <TableHead key={String(column.key)}>{column.label}</TableHead>
                 ))}
               </TableRow>
             </TableHeader>
@@ -176,9 +183,11 @@ export function DataTable<T extends Record<string, any>>({
           <TableHeader>
             <TableRow>
               {columns.map((column) => (
-                <TableHead 
-                  key={String(column.key)} 
-                  className={column.sortable ? 'cursor-pointer hover:bg-muted/50' : ''}
+                <TableHead
+                  key={String(column.key)}
+                  className={
+                    column.sortable ? 'cursor-pointer hover:bg-muted/50' : ''
+                  }
                   onClick={() => column.sortable && handleSort(column.key)}
                 >
                   <div className="flex items-center space-x-2">
@@ -192,8 +201,8 @@ export function DataTable<T extends Record<string, any>>({
           <TableBody>
             {paginatedData.length === 0 ? (
               <TableRow>
-                <TableCell 
-                  colSpan={columns.length} 
+                <TableCell
+                  colSpan={columns.length}
                   className="text-center py-8 text-muted-foreground"
                 >
                   No se encontraron resultados
@@ -203,15 +212,16 @@ export function DataTable<T extends Record<string, any>>({
               paginatedData.map((row, index) => (
                 <TableRow
                   key={index}
-                  className={onRowClick ? 'cursor-pointer hover:bg-muted/50' : ''}
+                  className={
+                    onRowClick ? 'cursor-pointer hover:bg-muted/50' : ''
+                  }
                   onClick={() => onRowClick?.(row)}
                 >
                   {columns.map((column) => (
                     <TableCell key={String(column.key)}>
-                      {column.render 
+                      {column.render
                         ? column.render(row[column.key], row)
-                        : row[column.key]
-                      }
+                        : row[column.key]}
                     </TableCell>
                   ))}
                 </TableRow>
@@ -226,15 +236,15 @@ export function DataTable<T extends Record<string, any>>({
         <div className="flex items-center justify-between">
           <div className="text-sm text-muted-foreground">
             Mostrando {(currentPage - 1) * pageSize + 1} a{' '}
-            {Math.min(currentPage * pageSize, sortedData.length)} de{' '}
-            {sortedData.length} resultados
+            {Math.min(currentPage * pageSize, totalCount)} de {totalCount}{' '}
+            resultados
           </div>
-          
+
           <div className="flex items-center space-x-2">
             <Button
               variant="outline"
               size="sm"
-              onClick={() => setCurrentPage(1)}
+              onClick={() => handlePageChange(1)}
               disabled={currentPage === 1}
             >
               <ChevronsLeft className="h-4 w-4" />
@@ -242,36 +252,38 @@ export function DataTable<T extends Record<string, any>>({
             <Button
               variant="outline"
               size="sm"
-              onClick={() => setCurrentPage(currentPage - 1)}
+              onClick={() => handlePageChange(currentPage - 1)}
               disabled={currentPage === 1}
             >
               <ChevronLeft className="h-4 w-4" />
             </Button>
-            
+
             <div className="flex items-center space-x-1">
               <span className="text-sm">Página</span>
               <Select
                 value={currentPage.toString()}
-                onValueChange={(value) => setCurrentPage(Number(value))}
+                onValueChange={(value) => handlePageChange(Number(value))}
               >
                 <SelectTrigger className="w-16 h-8">
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
-                  {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
-                    <SelectItem key={page} value={page.toString()}>
-                      {page}
-                    </SelectItem>
-                  ))}
+                  {Array.from({ length: totalPages }, (_, i) => i + 1).map(
+                    (page) => (
+                      <SelectItem key={page} value={page.toString()}>
+                        {page}
+                      </SelectItem>
+                    )
+                  )}
                 </SelectContent>
               </Select>
               <span className="text-sm">de {totalPages}</span>
             </div>
-            
+
             <Button
               variant="outline"
               size="sm"
-              onClick={() => setCurrentPage(currentPage + 1)}
+              onClick={() => handlePageChange(currentPage + 1)}
               disabled={currentPage === totalPages}
             >
               <ChevronRight className="h-4 w-4" />
@@ -279,7 +291,7 @@ export function DataTable<T extends Record<string, any>>({
             <Button
               variant="outline"
               size="sm"
-              onClick={() => setCurrentPage(totalPages)}
+              onClick={() => handlePageChange(totalPages)}
               disabled={currentPage === totalPages}
             >
               <ChevronsRight className="h-4 w-4" />

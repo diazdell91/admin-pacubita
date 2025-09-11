@@ -1,0 +1,283 @@
+# =============================================================================
+# FRAGMENTS
+# =============================================================================
+
+# Basic fragments for core types
+fragment ArticleFragment on Article {
+  id
+  name
+  description
+  imagePath
+  isEnabled
+}
+
+fragment ArticleVariantFragment on ArticleVariant {
+  id
+  name
+  isEnabled
+}
+
+fragment CountryFragment on Country {
+  id
+  name
+}
+
+fragment StateFragment on State {
+  id
+  name
+}
+
+fragment CityFragment on City {
+  id
+  name
+  zipCodes
+}
+
+fragment ProvinceFragment on Province {
+  id
+  name
+}
+
+fragment MunicipalityFragment on Municipality {
+  id
+  name
+}
+
+fragment NeighborhoodFragment on Neighborhood {
+  id
+  name
+}
+
+fragment DeliveryTypeFragment on DeliveryType {
+  id
+  name
+  icon
+  description
+  isEnabled
+}
+
+fragment PartnerFragment on Partner {
+  id
+  name
+}
+
+fragment UserFragment on User {
+  id
+  firstName
+  lastName
+  email
+  phone
+}
+
+# =============================================================================
+# QUERIES
+# =============================================================================
+
+# Auth Queries
+query CurrentUser($input: CurrentUserInput!) {
+  currentUser(input: $input) {
+    user {
+      ...UserFragment
+    }
+  }
+}
+
+# Article Queries
+query GetArticles($input: ArticlesInput!) {
+  articles(input: $input) {
+    articles {
+      ...ArticleFragment
+      variants {
+        ...ArticleVariantFragment
+      }
+    }
+  }
+}
+
+query GetArticle($input: ArticleInput!) {
+  article(input: $input) {
+    article {
+      ...ArticleFragment
+      variants {
+        ...ArticleVariantFragment
+      }
+    }
+  }
+}
+
+# Delivery Type Queries
+query GetDeliveryTypes($input: DeliveryTypesInput!) {
+  deliveryTypes(input: $input) {
+    deliveryTypes {
+      ...DeliveryTypeFragment
+    }
+  }
+}
+
+query GetDeliveryType($input: DeliveryTypeInput!) {
+  deliveryType(input: $input) {
+    deliveryType {
+      ...DeliveryTypeFragment
+    }
+  }
+}
+
+# Location Queries
+query GetCountries($input: CountriesInput!) {
+  countries(input: $input) {
+    countries {
+      ...CountryFragment
+    }
+  }
+}
+
+query GetCountry($input: CountryInput!) {
+  country(input: $input) {
+    country {
+      ...CountryFragment
+    }
+  }
+}
+
+query GetStates($input: StatesInput!) {
+  states(input: $input) {
+    states {
+      ...StateFragment
+    }
+  }
+}
+
+query GetState($input: StateInput!) {
+  state(input: $input) {
+    state {
+      ...StateFragment
+    }
+  }
+}
+
+query GetCities($input: CitiesInput!) {
+  cities(input: $input) {
+    cities {
+      ...CityFragment
+    }
+  }
+}
+
+query GetCity($input: CityInput!) {
+  city(input: $input) {
+    city {
+      ...CityFragment
+    }
+  }
+}
+
+query GetProvinces($input: ProvincesInput!) {
+  provinces(input: $input) {
+    provinces {
+      ...ProvinceFragment
+    }
+  }
+}
+
+query GetProvince($input: ProvinceInput!) {
+  province(input: $input) {
+    province {
+      ...ProvinceFragment
+    }
+  }
+}
+
+query GetMunicipalities($input: MunicipalitiesInput!) {
+  municipalities(input: $input) {
+    municipalities {
+      ...MunicipalityFragment
+    }
+  }
+}
+
+query GetMunicipality($input: MunicipalityInput!) {
+  municipality(input: $input) {
+    municipality {
+      ...MunicipalityFragment
+    }
+  }
+}
+
+query GetNeighborhoods($input: NeighborhoodsInput!) {
+  neighborhoods(input: $input) {
+    neighborhoods {
+      ...NeighborhoodFragment
+    }
+  }
+}
+
+query GetNeighborhood($input: NeighborhoodInput!) {
+  neighborhood(input: $input) {
+    neighborhood {
+      ...NeighborhoodFragment
+    }
+  }
+}
+
+# Order Queries
+query GetOrders($input: OrdersInput!) {
+  orders(input: $input) {
+    orders {
+      id
+      status
+      serviceType
+    }
+  }
+}
+
+query GetOrder($input: OrderInput!) {
+  order(input: $input) {
+    order {
+      id
+      status
+      serviceType
+    }
+  }
+}
+
+# Partner Queries
+query GetPartners($input: PartnersInput!) {
+  partners(input: $input) {
+    partners {
+      ...PartnerFragment
+    }
+  }
+}
+
+query GetPartner($input: PartnerInput!) {
+  partner(input: $input) {
+    partner {
+      ...PartnerFragment
+    }
+  }
+}
+
+# Pricing Queries
+query GetPricingRules($input: PricingRulesInput!) {
+  pricingRules(input: $input) {
+    pricingRules {
+      ... on ArticlePricingRule {
+        id
+        type
+        isEnabled
+      }
+    }
+  }
+}
+
+query GetPricingRule($input: PricingRuleInput!) {
+  pricingRule(input: $input) {
+    pricingRule {
+      ... on ArticlePricingRule {
+        id
+        type
+        isEnabled
+      }
+    }
+  }
+}

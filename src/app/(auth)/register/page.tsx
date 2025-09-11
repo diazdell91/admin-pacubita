@@ -41,13 +41,13 @@ export default function RegisterPage() {
 
       // TODO: Implement Apollo GraphQL CreateUser mutation
       // Temporary mock registration
-      if (Object.values(formData).every(value => value.trim() !== '')) {
+      if (Object.values(formData).every((value) => value.trim() !== '')) {
         toast.success('Cuenta creada correctamente');
         router.push('/login');
       } else {
         toast.error('Todos los campos son obligatorios');
       }
-    } catch (error) {
+    } catch {
       toast.error('Error al crear la cuenta');
     } finally {
       setIsLoading(false);
@@ -68,7 +68,7 @@ export default function RegisterPage() {
           Regístrate para acceder al panel administrativo
         </p>
       </CardHeader>
-      
+
       <CardContent>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="grid grid-cols-2 gap-4">
@@ -87,7 +87,7 @@ export default function RegisterPage() {
                 />
               </div>
             </div>
-            
+
             <div className="space-y-2">
               <Label htmlFor="lastName">Apellido</Label>
               <div className="relative">
@@ -104,7 +104,7 @@ export default function RegisterPage() {
               </div>
             </div>
           </div>
-          
+
           <div className="space-y-2">
             <Label htmlFor="email">Email</Label>
             <div className="relative">
@@ -121,7 +121,7 @@ export default function RegisterPage() {
               />
             </div>
           </div>
-          
+
           <div className="space-y-2">
             <Label htmlFor="phone">Teléfono</Label>
             <div className="relative">
@@ -138,7 +138,7 @@ export default function RegisterPage() {
               />
             </div>
           </div>
-          
+
           <div className="space-y-2">
             <Label htmlFor="password">Contraseña</Label>
             <div className="relative">
@@ -158,11 +158,15 @@ export default function RegisterPage() {
                 onClick={() => setShowPassword(!showPassword)}
                 className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600"
               >
-                {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                {showPassword ? (
+                  <EyeOff className="h-4 w-4" />
+                ) : (
+                  <Eye className="h-4 w-4" />
+                )}
               </button>
             </div>
           </div>
-          
+
           <div className="space-y-2">
             <Label htmlFor="confirmPassword">Confirmar Contraseña</Label>
             <div className="relative">
@@ -179,7 +183,7 @@ export default function RegisterPage() {
               />
             </div>
           </div>
-          
+
           <div className="flex items-center space-x-2">
             <input
               id="terms"
@@ -194,7 +198,7 @@ export default function RegisterPage() {
               </Link>
             </Label>
           </div>
-          
+
           <Button
             type="submit"
             className="w-full"
@@ -204,7 +208,7 @@ export default function RegisterPage() {
             {isLoading ? 'Creando cuenta...' : 'Crear Cuenta'}
           </Button>
         </form>
-        
+
         <div className="mt-6 text-center">
           <p className="text-sm text-gray-600">
             ¿Ya tienes cuenta?{' '}

@@ -17,6 +17,7 @@ import { SidebarTrigger } from '@/components/ui/sidebar';
 import { Separator } from '@/components/ui/separator';
 import { Breadcrumbs } from '@/components/layout/Breadcrumbs';
 import { useAuth } from '@/hooks/useAuth';
+import Link from 'next/link';
 
 export function Header() {
   const { user, signOut } = useAuth();
@@ -34,7 +35,7 @@ export function Header() {
       <SidebarTrigger className="-ml-1" />
       <Separator orientation="vertical" className="mr-2 h-4" />
       <Breadcrumbs />
-      
+
       <div className="ml-auto flex items-center gap-2">
         {/* Search */}
         <div className="relative hidden md:block">
@@ -45,7 +46,7 @@ export function Header() {
             className="w-80 pl-8"
           />
         </div>
-        
+
         {/* Notifications */}
         <Button variant="ghost" size="sm" className="relative">
           <Bell className="h-4 w-4" />
@@ -56,7 +57,7 @@ export function Header() {
             3
           </Badge>
         </Button>
-        
+
         {/* User Menu */}
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
@@ -81,16 +82,18 @@ export function Header() {
               </div>
             </DropdownMenuLabel>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>
-              <User className="mr-2 h-4 w-4" />
-              <span>Perfil</span>
+            <DropdownMenuItem asChild>
+              <Link href="/dashboard/profile">
+                <User className="mr-2 h-4 w-4" />
+                <span>Perfil</span>
+              </Link>
             </DropdownMenuItem>
             <DropdownMenuItem>
               <Bell className="mr-2 h-4 w-4" />
               <span>Notificaciones</span>
             </DropdownMenuItem>
             <DropdownMenuSeparator />
-            <DropdownMenuItem 
+            <DropdownMenuItem
               className="text-red-600 cursor-pointer"
               onClick={handleSignOut}
             >

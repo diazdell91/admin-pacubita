@@ -1,6 +1,11 @@
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Plus, Search, Package, Users, ShoppingBag } from 'lucide-react';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardTitle,
+} from '@/components/ui/card';
+import { Plus, Search, Package } from 'lucide-react';
 
 interface EmptyStateProps {
   icon?: React.ComponentType<{ className?: string }>;
@@ -17,7 +22,7 @@ export function EmptyState({
   description,
   actionLabel,
   onAction,
-  variant = 'default'
+  // variant = 'default'
 }: EmptyStateProps) {
   return (
     <Card className="border-dashed">
@@ -48,7 +53,8 @@ export function SearchEmptyState({ searchTerm }: { searchTerm: string }) {
       </div>
       <h3 className="text-lg font-medium mb-2">No se encontraron resultados</h3>
       <p className="text-muted-foreground mb-4">
-        No se encontraron resultados para "{searchTerm}". Intenta con otros términos de búsqueda.
+        No se encontraron resultados para &quot;{searchTerm}&quot;. Intenta con
+        otros términos de búsqueda.
       </p>
     </div>
   );

@@ -2,7 +2,13 @@
 
 import React from 'react';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card';
 import { AlertTriangle, RefreshCw } from 'lucide-react';
 
 interface ErrorBoundaryState {
@@ -11,10 +17,10 @@ interface ErrorBoundaryState {
 }
 
 export class ErrorBoundary extends React.Component<
-  React.PropsWithChildren<{}>,
+  React.PropsWithChildren<object>,
   ErrorBoundaryState
 > {
-  constructor(props: React.PropsWithChildren<{}>) {
+  constructor(props: React.PropsWithChildren<object>) {
     super(props);
     this.state = { hasError: false };
   }
@@ -38,7 +44,8 @@ export class ErrorBoundary extends React.Component<
               </div>
               <CardTitle className="text-xl">Algo salió mal</CardTitle>
               <CardDescription>
-                Se ha producido un error inesperado. Por favor, inténtalo de nuevo.
+                Se ha producido un error inesperado. Por favor, inténtalo de
+                nuevo.
               </CardDescription>
             </CardHeader>
             <CardContent className="text-center space-y-4">
@@ -48,7 +55,9 @@ export class ErrorBoundary extends React.Component<
                 </div>
               )}
               <Button
-                onClick={() => this.setState({ hasError: false, error: undefined })}
+                onClick={() =>
+                  this.setState({ hasError: false, error: undefined })
+                }
                 className="w-full"
               >
                 <RefreshCw className="mr-2 h-4 w-4" />
@@ -64,11 +73,11 @@ export class ErrorBoundary extends React.Component<
   }
 }
 
-export function ErrorFallback({ 
-  error, 
-  resetError 
-}: { 
-  error?: Error; 
+export function ErrorFallback({
+  error,
+  resetError,
+}: {
+  error?: Error;
   resetError?: () => void;
 }) {
   return (

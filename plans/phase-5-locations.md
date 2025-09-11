@@ -3,17 +3,18 @@
 ## Status: ⏳ PENDING
 
 ### Overview
+
 Implement comprehensive geographic location management system with hierarchical structure (Countries → States/Provinces → Cities → Municipalities → Neighborhoods) and mapping integration.
 
 ## Planned Features
 
 ### 🌍 Location Hierarchy Management
+
 - [ ] **Locations Overview** (`src/app/(dashboard)/locations/page.tsx`)
   - Geographic hierarchy tree view
   - Interactive location browser
   - Search across all levels
   - Bulk operations
-  
 - [ ] **Location Type Pages**
   - [ ] **Countries** (`src/app/(dashboard)/locations/countries/page.tsx`)
   - [ ] **States/Provinces** (`src/app/(dashboard)/locations/states/page.tsx`)
@@ -22,31 +23,30 @@ Implement comprehensive geographic location management system with hierarchical 
   - [ ] **Neighborhoods** (`src/app/(dashboard)/locations/neighborhoods/page.tsx`)
 
 ### 📍 Location Details & CRUD
+
 - [ ] **Location Details** (`src/app/(dashboard)/locations/[type]/[id]/page.tsx`)
   - Complete location information
   - Parent/child relationships
   - Associated orders and users
   - Coverage area display
   - Service availability
-  
 - [ ] **Create Location** (`src/app/(dashboard)/locations/[type]/create/page.tsx`)
   - Hierarchical location creation
   - Parent location selection
   - Geographic boundaries
   - Service area definition
-  
 - [ ] **Edit Location** (`src/app/(dashboard)/locations/[type]/[id]/edit/page.tsx`)
   - Location information update
   - Boundary adjustments
   - Service area modifications
 
 ### 🗺️ Geographic Features
+
 - [ ] **Interactive Maps** (Optional)
   - Location visualization
   - Coverage area mapping
   - Service zone display
   - Route planning
-  
 - [ ] **Geographic Search**
   - Address lookup
   - Coordinate-based search
@@ -54,42 +54,39 @@ Implement comprehensive geographic location management system with hierarchical 
   - Service area validation
 
 ### 🏗️ Location Components
+
 - [ ] **LocationTree** (`src/app/(dashboard)/locations/components/LocationTree.tsx`)
   - Hierarchical tree view
   - Expandable/collapsible nodes
   - Search integration
   - Drag and drop organization
-  
 - [ ] **LocationForm** (`src/app/(dashboard)/locations/components/LocationForm.tsx`)
   - Dynamic form based on location type
   - Parent location selector
   - Coordinates input
   - ZIP codes management
-  
 - [ ] **LocationSelector** (`src/app/(dashboard)/locations/components/LocationSelector.tsx`)
   - Cascading dropdown selector
   - Auto-population of child locations
   - Validation integration
   - Search functionality
-  
 - [ ] **MapView** (`src/app/(dashboard)/locations/components/MapView.tsx`)
   - Interactive map display
   - Location markers
   - Coverage area visualization
   - Zoom and pan controls
-  
 - [ ] **LocationHierarchy** (`src/app/(dashboard)/locations/components/LocationHierarchy.tsx`)
   - Breadcrumb-style hierarchy display
   - Navigation between levels
   - Quick access to parents/children
 
 ### 📊 Location Data Management
+
 - [ ] **Data Import/Export**
   - CSV/Excel import
   - Bulk location creation
   - Data validation
   - Export functionality
-  
 - [ ] **Location Validation**
   - Duplicate detection
   - Hierarchy validation
@@ -97,6 +94,7 @@ Implement comprehensive geographic location management system with hierarchical 
   - ZIP code validation
 
 ### 🔄 Location Workflows
+
 - [ ] **Location Creation Workflow**
   1. Location type selection
   2. Parent location selection
@@ -104,7 +102,6 @@ Implement comprehensive geographic location management system with hierarchical 
   4. Geographic data input
   5. Service area definition
   6. Validation and creation
-  
 - [ ] **Hierarchy Management**
   - Move locations between parents
   - Merge duplicate locations
@@ -114,6 +111,7 @@ Implement comprehensive geographic location management system with hierarchical 
 ## Location Types & Structure
 
 ### 🏳️ Countries
+
 - [ ] **Country Management**
   - Country name and code
   - Currency information
@@ -121,6 +119,7 @@ Implement comprehensive geographic location management system with hierarchical 
   - Service availability
 
 ### 🏛️ States/Provinces
+
 - [ ] **State/Province Management**
   - Regional divisions
   - Parent country assignment
@@ -128,6 +127,7 @@ Implement comprehensive geographic location management system with hierarchical 
   - Service zones
 
 ### 🏙️ Cities
+
 - [ ] **City Management**
   - City information
   - ZIP code ranges
@@ -135,6 +135,7 @@ Implement comprehensive geographic location management system with hierarchical 
   - Urban/rural classification
 
 ### 🏘️ Municipalities
+
 - [ ] **Municipality Management**
   - Administrative divisions
   - Parent province assignment
@@ -142,6 +143,7 @@ Implement comprehensive geographic location management system with hierarchical 
   - Population data
 
 ### 🏠 Neighborhoods
+
 - [ ] **Neighborhood Management**
   - Local area definitions
   - Parent municipality assignment
@@ -149,6 +151,7 @@ Implement comprehensive geographic location management system with hierarchical 
   - Service coverage
 
 ## GraphQL Integration
+
 - [ ] **Location Queries Implementation**
   - GET_COUNTRIES query
   - GET_STATES with country filter
@@ -156,7 +159,6 @@ Implement comprehensive geographic location management system with hierarchical 
   - GET_PROVINCES with country filter
   - GET_MUNICIPALITIES with province filter
   - GET_NEIGHBORHOODS with municipality filter
-  
 - [ ] **Location Mutations Implementation**
   - CREATE_STATE mutation
   - UPDATE_STATE mutation
@@ -170,6 +172,7 @@ Implement comprehensive geographic location management system with hierarchical 
   - UPDATE_NEIGHBORHOOD mutation
 
 ## File Structure (Planned)
+
 ```
 src/app/(dashboard)/locations/
 ├── page.tsx ⏳ (locations overview)
@@ -197,6 +200,7 @@ src/hooks/
 ```
 
 ## Dependencies Needed
+
 - [ ] Tree view component library
 - [ ] Map library (MapBox, Google Maps, or Leaflet)
 - [ ] CSV/Excel parsing library
@@ -205,22 +209,22 @@ src/hooks/
 - [ ] Address parsing library
 
 ## Integration Points
+
 - [ ] **Order System Integration**
   - Delivery address validation
   - Service area coverage
   - Pricing zone mapping
-  
 - [ ] **User System Integration**
   - User location assignment
   - Service area restrictions
   - Regional user management
-  
 - [ ] **Pricing System Integration**
   - Location-based pricing rules
   - Distance calculations
   - Zone-specific rates
 
 ## Acceptance Criteria
+
 - ✅ Location hierarchy displays correctly
 - ✅ Location creation maintains proper relationships
 - ✅ Search works across all location levels
@@ -231,6 +235,7 @@ src/hooks/
 - ✅ Performance remains good with large datasets
 
 ## Technical Considerations
+
 - **Performance**: Efficient tree rendering and search
 - **Data Integrity**: Hierarchical relationship validation
 - **Scalability**: Handle large geographic datasets
@@ -239,16 +244,15 @@ src/hooks/
 - **Testing**: Geographic calculation accuracy
 
 ## Optional Features
+
 - [ ] **Map Integration**
   - Visual location management
   - Coverage area drawing
   - Route optimization
-  
 - [ ] **Address Geocoding**
   - Automatic coordinate lookup
   - Address standardization
   - Reverse geocoding
-  
 - [ ] **Service Area Management**
   - Custom delivery zones
   - Coverage optimization

@@ -4,22 +4,24 @@ This folder contains detailed development plans for the Cubita Admin logistics p
 
 ## 📋 Phase Overview
 
-| Phase | Focus Area | Status | Duration | Dependencies |
-|-------|------------|--------|----------|--------------|
-| [Phase 1](./phase-1-foundation.md) | **Foundation & Core Setup** ⚡ | ✅ **COMPLETED** | 3-4 days | None |
-| [Phase 2](./phase-2-orders.md) | **Orders Management** 📦 | ⏳ Pending | 3-4 days | Phase 1 |
-| [Phase 3](./phase-3-users.md) | **User Management** 👥 | ⏳ Pending | 4-5 days | Phase 1 |
-| [Phase 4](./phase-4-articles-pricing.md) | **Articles & Pricing** 🛍️ | ⏳ Pending | 5-6 days | Phase 1, 3 |
-| [Phase 5](./phase-5-locations.md) | **Locations & Geographic** 🗺️ | ⏳ Pending | 4-5 days | Phase 1, 4 |
-| [Phase 6](./phase-6-analytics.md) | **Dashboard & Analytics** 📊 | ⏳ Pending | 5-6 days | All phases |
-| [Phase 7](./phase-7-settings.md) | **Settings & Configuration** ⚙️ | ⏳ Pending | 3-4 days | All phases |
-| [Phase 8](./phase-8-testing.md) | **Testing & Performance** 🧪 | ⏳ Pending | 4-5 days | All phases |
+| Phase                                    | Focus Area                      | Status           | Duration | Dependencies |
+| ---------------------------------------- | ------------------------------- | ---------------- | -------- | ------------ |
+| [Phase 1](./phase-1-foundation.md)       | **Foundation & Core Setup** ⚡  | ✅ **COMPLETED** | 3-4 days | None         |
+| [Phase 2](./phase-2-orders.md)           | **Orders Management** 📦        | ⏳ Pending       | 3-4 days | Phase 1      |
+| [Phase 3](./phase-3-users.md)            | **User Management** 👥          | ⏳ Pending       | 4-5 days | Phase 1      |
+| [Phase 4](./phase-4-articles-pricing.md) | **Articles & Pricing** 🛍️       | ⏳ Pending       | 5-6 days | Phase 1, 3   |
+| [Phase 5](./phase-5-locations.md)        | **Locations & Geographic** 🗺️   | ⏳ Pending       | 4-5 days | Phase 1, 4   |
+| [Phase 6](./phase-6-analytics.md)        | **Dashboard & Analytics** 📊    | ⏳ Pending       | 5-6 days | All phases   |
+| [Phase 7](./phase-7-settings.md)         | **Settings & Configuration** ⚙️ | ⏳ Pending       | 3-4 days | All phases   |
+| [Phase 8](./phase-8-testing.md)          | **Testing & Performance** 🧪    | ⏳ Pending       | 4-5 days | All phases   |
+| [Phase 9](./phase-9-graphql-migration.md) | **GraphQL Hooks Migration** 🔧  | ⏳ Pending       | 2-3 days | Phase 1      |
 
-**Total Estimated Time:** 31-39 days (~6-8 weeks)
+**Total Estimated Time:** 33-42 days (~7-8 weeks)
 
 ## 🏗️ Architecture Overview
 
 ### **Tech Stack**
+
 - **Frontend:** Next.js 15, React 19, TypeScript
 - **Styling:** Tailwind CSS, shadcn/ui components
 - **State:** Zustand + Apollo Client GraphQL
@@ -27,6 +29,7 @@ This folder contains detailed development plans for the Cubita Admin logistics p
 - **Tools:** ESLint, Prettier, Husky, lint-staged
 
 ### **Key Features**
+
 - 🔐 **Authentication** - Role-based access control
 - 📦 **Orders** - Complete order lifecycle management
 - 👥 **Users** - Multi-type user system (Clients, Drivers, Partners, Staff)
@@ -70,11 +73,13 @@ src/
 ## 🚀 Getting Started
 
 ### **Prerequisites**
-- Node.js 18+ 
+
+- Node.js 18+
 - npm or yarn
 - GraphQL backend endpoint configured
 
 ### **Development Setup**
+
 ```bash
 # Install dependencies
 npm install
@@ -88,6 +93,7 @@ npm run dev
 ```
 
 ### **Available Scripts**
+
 ```bash
 npm run dev          # Development server
 npm run build        # Production build
@@ -103,6 +109,7 @@ npm run type-check   # TypeScript check
 ## 🎯 Development Workflow
 
 ### **Phase-by-Phase Development**
+
 1. **Complete Phase 1** (Foundation) ✅
 2. **Choose next phase** based on business priorities
 3. **Follow phase documentation** for detailed implementation
@@ -110,12 +117,14 @@ npm run type-check   # TypeScript check
 5. **Commit regularly** with conventional commit messages
 
 ### **Branch Strategy**
+
 - `main` - Production ready code
 - `develop` - Integration branch
 - `feature/phase-X-feature-name` - Feature branches
 - `hotfix/issue-description` - Critical fixes
 
 ### **Commit Convention**
+
 ```bash
 feat(phase-2): add order creation form
 fix(auth): resolve login redirect issue
@@ -126,6 +135,7 @@ test(orders): add unit tests for order components
 ## 📊 Progress Tracking
 
 ### **Phase 1: Foundation ✅**
+
 - [x] Authentication system
 - [x] Dashboard layout
 - [x] Core UI components
@@ -133,6 +143,7 @@ test(orders): add unit tests for order components
 - [x] State management
 
 ### **Current Status**
+
 - **Active Phase:** Ready for Phase 2 (Orders Management)
 - **Development Server:** http://localhost:3002
 - **Last Update:** $(date)

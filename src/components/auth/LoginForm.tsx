@@ -22,14 +22,18 @@ import {
 import { Eye, EyeOff, Mail, Lock } from 'lucide-react';
 import { useAuth } from '@/hooks/useAuth';
 
-const loginSchema = z.object({
-  email: z.string().email('Email inválido').optional().or(z.literal('')),
-  phone: z.string().optional(),
-  password: z.string().min(6, 'La contraseña debe tener al menos 6 caracteres'),
-}).refine((data) => data.email || data.phone, {
-  message: 'Email o teléfono requerido',
-  path: ['email'],
-});
+const loginSchema = z
+  .object({
+    email: z.string().email('Email inválido').optional().or(z.literal('')),
+    phone: z.string().optional(),
+    password: z
+      .string()
+      .min(6, 'La contraseña debe tener al menos 6 caracteres'),
+  })
+  .refine((data) => data.email || data.phone, {
+    message: 'Email o teléfono requerido',
+    path: ['email'],
+  });
 
 type LoginFormData = z.infer<typeof loginSchema>;
 
@@ -69,7 +73,7 @@ export function LoginForm() {
           Accede a tu panel de administración
         </p>
       </CardHeader>
-      
+
       <CardContent>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
@@ -130,7 +134,7 @@ export function LoginForm() {
                 </FormItem>
               )}
             />
-            
+
             <div className="flex items-center justify-between">
               <div className="flex items-center space-x-2">
                 <input
@@ -149,7 +153,7 @@ export function LoginForm() {
                 ¿Olvidaste tu contraseña?
               </Link>
             </div>
-            
+
             <Button
               type="submit"
               className="w-full"
@@ -160,7 +164,7 @@ export function LoginForm() {
             </Button>
           </form>
         </Form>
-        
+
         <div className="mt-6 text-center">
           <p className="text-sm text-gray-600">
             ¿No tienes cuenta?{' '}

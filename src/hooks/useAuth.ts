@@ -2,33 +2,22 @@
 
 import { useState, useEffect, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
+import { useMutation, useQuery } from '@apollo/client/react';
 import { useAppStore } from '@/stores/useAppStore';
 import { apolloClient } from '@/lib/apollo';
+import { graphql } from '@/generated';
 import { toast } from 'sonner';
-
-// Types based on GraphQL schema
-interface User {
-  id: string;
-  firstName: string;
-  lastName: string;
-  email: string;
-  phone: string;
-  createdAt: string;
-}
-
-interface Tokens {
-  accessToken: string;
-  refreshToken: string;
-}
-
-interface SignInInput {
-  email?: string;
-  phone?: string;
-  password: string;
-}
+import type {
+  SignInInput,
+  UserFragmentFragment,
+  SignInMutation,
+  SignOutMutation,
+  RefreshTokensMutation,
+  CurrentUserQuery,
+} from '@/generated/graphql';
 
 interface AuthState {
-  user: User | null;
+  user: UserFragmentFragment | null;
   isLoading: boolean;
   isAuthenticated: boolean;
 }
@@ -50,7 +39,7 @@ export function useAuth() {
     try {
       const token = localStorage.getItem('token');
       const refreshToken = localStorage.getItem('refreshToken');
-      
+
       if (!token || !refreshToken) {
         setIsLoading(false);
         return;
@@ -58,7 +47,7 @@ export function useAuth() {
 
       // TODO: Implement currentUser query with Apollo Client
       // For now, we'll use mock data if token exists
-      const mockUser: User = {
+      const mockUser: UserFragmentFragment = {
         id: '1',
         firstName: 'Juan',
         lastName: 'Díaz',
@@ -66,7 +55,7 @@ export function useAuth() {
         phone: '+53 5555 5555',
         createdAt: new Date().toISOString(),
       };
-      
+
       setUser(mockUser);
     } catch (error) {
       console.error('Auth check failed:', error);
@@ -76,72 +65,112 @@ export function useAuth() {
     }
   }, [setUser]);
 
-  const signIn = useCallback(async (input: SignInInput): Promise<boolean> => {
-    setIsLoading(true);
-    
-    try {
-      // TODO: Implement SignIn mutation with Apollo Client
-      // For now, we'll use mock authentication
-      
-      if (!input.email && !input.phone) {
-        throw new Error('Email o teléfono requerido');
+  const [signInMutation] = useMutation(
+    graphql(`
+      mutation SignIn($input: SignInInput!) {
+        signIn(input: $input) {
+          tokens {
+            accessToken
+            refreshToken
+          }
+        }
       }
-      
-      if (!input.password) {
-        throw new Error('Contraseña requerida');
+    `)
+  );
+
+  const signIn = useCallback(
+    async (input: SignInInput): Promise<boolean> => {
+      setIsLoading(true);
+
+      try {
+        if (!input.email && !input.phone) {
+          throw new Error('Email o teléfono requerido');
+        }
+
+        if (!input.password) {
+          throw new Error('Contraseña requerida');
+        }
+
+        // Use real GraphQL mutation with generated types
+        const { data } = await signInMutation({
+          variables: {
+            input: {
+              email: input.email || null,
+              phone: input.phone || null,
+              password: input.password,
+            },
+          },
+        });
+
+        if (!data?.signIn?.tokens) {
+          throw new Error('Error en la respuesta del servidor');
+        }
+
+        const { accessToken, refreshToken } = data.signIn.tokens;
+
+        // Store tokens
+        localStorage.setItem('token', accessToken);
+        localStorage.setItem('refreshToken', refreshToken);
+
+        // Mock user data for now (until we have a currentUser query)
+        const mockUser: UserFragmentFragment = {
+          id: '1',
+          firstName: 'Staff',
+          lastName: 'Admin',
+          email: input.email || 'staff@pacubita.com',
+          phone: input.phone || '+53 5555 5555',
+          createdAt: new Date().toISOString(),
+        };
+
+        // Update user state
+        setUser(mockUser);
+
+        toast.success('Sesión iniciada correctamente');
+        return true;
+      } catch (error) {
+        console.error('SignIn error:', error);
+        const message =
+          error instanceof Error ? error.message : 'Error al iniciar sesión';
+        toast.error(message);
+        return false;
+      } finally {
+        setIsLoading(false);
       }
+    },
+    [setUser, signInMutation]
+  );
 
-      // Mock authentication logic
-      if (input.password.length < 6) {
-        throw new Error('Credenciales inválidas');
+  const [signOutMutation] = useMutation(
+    graphql(`
+      mutation SignOut($input: SignOutInput!) {
+        signOut(input: $input) {
+          _
+        }
       }
-
-      // Mock tokens and user data
-      const mockTokens: Tokens = {
-        accessToken: 'mock_access_token',
-        refreshToken: 'mock_refresh_token',
-      };
-
-      const mockUser: User = {
-        id: '1',
-        firstName: 'Juan',
-        lastName: 'Díaz',
-        email: input.email || 'juan@cubita.com',
-        phone: input.phone || '+53 5555 5555',
-        createdAt: new Date().toISOString(),
-      };
-
-      // Store tokens
-      localStorage.setItem('token', mockTokens.accessToken);
-      localStorage.setItem('refreshToken', mockTokens.refreshToken);
-      
-      // Update user state
-      setUser(mockUser);
-      
-      toast.success('Sesión iniciada correctamente');
-      return true;
-    } catch (error) {
-      const message = error instanceof Error ? error.message : 'Error al iniciar sesión';
-      toast.error(message);
-      return false;
-    } finally {
-      setIsLoading(false);
-    }
-  }, [setUser]);
+    `)
+  );
 
   const signOut = useCallback(async () => {
     setIsLoading(true);
-    
+
     try {
-      // TODO: Implement SignOut mutation with Apollo Client
-      
+      // Try to call the server signOut mutation
+      try {
+        await signOutMutation({
+          variables: { input: {} },
+        });
+      } catch (error) {
+        // Even if server signOut fails, we still want to clear local state
+        console.warn('Server signOut failed:', error);
+      }
+
       // Clear tokens and user state
       clearTokens();
       setUser(null);
-      
+
       // Reset Apollo Client cache
       await apolloClient.resetStore();
-      
+
       toast.success('Sesión cerrada correctamente');
       router.push('/login');
     } catch (error) {
@@ -149,25 +178,50 @@ export function useAuth() {
     } finally {
       setIsLoading(false);
     }
-  }, [setUser, router]);
+  }, [setUser, router, signOutMutation]);
+
+  const [refreshTokensMutation] = useMutation(
+    graphql(`
+      mutation RefreshTokens($input: RefreshTokensInput!) {
+        refreshTokens(input: $input) {
+          tokens {
+            accessToken
+            refreshToken
+          }
+        }
+      }
+    `)
+  );
 
   const refreshTokens = useCallback(async (): Promise<boolean> => {
     try {
       const refreshToken = localStorage.getItem('refreshToken');
-      
+
       if (!refreshToken) {
         throw new Error('No refresh token available');
       }
 
-      // TODO: Implement RefreshTokens mutation with Apollo Client
-      // For now, we'll return true to simulate success
-      return true;
+      const { data } = await refreshTokensMutation({
+        variables: {
+          input: { refreshToken },
+        },
+      });
+
+      if (data?.refreshTokens?.tokens) {
+        const { accessToken: newAccessToken, refreshToken: newRefreshToken } =
+          data.refreshTokens.tokens;
+        localStorage.setItem('token', newAccessToken);
+        localStorage.setItem('refreshToken', newRefreshToken);
+        return true;
+      }
+
+      throw new Error('Failed to refresh tokens');
     } catch (error) {
       console.error('Token refresh failed:', error);
       signOut();
       return false;
     }
-  }, [signOut]);
+  }, [signOut, refreshTokensMutation]);
 
   const clearTokens = useCallback(() => {
     localStorage.removeItem('token');

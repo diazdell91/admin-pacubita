@@ -10,15 +10,12 @@ import {
   BarChart3,
   Settings,
   Home,
-  Truck,
-  CreditCard,
   FileText,
 } from 'lucide-react';
 
 import {
   Sidebar,
   SidebarContent,
-  SidebarFooter,
   SidebarGroup,
   SidebarGroupContent,
   SidebarGroupLabel,
@@ -31,7 +28,11 @@ import {
   SidebarMenuSubItem,
   SidebarRail,
 } from '@/components/ui/sidebar';
-import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from '@/components/ui/collapsible';
 import { ChevronRight } from 'lucide-react';
 import Link from 'next/link';
 
@@ -39,129 +40,129 @@ const data = {
   navMain: [
     {
       title: 'Dashboard',
-      url: '/',
+      url: '/dashboard',
       icon: Home,
     },
     {
       title: 'Pedidos',
-      url: '/orders',
+      url: '/dashboard/orders',
       icon: Package2,
       items: [
         {
           title: 'Todos los pedidos',
-          url: '/orders',
+          url: '/dashboard/orders',
         },
         {
           title: 'Crear pedido',
-          url: '/orders/create',
+          url: '/dashboard/orders/create',
         },
         {
           title: 'Entregas',
-          url: '/orders?type=delivery',
+          url: '/dashboard/orders?type=delivery',
         },
         {
           title: 'Empaquetado',
-          url: '/orders?type=wrapping',
+          url: '/dashboard/orders?type=wrapping',
         },
       ],
     },
     {
       title: 'Usuarios',
-      url: '/users',
+      url: '/dashboard/users',
       icon: Users,
       items: [
         {
           title: 'Todos los usuarios',
-          url: '/users',
+          url: '/dashboard/users',
         },
         {
           title: 'Clientes',
-          url: '/users/clients',
+          url: '/dashboard/users/clients',
         },
         {
           title: 'Conductores',
-          url: '/users/drivers',
+          url: '/dashboard/users/drivers',
         },
         {
           title: 'Socios',
-          url: '/users/partners',
+          url: '/dashboard/users/partners',
         },
         {
           title: 'Personal',
-          url: '/users/staff',
+          url: '/dashboard/users/staff',
         },
       ],
     },
     {
       title: 'Artículos',
-      url: '/articles',
+      url: '/dashboard/articles',
       icon: ShoppingBag,
       items: [
         {
           title: 'Catálogo',
-          url: '/articles',
+          url: '/dashboard/articles',
         },
         {
           title: 'Crear artículo',
-          url: '/articles/create',
+          url: '/dashboard/articles/create',
         },
         {
           title: 'Variantes',
-          url: '/articles/variants',
+          url: '/dashboard/articles/variants',
         },
         {
           title: 'Tipos de entrega',
-          url: '/articles/delivery-types',
+          url: '/dashboard/articles/delivery-types',
         },
       ],
     },
     {
       title: 'Precios',
-      url: '/pricing',
+      url: '/dashboard/pricing',
       icon: Calculator,
       items: [
         {
           title: 'Reglas de precios',
-          url: '/pricing',
+          url: '/dashboard/pricing',
         },
         {
           title: 'Calculadora',
-          url: '/pricing/calculator',
+          url: '/dashboard/pricing/calculator',
         },
         {
           title: 'Crear regla',
-          url: '/pricing/create',
+          url: '/dashboard/pricing/create',
         },
       ],
     },
     {
       title: 'Ubicaciones',
-      url: '/locations',
+      url: '/dashboard/locations',
       icon: MapPin,
       items: [
         {
           title: 'Vista general',
-          url: '/locations',
+          url: '/dashboard/locations',
         },
         {
           title: 'Países',
-          url: '/locations/countries',
+          url: '/dashboard/locations/countries',
         },
         {
           title: 'Estados/Provincias',
-          url: '/locations/states',
+          url: '/dashboard/locations/states',
         },
         {
           title: 'Ciudades',
-          url: '/locations/cities',
+          url: '/dashboard/locations/cities',
         },
         {
           title: 'Municipios',
-          url: '/locations/municipalities',
+          url: '/dashboard/locations/municipalities',
         },
         {
           title: 'Barrios',
-          url: '/locations/neighborhoods',
+          url: '/dashboard/locations/neighborhoods',
         },
       ],
     },
@@ -169,17 +170,17 @@ const data = {
   navSecondary: [
     {
       title: 'Analíticas',
-      url: '/analytics',
+      url: '/dashboard/analytics',
       icon: BarChart3,
     },
     {
       title: 'Reportes',
-      url: '/reports',
+      url: '/dashboard/reports',
       icon: FileText,
     },
     {
       title: 'Configuración',
-      url: '/settings',
+      url: '/dashboard/settings',
       icon: Settings,
     },
   ],
@@ -194,66 +195,60 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
             <span className="text-white font-bold text-sm">C</span>
           </div>
           <div className="grid flex-1 text-left text-sm leading-tight">
-            <span className="truncate font-semibold">Cubita Admin</span>
+            <span className="truncate font-semibold">Pa Cubita Admin</span>
             <span className="truncate text-xs text-muted-foreground">
               Sistema de Gestión
             </span>
           </div>
         </div>
       </SidebarHeader>
-      
+
       <SidebarContent>
         <SidebarGroup>
           <SidebarGroupLabel>Navegación Principal</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
               {data.navMain.map((item) => (
-                <Collapsible
-                  key={item.title}
-                  asChild
-                  defaultOpen={false}
-                  className="group/collapsible"
-                >
-                  <SidebarMenuItem>
-                    <CollapsibleTrigger asChild>
-                      <SidebarMenuButton tooltip={item.title}>
+                <SidebarMenuItem key={item.title}>
+                  {item.items ? (
+                    <Collapsible asChild defaultOpen={false} className="group/collapsible">
+                      <>
+                        <CollapsibleTrigger asChild>
+                          <SidebarMenuButton tooltip={item.title}>
+                            <item.icon />
+                            <span>{item.title}</span>
+                            <ChevronRight className="ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90" />
+                          </SidebarMenuButton>
+                        </CollapsibleTrigger>
+                        <CollapsibleContent>
+                          <SidebarMenuSub>
+                            {item.items.map((subItem) => (
+                              <SidebarMenuSubItem key={subItem.title}>
+                                <SidebarMenuSubButton asChild>
+                                  <Link href={subItem.url}>
+                                    <span>{subItem.title}</span>
+                                  </Link>
+                                </SidebarMenuSubButton>
+                              </SidebarMenuSubItem>
+                            ))}
+                          </SidebarMenuSub>
+                        </CollapsibleContent>
+                      </>
+                    </Collapsible>
+                  ) : (
+                    <SidebarMenuButton asChild tooltip={item.title}>
+                      <Link href={item.url}>
                         <item.icon />
                         <span>{item.title}</span>
-                        {item.items && (
-                          <ChevronRight className="ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90" />
-                        )}
-                      </SidebarMenuButton>
-                    </CollapsibleTrigger>
-                    {item.items && (
-                      <CollapsibleContent>
-                        <SidebarMenuSub>
-                          {item.items.map((subItem) => (
-                            <SidebarMenuSubItem key={subItem.title}>
-                              <SidebarMenuSubButton asChild>
-                                <Link href={subItem.url}>
-                                  <span>{subItem.title}</span>
-                                </Link>
-                              </SidebarMenuSubButton>
-                            </SidebarMenuSubItem>
-                          ))}
-                        </SidebarMenuSub>
-                      </CollapsibleContent>
-                    )}
-                    {!item.items && (
-                      <SidebarMenuButton asChild>
-                        <Link href={item.url}>
-                          <item.icon />
-                          <span>{item.title}</span>
-                        </Link>
-                      </SidebarMenuButton>
-                    )}
-                  </SidebarMenuItem>
-                </Collapsible>
+                      </Link>
+                    </SidebarMenuButton>
+                  )}
+                </SidebarMenuItem>
               ))}
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
-        
+
         <SidebarGroup className="mt-auto">
           <SidebarGroupContent>
             <SidebarMenu>
@@ -271,7 +266,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
-      
+
       <SidebarRail />
     </Sidebar>
   );
