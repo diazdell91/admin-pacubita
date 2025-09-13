@@ -18,7 +18,7 @@ import {
 } from '@/components/ui/card';
 // TODO: Replace with GraphQL when backend is ready
 // import { CREATE_COUNTRY } from '@/lib/graphql/mutations/locations';
-import { createMockMutationHook } from '@/lib/mock-data';
+import {  } from "@/lib/graphql/generated";
 import Link from 'next/link';
 
 export default function CreateCountryPage() {
@@ -30,7 +30,7 @@ export default function CreateCountryPage() {
   });
 
   // TODO: Replace with GraphQL when backend is ready
-  const [createCountry] = createMockMutationHook();
+  // TODO: Add proper mutation
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();

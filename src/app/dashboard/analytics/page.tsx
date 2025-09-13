@@ -32,67 +32,23 @@ import {
   Download,
 } from 'lucide-react';
 
-// Mock data - in real implementation this would come from GraphQL
-const mockAnalyticsData = {
+// TODO: Replace with real GraphQL analytics data from codegen
+const analyticsData = {
   overview: {
-    totalOrders: 2547,
-    totalRevenue: 125430,
-    activeUsers: 1834,
-    completionRate: 94.2,
-    averageDeliveryTime: 45, // minutes
+    totalOrders: 0,
+    totalRevenue: 0,
+    activeUsers: 0,
+    averageDeliveryTime: 0,
     trends: {
-      orders: { value: 12.5, direction: 'up' },
-      revenue: { value: 8.3, direction: 'up' },
-      users: { value: -2.1, direction: 'down' },
-      deliveryTime: { value: 5.2, direction: 'down' },
-    },
+      orders: { value: 0, direction: 'up' },
+      revenue: { value: 0, direction: 'up' },
+      users: { value: 0, direction: 'up' },
+      deliveryTime: { value: 0, direction: 'down' }
+    }
   },
-  ordersByStatus: [
-    { status: 'DELIVERED', count: 1892, percentage: 74.3 },
-    { status: 'IN_TRANSIT', count: 234, percentage: 9.2 },
-    { status: 'PENDING', count: 198, percentage: 7.8 },
-    { status: 'CONFIRMED', count: 156, percentage: 6.1 },
-    { status: 'CANCELLED', count: 67, percentage: 2.6 },
-  ],
-  revenueByMonth: [
-    { month: 'Ene', revenue: 18500, orders: 245 },
-    { month: 'Feb', revenue: 22300, orders: 298 },
-    { month: 'Mar', revenue: 25100, orders: 334 },
-    { month: 'Abr', revenue: 28900, orders: 387 },
-    { month: 'May', revenue: 31200, orders: 421 },
-    { month: 'Jun', revenue: 29800, orders: 398 },
-  ],
-  topPartners: [
-    {
-      id: '1',
-      name: 'Express Delivery',
-      orders: 543,
-      revenue: 28400,
-      rating: 4.8,
-    },
-    {
-      id: '2',
-      name: 'Fast Logistics',
-      orders: 421,
-      revenue: 22100,
-      rating: 4.6,
-    },
-    { id: '3', name: 'City Courier', orders: 334, revenue: 18900, rating: 4.7 },
-    {
-      id: '4',
-      name: 'Metro Transport',
-      orders: 287,
-      revenue: 15600,
-      rating: 4.5,
-    },
-  ],
-  deliveryAreas: [
-    { area: 'La Habana', orders: 1234, percentage: 48.5 },
-    { area: 'Santiago', orders: 456, percentage: 17.9 },
-    { area: 'Camagüey', orders: 234, percentage: 9.2 },
-    { area: 'Holguín', orders: 198, percentage: 7.8 },
-    { area: 'Otros', orders: 425, percentage: 16.6 },
-  ],
+  ordersByStatus: [],
+  topPartners: [],
+  deliveryAreas: []
 };
 
 const timeRanges = [
@@ -187,11 +143,11 @@ export default function AnalyticsPage() {
               </CardHeader>
               <CardContent>
                 <div className="text-2xl font-bold">
-                  {mockAnalyticsData.overview.totalOrders.toLocaleString()}
+                  {analyticsData?.overview?.totalOrders?.toLocaleString() || '0'}
                 </div>
                 <div className="flex items-center text-xs text-muted-foreground">
                   <TrendingUp className="mr-1 h-3 w-3 text-green-600" />+
-                  {mockAnalyticsData.overview.trends.orders.value}% vs mes
+                  {analyticsData?.overview?.trends?.orders?.value || 0}% vs mes
                   anterior
                 </div>
               </CardContent>
@@ -206,11 +162,11 @@ export default function AnalyticsPage() {
               </CardHeader>
               <CardContent>
                 <div className="text-2xl font-bold">
-                  {formatCurrency(mockAnalyticsData.overview.totalRevenue)}
+                  {formatCurrency(analyticsData?.overview?.totalRevenue || 0)}
                 </div>
                 <div className="flex items-center text-xs text-muted-foreground">
                   <TrendingUp className="mr-1 h-3 w-3 text-green-600" />+
-                  {mockAnalyticsData.overview.trends.revenue.value}% vs mes
+                  {analyticsData?.overview?.trends?.revenue?.value || 0}% vs mes
                   anterior
                 </div>
               </CardContent>
@@ -225,11 +181,11 @@ export default function AnalyticsPage() {
               </CardHeader>
               <CardContent>
                 <div className="text-2xl font-bold">
-                  {mockAnalyticsData.overview.activeUsers.toLocaleString()}
+                  {analyticsData?.overview?.activeUsers?.toLocaleString() || '0'}
                 </div>
                 <div className="flex items-center text-xs text-muted-foreground">
                   <TrendingDown className="mr-1 h-3 w-3 text-red-600" />
-                  {mockAnalyticsData.overview.trends.users.value}% vs mes
+                  {analyticsData?.overview?.trends?.users?.value || 0}% vs mes
                   anterior
                 </div>
               </CardContent>
@@ -244,11 +200,11 @@ export default function AnalyticsPage() {
               </CardHeader>
               <CardContent>
                 <div className="text-2xl font-bold">
-                  {mockAnalyticsData.overview.averageDeliveryTime}min
+                  {analyticsData?.overview?.averageDeliveryTime || 0}min
                 </div>
                 <div className="flex items-center text-xs text-muted-foreground">
                   <TrendingDown className="mr-1 h-3 w-3 text-green-600" />-
-                  {mockAnalyticsData.overview.trends.deliveryTime.value}% mejora
+                  {analyticsData?.overview?.trends?.deliveryTime?.value || 0}% mejora
                 </div>
               </CardContent>
             </Card>
@@ -269,7 +225,7 @@ export default function AnalyticsPage() {
               </CardHeader>
               <CardContent>
                 <div className="space-y-3">
-                  {mockAnalyticsData.ordersByStatus.map((item) => (
+                  {analyticsData?.ordersByStatus?.map((item: any) => (
                     <div
                       key={item.status}
                       className="flex items-center justify-between"
@@ -300,7 +256,7 @@ export default function AnalyticsPage() {
               </CardHeader>
               <CardContent>
                 <div className="space-y-3">
-                  {mockAnalyticsData.topPartners.map((partner, index) => (
+                  {analyticsData?.topPartners?.map((partner: any, index: number) => (
                     <div
                       key={partner.id}
                       className="flex items-center justify-between"
@@ -341,7 +297,7 @@ export default function AnalyticsPage() {
             </CardHeader>
             <CardContent>
               <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-                {mockAnalyticsData.deliveryAreas.map((area) => (
+                {analyticsData?.deliveryAreas?.map((area: any) => (
                   <div key={area.area} className="p-4 border rounded-lg">
                     <div className="flex items-center justify-between mb-2">
                       <span className="font-medium">{area.area}</span>

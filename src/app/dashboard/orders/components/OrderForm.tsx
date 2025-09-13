@@ -42,39 +42,10 @@ interface OrderFormProps {
   onUpdate: (data: Partial<OrderFormData>) => void;
 }
 
-// Mock data - will be replaced with GraphQL
-const mockPartners = [
-  { id: '1', name: 'Express Delivery' },
-  { id: '2', name: 'Fast Courier' },
-  { id: '3', name: 'Premium Package' },
-];
-
-const mockArticles = [
-  {
-    id: '1',
-    name: 'Smartphone Samsung Galaxy',
-    price: 2250,
-    variants: [
-      { id: '1', name: '128GB Negro' },
-      { id: '2', name: '256GB Azul' },
-    ],
-  },
-  {
-    id: '2',
-    name: 'Tablet iPad Air',
-    price: 3500,
-    variants: [
-      { id: '3', name: '64GB WiFi' },
-      { id: '4', name: '256GB WiFi+Cellular' },
-    ],
-  },
-];
-
-const mockDeliveryTypes = [
-  { id: '1', name: 'Entrega Express' },
-  { id: '2', name: 'Entrega Estándar' },
-  { id: '3', name: 'Entrega Premium' },
-];
+// TODO: Replace with real GraphQL data from codegen
+const partners: any[] = [];
+const articles: any[] = [];
+const deliveryTypes: any[] = [];
 
 export function OrderForm({ step, data, onUpdate }: OrderFormProps) {
   const [selectedDate, setSelectedDate] = useState<Date>();
@@ -136,7 +107,7 @@ export function OrderForm({ step, data, onUpdate }: OrderFormProps) {
 
   const calculateTotal = () => {
     const subtotal = data.items.reduce((sum, item) => {
-      const article = mockArticles.find((a) => a.id === item.productId);
+      const article = [].find((a) => a.id === item.productId);
       return sum + (article ? article.price * item.quantity : 0);
     }, 0);
 
@@ -515,7 +486,7 @@ export function OrderForm({ step, data, onUpdate }: OrderFormProps) {
                           <SelectValue placeholder="Seleccionar" />
                         </SelectTrigger>
                         <SelectContent>
-                          {mockArticles.map((article) => (
+                          {[].map((article) => (
                             <SelectItem key={article.id} value={article.id}>
                               {article.name}
                             </SelectItem>
@@ -537,7 +508,7 @@ export function OrderForm({ step, data, onUpdate }: OrderFormProps) {
                             <SelectValue placeholder="Seleccionar" />
                           </SelectTrigger>
                           <SelectContent>
-                            {mockArticles
+                            {[]
                               .find((a) => a.id === item.productId)
                               ?.variants.map((variant) => (
                                 <SelectItem key={variant.id} value={variant.id}>
@@ -561,7 +532,7 @@ export function OrderForm({ step, data, onUpdate }: OrderFormProps) {
                           <SelectValue placeholder="Seleccionar" />
                         </SelectTrigger>
                         <SelectContent>
-                          {mockDeliveryTypes.map((type) => (
+                          {deliveryTypes.map((type) => (
                             <SelectItem key={type.id} value={type.id}>
                               {type.name}
                             </SelectItem>
@@ -679,7 +650,7 @@ export function OrderForm({ step, data, onUpdate }: OrderFormProps) {
             <CardContent>
               <div className="space-y-3">
                 {data.items.map((item, index) => {
-                  const article = mockArticles.find(
+                  const article = [].find(
                     (a) => a.id === item.productId
                   );
                   const variant = article?.variants.find(

@@ -26,7 +26,7 @@ import {
 // TODO: Replace with GraphQL when backend is ready
 // import { CREATE_MUNICIPALITY } from '@/lib/graphql/mutations/locations';
 // import { GET_PROVINCES } from '@/lib/graphql/queries/locations';
-import { useMockStatesQuery, useMockCreateMunicipalityMutation } from '@/lib/mock-data';
+import { useStatesQuery} from "@/lib/graphql/generated";
 import Link from 'next/link';
 
 export default function CreateMunicipalityPage() {
@@ -42,12 +42,12 @@ export default function CreateMunicipalityPage() {
   });
 
   // TODO: Replace with GraphQL when backend is ready
-  const { data: provincesData } = useMockStatesQuery();
+  const { data: provincesData } = useStatesQuery();
 
   // TODO: Replace with GraphQL when backend is ready
-  const [createMunicipality] = useMockCreateMunicipalityMutation();
+  // TODO: Add proper mutation
 
-  const provinces = provincesData?.states?.data || [];
+  const provinces = provincesData?.states?.states || [];
   const selectedProvince = provinces.find(
     (p: any) => p.id === formData.provinceId
   );

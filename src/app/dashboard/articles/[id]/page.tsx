@@ -12,7 +12,7 @@ import {
 } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { LoadingSpinner } from '@/components/common/LoadingSpinner';
-import { useGetArticleQuery } from '@/lib/graphql/generated';
+import { useArticleQuery } from '@/lib/graphql/generated';
 import {
   ArrowLeft,
   Edit,
@@ -52,7 +52,7 @@ export default function ArticleDetailPage() {
   const router = useRouter();
   const articleId = params.id as string;
 
-  const { loading, error, data, refetch } = useGetArticleQuery({
+  const { loading, error, data, refetch } = useArticleQuery({
     variables: {
       input: {
         id: articleId,
@@ -61,7 +61,7 @@ export default function ArticleDetailPage() {
     errorPolicy: 'all',
   });
 
-  const article: Article | undefined = data?.article;
+  const article = data?.article?.article;
 
   const handleEdit = () => {
     router.push(`/dashboard/articles/${articleId}/edit`);

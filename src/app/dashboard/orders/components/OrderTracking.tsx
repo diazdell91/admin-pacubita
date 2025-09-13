@@ -153,33 +153,8 @@ export function OrderTracking({
     }
   );
 
-  // Mock timeline if not provided
-  const mockTimeline =
-    timeline.length > 0
-      ? timeline
-      : [
-          {
-            id: '1',
-            status: 'PENDING',
-            timestamp: order.createdAt,
-            notes: 'Pedido creado en el sistema',
-            updatedBy: 'Sistema',
-          },
-          {
-            id: '2',
-            status: 'CONFIRMED',
-            timestamp: new Date(Date.now() - 2 * 60 * 60 * 1000).toISOString(),
-            notes: 'Pedido confirmado por el cliente',
-            updatedBy: 'Cliente',
-          },
-          {
-            id: '3',
-            status: 'ACCEPTED',
-            timestamp: new Date(Date.now() - 1 * 60 * 60 * 1000).toISOString(),
-            notes: 'Pedido aceptado por el conductor',
-            updatedBy: 'Conductor',
-          },
-        ];
+  // TODO: Use real timeline data from GraphQL
+  const actualTimeline = timeline.length > 0 ? timeline : [];
 
   const getCurrentStatusIndex = () => {
     return statusFlow.findIndex((s) => s.status === order.status);
@@ -321,7 +296,7 @@ export function OrderTracking({
         </CardHeader>
         <CardContent>
           <div className="space-y-4">
-            {mockTimeline
+            {actualTimeline
               .sort(
                 (a, b) =>
                   new Date(b.timestamp).getTime() -

@@ -40,8 +40,8 @@ export default function RegisterPage() {
       }
 
       // TODO: Implement Apollo GraphQL CreateUser mutation
-      // Temporary mock registration
       if (Object.values(formData).every((value) => value.trim() !== '')) {
+        // TODO: Implement real registration with GraphQL
         toast.success('Cuenta creada correctamente');
         router.push('/login');
       } else {

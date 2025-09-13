@@ -1,8 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-// TODO: Replace with GraphQL when backend is ready
-// import { useMutation, useQuery } from '@apollo/client/react';
+import { useMutation, useQuery } from '@apollo/client';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { ArrowLeft, Map, Save, X } from 'lucide-react';
 
@@ -23,10 +22,9 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
-// TODO: Replace with GraphQL when backend is ready
-// import { CREATE_STATE } from '@/lib/graphql/mutations/locations';
-// import { GET_COUNTRIES } from '@/lib/graphql/queries/locations';
-import { useMockCountriesQuery, useMockCreateStateMutation } from '@/lib/mock-data';
+// import { CREATE_STATE } from '@/lib/graphql/generated';
+// import { GET_COUNTRIES } from '@/lib/graphql/generated';
+// import { useCountriesQuery, CREATE_STATE } from '@/lib/graphql/generated';
 import Link from 'next/link';
 
 export default function CreateStatePage() {
@@ -41,17 +39,20 @@ export default function CreateStatePage() {
     countryId: preselectedCountryId || '',
   });
 
-  const { data: countriesData } = useQuery(GET_COUNTRIES, {
-    variables: { input: {} },
-  });
+  // TODO: Implement with real GraphQL queries from codegen
+  // const { data: countriesData } = useQuery(GET_COUNTRIES, {
+  //   variables: { input: {} },
+  // });
+  // const [createState] = useMutation(CREATE_STATE, {
+  //   onCompleted: () => {
+  //     router.push('/dashboard/locations/states');
+  //   },
+  // });
 
-  const [createState] = useMutation(CREATE_STATE, {
-    onCompleted: () => {
-      router.push('/dashboard/locations/states');
-    },
-  });
+  const countriesData = null;
+  const createState = () => Promise.resolve().then(() => router.push('/dashboard/locations/states'));
 
-  const countries = countriesData?.countries?.data || [];
+  const countries: any[] = [];
   const selectedCountry = countries.find(
     (c: any) => c.id === formData.countryId
   );

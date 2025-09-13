@@ -61,11 +61,11 @@ import {
 // } from '@/lib/graphql/queries/locations';
 // import { DELETE_CITY } from '@/lib/graphql/mutations/locations';
 import { 
-  useMockCountriesQuery, 
-  useMockStatesQuery, 
-  useMockCitiesQuery,
-  createMockMutationHook 
-} from '@/lib/mock-data';
+  useCountriesQuery, 
+  useStatesQuery, 
+  useCitiesQuery,
+   
+} from "@/lib/graphql/generated";
 import Link from 'next/link';
 
 export default function CitiesPage() {
@@ -79,16 +79,18 @@ export default function CitiesPage() {
   );
 
   // TODO: Replace with GraphQL when backend is ready
-  const { data: countriesData } = useMockCountriesQuery();
+  const { data: countriesData } = useCountriesQuery({
+    variables: { input: { _: null } },
+  });
 
   // TODO: Replace with GraphQL when backend is ready
-  const { data: statesData } = useMockStatesQuery();
+  const { data: statesData } = useStatesQuery();
 
   // TODO: Replace with GraphQL when backend is ready
-  const { data: citiesData, loading, error, refetch } = useMockCitiesQuery();
+  const { data: citiesData, loading, error, refetch } = useCitiesQuery();
 
   // TODO: Replace with GraphQL when backend is ready
-  const [deleteCity] = createMockMutationHook();
+  // TODO: Add proper mutation
 
   const handleDelete = async (cityId: string) => {
     if (window.confirm('¿Estás seguro de que quieres eliminar esta ciudad?')) {
@@ -97,9 +99,9 @@ export default function CitiesPage() {
     }
   };
 
-  const countries = countriesData?.countries?.data || [];
-  const states = statesData?.states?.data || [];
-  const cities = citiesData?.cities?.data || [];
+  const countries = countriesData?.countries?.countries || [];
+  const states = statesData?.states?.states || [];
+  const cities = citiesData?.cities?.cities || [];
 
   const selectedCountry = countries.find(
     (c: any) => c.id === selectedCountryId

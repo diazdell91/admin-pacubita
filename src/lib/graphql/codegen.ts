@@ -16,27 +16,6 @@ const config: CodegenConfig = {
       ],
       config: {
         withHooks: true,
-        withHOC: false,
-        withComponent: false,
-        apolloReactHooksImportFrom: '@apollo/client',
-        skipTypename: false,
-        scalars: {
-          UUID: 'string',
-          DateTime: 'string',
-          Decimal: 'number',
-        },
-        namingConvention: {
-          typeNames: 'pascal-case#pascalCase',
-          enumValues: 'upper-case#upperCase',
-        },
-        dedupeFragments: true,
-        nonOptionalTypename: true,
-        avoidOptionals: {
-          field: true,
-          inputValue: true,
-          object: false,
-          defaultValue: false,
-        },
       },
     },
     "./src/lib/graphql/schema.json": {

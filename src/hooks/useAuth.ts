@@ -7,17 +7,33 @@ import { useAppStore } from '@/stores/useAppStore';
 import { apolloClient } from '@/lib/apollo';
 import { graphql } from '@/generated';
 import { toast } from 'sonner';
-import type {
-  SignInInput,
-  UserFragmentFragment,
-  SignInMutation,
-  SignOutMutation,
-  RefreshTokensMutation,
-  CurrentUserQuery,
-} from '@/generated/graphql';
+// TODO: Import proper types from generated GraphQL
+// import type {
+//   SignInInput,
+//   UserFragmentFragment,
+//   SignInMutation,
+//   SignOutMutation,
+//   RefreshTokensMutation,
+//   CurrentUserQuery,
+// } from '@/generated/graphql';
+
+interface SignInInput {
+  email?: string | null;
+  phone?: string | null;
+  password: string;
+}
+
+interface User {
+  id: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  phone?: string;
+  createdAt: string;
+}
 
 interface AuthState {
-  user: UserFragmentFragment | null;
+  user: User | null;
   isLoading: boolean;
   isAuthenticated: boolean;
 }
@@ -46,17 +62,12 @@ export function useAuth() {
       }
 
       // TODO: Implement currentUser query with Apollo Client
-      // For now, we'll use mock data if token exists
-      const mockUser: UserFragmentFragment = {
-        id: '1',
-        firstName: 'Juan',
-        lastName: 'Díaz',
-        email: 'juan@cubita.com',
-        phone: '+53 5555 5555',
-        createdAt: new Date().toISOString(),
-      };
-
-      setUser(mockUser);
+      // Mock removed - implement real user query
+      if (token && refreshToken) {
+        // TODO: Query current user from server
+        // For now, just keep null
+        setUser(null);
+      }
     } catch (error) {
       console.error('Auth check failed:', error);
       clearTokens();
@@ -112,8 +123,9 @@ export function useAuth() {
         localStorage.setItem('token', accessToken);
         localStorage.setItem('refreshToken', refreshToken);
 
-        // Mock user data for now (until we have a currentUser query)
-        const mockUser: UserFragmentFragment = {
+        // TODO: Get user data from server response
+        // Mock user for now
+        const user: User = {
           id: '1',
           firstName: 'Staff',
           lastName: 'Admin',
@@ -122,8 +134,7 @@ export function useAuth() {
           createdAt: new Date().toISOString(),
         };
 
-        // Update user state
-        setUser(mockUser);
+        setUser(user);
 
         toast.success('Sesión iniciada correctamente');
         return true;

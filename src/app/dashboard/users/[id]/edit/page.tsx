@@ -39,9 +39,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Switch } from '@/components/ui/switch';
 import { Badge } from '@/components/ui/badge';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { GET_USER } from '@/lib/graphql/queries/users';
-import { UPDATE_USER } from '@/lib/graphql/mutations/users';
-import { GET_PARTNERS } from '@/lib/graphql/queries/partners';
+// TODO: Add proper user queries and mutations to generated file
 import Link from 'next/link';
 
 const USER_TYPE_CONFIG = {
@@ -114,10 +112,8 @@ export default function EditUserPage() {
     notes: '',
   });
 
-  const { data: userData, loading: userLoading } = useQuery(GET_USER, {
-    variables: { input: { id: userId } },
-    fetchPolicy: 'cache-and-network',
-  });
+  // TODO: Replace with proper query - const { data: userData, loading: userLoading } = useQuery(GET_USER, {
+  const { data: userData, loading: userLoading } = { data: null, loading: false };
 
   const { data: partnersData } = useQuery(GET_PARTNERS, {
     variables: { input: {} },

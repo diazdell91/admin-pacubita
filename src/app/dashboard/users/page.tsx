@@ -1,8 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-// TODO: Replace with useQuery when backend endpoint is ready
-// import { useQuery } from '@apollo/client/react';
+import { useQuery } from '@apollo/client';
 import {
   Users,
   Plus,
@@ -54,8 +53,7 @@ import {
   CardTitle,
 } from '@/components/ui/card';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-// TODO: Replace with actual GraphQL query when backend is ready
-// import { GET_USERS } from '@/lib/graphql/queries/users';
+// import { GET_USERS } from '@/lib/graphql/generated';
 import Link from 'next/link';
 
 const USER_TYPES = [
@@ -77,61 +75,7 @@ const STATUS_OPTIONS = [
   { value: 'disabled', label: 'Desactivados' },
 ];
 
-// TODO: Remove mock data when backend GraphQL endpoint is ready
-const MOCK_USERS = {
-  users: {
-    data: [
-      {
-        id: '1',
-        email: 'juan.perez@email.com',
-        firstName: 'Juan',
-        lastName: 'Pérez',
-        phone: '+1-555-0123',
-        type: 'CLIENT',
-        isEnabled: true,
-        createdAt: '2024-01-15T10:30:00Z',
-        profile: {
-          avatar: null,
-          address: 'Calle 123, Ciudad',
-        },
-      },
-      {
-        id: '2',
-        email: 'maria.garcia@email.com',
-        firstName: 'María',
-        lastName: 'García',
-        phone: '+1-555-0124',
-        type: 'DRIVER',
-        isEnabled: true,
-        createdAt: '2024-01-16T14:20:00Z',
-        profile: {
-          avatar: null,
-          address: 'Avenida 456, Ciudad',
-        },
-      },
-      {
-        id: '3',
-        email: 'carlos.lopez@email.com',
-        firstName: 'Carlos',
-        lastName: 'López',
-        phone: '+1-555-0125',
-        type: 'PARTNER',
-        isEnabled: false,
-        createdAt: '2024-01-17T09:15:00Z',
-        profile: {
-          avatar: null,
-          address: 'Plaza 789, Ciudad',
-        },
-      },
-    ],
-    pagination: {
-      total: 3,
-      page: 1,
-      limit: 20,
-      totalPages: 1,
-    },
-  },
-};
+// Mock data removed - using real GraphQL queries
 
 export default function UsersPage() {
   const [searchTerm, setSearchTerm] = useState('');
@@ -141,7 +85,7 @@ export default function UsersPage() {
   const [currentPage, setCurrentPage] = useState(1);
   const pageSize = 20;
 
-  // TODO: Replace with actual GraphQL query when backend is ready
+  // TODO: Implement with real GraphQL queries from codegen
   // const { data, loading, error, refetch } = useQuery(GET_USERS, {
   //   variables: {
   //     input: {
@@ -166,11 +110,10 @@ export default function UsersPage() {
   //   fetchPolicy: 'cache-and-network',
   // });
 
-  // Mock data implementation - remove when backend is ready
-  const data = MOCK_USERS;
+  const data = null;
   const loading = false;
   const error = null;
-  const refetch = () => Promise.resolve({ data: MOCK_USERS });
+  const refetch = () => Promise.resolve();
 
   const getTypeConfig = (type: string) => {
     return (

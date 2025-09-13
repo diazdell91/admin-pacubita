@@ -1,8 +1,6 @@
 'use client';
 
 import { useState } from 'react';
-// TODO: Replace with GraphQL when backend is ready
-// import { useQuery } from '@apollo/client/react';
 import { useSearchParams } from 'next/navigation';
 import {
   Home,
@@ -40,12 +38,7 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
-// TODO: Replace with GraphQL when backend is ready
-// import {
-//   GET_MUNICIPALITIES,
-//   GET_NEIGHBORHOODS,
-// } from '@/lib/graphql/queries/locations';
-import { useMockMunicipalitiesQuery, useMockNeighborhoodsQuery } from '@/lib/mock-data';
+import { useMunicipalitiesQuery, useNeighborhoodsQuery } from '@/lib/graphql/generated';
 import Link from 'next/link';
 
 export default function NeighborhoodsPage() {
@@ -57,15 +50,17 @@ export default function NeighborhoodsPage() {
     preselectedMunicipalityId || ''
   );
 
-  // TODO: Replace with GraphQL when backend is ready
-  const { data: municipalitiesData } = useMockMunicipalitiesQuery();
+  const { data: municipalitiesData } = useMunicipalitiesQuery({
+    variables: { input: { provinceId: '' } }, // We'll need to adjust this based on your needs
+  });
 
-  // TODO: Replace with GraphQL when backend is ready
-  const { data: neighborhoodsData, loading, error, refetch } = useMockNeighborhoodsQuery();
+  const { data: neighborhoodsData, loading, error, refetch } = useNeighborhoodsQuery({
+    variables: { input: { municipalityId: selectedMunicipalityId || '' } },
+    skip: !selectedMunicipalityId,
+  });
 
-  const municipalities =
-    municipalitiesData?.municipalities?.data || [];
-  const neighborhoods = neighborhoodsData?.neighborhoods?.data || [];
+  const municipalities = municipalitiesData?.municipalities?.municipalities || [];
+  const neighborhoods = neighborhoodsData?.neighborhoods?.neighborhoods || [];
   const selectedMunicipality = municipalities.find(
     (m: any) => m.id === selectedMunicipalityId
   );

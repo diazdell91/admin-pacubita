@@ -26,7 +26,7 @@ import {
 // TODO: Replace with GraphQL when backend is ready
 // import { CREATE_NEIGHBORHOOD } from '@/lib/graphql/mutations/locations';
 // import { GET_MUNICIPALITIES } from '@/lib/graphql/queries/locations';
-import { useMockMunicipalitiesQuery, useMockCreateNeighborhoodMutation } from '@/lib/mock-data';
+import { useMunicipalitiesQuery} from "@/lib/graphql/generated";
 import Link from 'next/link';
 
 export default function CreateNeighborhoodPage() {
@@ -42,13 +42,13 @@ export default function CreateNeighborhoodPage() {
   });
 
   // TODO: Replace with GraphQL when backend is ready
-  const { data: municipalitiesData } = useMockMunicipalitiesQuery();
+  const { data: municipalitiesData } = useMunicipalitiesQuery();
 
   // TODO: Replace with GraphQL when backend is ready
-  const [createNeighborhood] = useMockCreateNeighborhoodMutation();
+  // TODO: Add proper mutation
 
   const municipalities =
-    municipalitiesData?.municipalities?.data || [];
+    municipalitiesData?.municipalities?.municipalities || [];
   const selectedMunicipality = municipalities.find(
     (m: any) => m.id === formData.municipalityId
   );

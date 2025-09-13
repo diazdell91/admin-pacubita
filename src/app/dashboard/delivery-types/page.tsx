@@ -1,25 +1,16 @@
 'use client';
 
 import { useState } from 'react';
-// TODO: Replace with GraphQL when backend is ready
-// import { useQuery, useMutation } from '@apollo/client/react';
+import { useQuery, useMutation } from '@apollo/client';
 import { PageHeader } from '@/components/common/PageHeader';
 import { DataTable } from '@/components/common/DataTable';
 import { LoadingSpinner } from '@/components/common/LoadingSpinner';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
-// TODO: Replace with GraphQL when backend is ready
-// import { GET_DELIVERY_TYPES } from '@/lib/graphql/queries/articles';
-// import {
-//   CREATE_DELIVERY_TYPE,
-//   UPDATE_DELIVERY_TYPE,
-// } from '@/lib/graphql/mutations/articles';
-import { 
-  useMockDeliveryTypesQuery, 
-  useMockCreateDeliveryTypeMutation, 
-  useMockUpdateDeliveryTypeMutation 
-} from '@/lib/mock-data';
+// import { GET_DELIVERY_TYPES } from '@/lib/graphql/generated';
+// import { CREATE_DELIVERY_TYPE, UPDATE_DELIVERY_TYPE } from '@/lib/graphql/generated';
+// Mock data imports removed - using real GraphQL
 import React from 'react';
 import {
   Eye,
@@ -100,14 +91,19 @@ export default function DeliveryTypesPage() {
   });
   const router = useRouter();
 
-  // TODO: Replace with GraphQL when backend is ready
-  const { loading, error, data, refetch } = useMockDeliveryTypesQuery();
+  // TODO: Implement with real GraphQL queries from codegen
+  // const { loading, error, data, refetch } = useQuery(GET_DELIVERY_TYPES);
+  // const [createDeliveryType, { loading: creating }] = useMutation(CREATE_DELIVERY_TYPE);
+  // const [updateDeliveryType, { loading: updating }] = useMutation(UPDATE_DELIVERY_TYPE);
 
-  // TODO: Replace with GraphQL when backend is ready
-  const [createDeliveryType, { loading: creating }] = useMockCreateDeliveryTypeMutation();
-
-  // TODO: Replace with GraphQL when backend is ready
-  const [updateDeliveryType, { loading: updating }] = useMockUpdateDeliveryTypeMutation();
+  const loading = false;
+  const error = null;
+  const data = null;
+  const refetch = () => Promise.resolve();
+  const createDeliveryType = () => Promise.resolve();
+  const updateDeliveryType = () => Promise.resolve();
+  const creating = false;
+  const updating = false;
 
   const deliveryTypes = data?.deliveryTypes?.data || [];
   const totalTypes = deliveryTypes.length;

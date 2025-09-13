@@ -8,7 +8,7 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent } from '@/components/ui/card';
-import { useGetArticlesQuery } from '@/lib/graphql/generated';
+import { useArticlesQuery } from '@/lib/graphql/generated';
 import {
   Eye,
   Edit,
@@ -64,26 +64,16 @@ export default function ArticleVariantsPage() {
   const [statusFilter, setStatusFilter] = useState<string>('all');
   const router = useRouter();
 
-  const { loading, error, data, refetch } = useGetArticlesQuery({
+  const { loading, error, data, refetch } = useArticlesQuery({
     variables: {
       input: {
-        search: searchTerm || undefined,
-        isEnabled:
-          statusFilter === 'all' ? undefined : statusFilter === 'enabled',
-        pagination: {
-          page: currentPage,
-          limit: pageSize,
-        },
-        sorting: {
-          field: 'createdAt',
-          order: -1,
-        },
+        _: null, // Required placeholder field
       },
     },
     fetchPolicy: 'cache-and-network',
   });
 
-  const articles: Article[] = data?.articles?.data || [];
+  const articles = data?.articles?.articles || [];
 
   // Flatten variants from all articles
   const variants: ArticleVariant[] = articles.flatMap((article) =>
@@ -330,10 +320,10 @@ export default function ArticleVariantsPage() {
 
       <div className="rounded-md border bg-white">
         <DataTable
-          data={filteredVariants}
-          columns={columns}
+          data={filteredVariants as any}
+          columns={columns as any}
           searchPlaceholder="Buscar variantes..."
-          onRowClick={handleViewVariant}
+          onRowClick={handleViewVariant as any}
           pageSize={pageSize}
           totalItems={filteredVariants.length}
           currentPage={currentPage}

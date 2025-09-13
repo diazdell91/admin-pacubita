@@ -52,7 +52,7 @@ import {
   CardTitle,
 } from '@/components/ui/card';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { GET_USERS } from '@/lib/graphql/queries/users';
+// TODO: Add proper user queries to generated file - import { GET_USERS }
 import Link from 'next/link';
 
 const STATUS_OPTIONS = [

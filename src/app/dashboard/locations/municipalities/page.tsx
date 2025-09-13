@@ -1,8 +1,6 @@
 'use client';
 
 import { useState } from 'react';
-// TODO: Replace with GraphQL when backend is ready
-// import { useQuery } from '@apollo/client/react';
 import { useSearchParams } from 'next/navigation';
 import {
   MapPin,
@@ -39,12 +37,7 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
-// TODO: Replace with GraphQL when backend is ready
-// import {
-//   GET_PROVINCES,
-//   GET_MUNICIPALITIES,
-// } from '@/lib/graphql/queries/locations';
-import { useMockStatesQuery, useMockMunicipalitiesQuery } from '@/lib/mock-data';
+import { useProvincesQuery, useMunicipalitiesQuery } from '@/lib/graphql/generated';
 import Link from 'next/link';
 
 export default function MunicipalitiesPage() {
@@ -56,16 +49,17 @@ export default function MunicipalitiesPage() {
     preselectedProvinceId || ''
   );
 
-  const { data: provincesData } = useQuery(GET_PROVINCES, {
+  const { data: provincesData } = useProvincesQuery({
     variables: { input: { countryId: 'cuba-id' } }, // Assuming Cuba for now
   });
 
-  // TODO: Replace with GraphQL when backend is ready
-  const { data: municipalitiesData, loading, error, refetch } = useMockMunicipalitiesQuery();
+  const { data: municipalitiesData, loading, error, refetch } = useMunicipalitiesQuery({
+    variables: { input: { provinceId: selectedProvinceId || '' } },
+    skip: !selectedProvinceId,
+  });
 
-  const provinces = provincesData?.states?.data || [];
-  const municipalities =
-    municipalitiesData?.municipalities?.data || [];
+  const provinces = provincesData?.provinces?.provinces || [];
+  const municipalities = municipalitiesData?.municipalities?.municipalities || [];
   const selectedProvince = provinces.find(
     (p: any) => p.id === selectedProvinceId
   );

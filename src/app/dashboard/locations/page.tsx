@@ -36,7 +36,7 @@ import {
 import { Badge } from '@/components/ui/badge';
 // TODO: Replace with GraphQL when backend is ready
 // import { GET_COUNTRIES } from '@/lib/graphql/queries/locations';
-import { useMockCountriesQuery } from '@/lib/mock-data';
+import { useCountriesQuery } from "@/lib/graphql/generated";
 import {
   LocationTree,
   generateSampleLocationTree,
@@ -90,9 +90,11 @@ export default function LocationsPage() {
   const [searchTerm, setSearchTerm] = useState('');
 
   // TODO: Replace with GraphQL when backend is ready
-  const { data: countriesData, loading: countriesLoading } = useMockCountriesQuery();
+  const { data: countriesData, loading: countriesLoading } = useCountriesQuery({
+    variables: { input: { _: null } },
+  });
 
-  const countries = countriesData?.countries?.data || [];
+  const countries = countriesData?.countries?.countries || [];
 
   return (
     <div className="space-y-6">

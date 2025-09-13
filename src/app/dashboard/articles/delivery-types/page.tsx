@@ -9,7 +9,7 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { useGetDeliveryTypesQuery } from '@/lib/graphql/generated';
+import { useDeliveryTypesQuery } from '@/lib/graphql/generated';
 import {
   Eye,
   Edit,
@@ -55,25 +55,16 @@ export default function DeliveryTypesPage() {
   const [statusFilter, setStatusFilter] = useState<string>('all');
   const router = useRouter();
 
-  const { loading, error, data, refetch } = useGetDeliveryTypesQuery({
+  const { loading, error, data, refetch } = useDeliveryTypesQuery({
     variables: {
       input: {
-        search: searchTerm || undefined,
-        isEnabled: statusFilter === 'all' ? undefined : statusFilter === 'enabled',
-        pagination: {
-          page: currentPage,
-          limit: pageSize,
-        },
-        sorting: {
-          field: 'createdAt',
-          order: -1,
-        },
+        _: null, // Required placeholder field
       },
     },
     errorPolicy: 'all',
   });
 
-  const deliveryTypes: DeliveryType[] = data?.deliveryTypes?.data || [];
+  const deliveryTypes = data?.deliveryTypes?.deliveryTypes || [];
   const totalDeliveryTypes = deliveryTypes.length;
 
   const handleCreateDeliveryType = () => {
@@ -350,10 +341,10 @@ export default function DeliveryTypesPage() {
 
       <div className="rounded-md border bg-white">
         <DataTable
-          data={deliveryTypes}
-          columns={columns}
+          data={deliveryTypes as any}
+          columns={columns as any}
           searchPlaceholder="Buscar tipos de entrega..."
-          onRowClick={handleViewDeliveryType}
+          onRowClick={handleViewDeliveryType as any}
           pageSize={pageSize}
           totalItems={totalDeliveryTypes}
           currentPage={currentPage}

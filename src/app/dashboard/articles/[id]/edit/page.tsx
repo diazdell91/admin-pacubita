@@ -16,7 +16,7 @@ import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { Switch } from '@/components/ui/switch';
 import { LoadingSpinner } from '@/components/common/LoadingSpinner';
-import { useGetArticleQuery, useUpdateArticleMutation } from '@/lib/graphql/generated';
+import { useArticleQuery, useUpdateArticleMutation } from '@/lib/graphql/generated';
 import {
   ArrowLeft,
   Save,
@@ -58,7 +58,7 @@ export default function EditArticlePage() {
     loading: loadingArticle,
     error: articleError,
     data,
-  } = useGetArticleQuery({
+  } = useArticleQuery({
     variables: {
       input: {
         id: articleId,
@@ -78,7 +78,7 @@ export default function EditArticlePage() {
     },
   });
 
-  const article: Article | undefined = data?.article;
+  const article = data?.article?.article;
 
   useEffect(() => {
     if (article) {
@@ -144,7 +144,7 @@ export default function EditArticlePage() {
             id: articleId,
             name: formData.name.trim(),
             description: formData.description.trim(),
-            imagePath: formData.imagePath,
+            imagePath: formData.imagePath || '',
             isEnabled: formData.isEnabled,
           },
         },

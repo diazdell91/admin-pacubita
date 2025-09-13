@@ -142,7 +142,7 @@ export default function PricingCalculatorPage() {
       });
     }
 
-    // Apply location multiplier (mock logic)
+    // TODO: Get location multipliers from GraphQL
     const locationMultipliers: { [key: string]: number } = {
       '1': 1.0, // La Habana
       '2': 1.2, // Santiago de Cuba
@@ -163,7 +163,7 @@ export default function PricingCalculatorPage() {
       });
     }
 
-    // Apply partner discount (mock logic)
+    // TODO: Get partner discounts from GraphQL
     const partnerDiscounts: { [key: string]: number } = {
       // Partner-specific discounts would come from the database
     };

@@ -1,6 +1,5 @@
 import { gql } from '@apollo/client';
 import * as Apollo from '@apollo/client';
-import * as ApolloReactHooks from '@apollo/client';
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
 export type Exact<T extends { [key: string]: unknown }> = {
@@ -30,23 +29,23 @@ export type Scalars = {
   Int: { input: number; output: number };
   Float: { input: number; output: number };
   Date: { input: any; output: any };
-  DateTime: { input: string; output: string };
-  UUID: { input: string; output: string };
+  DateTime: { input: any; output: any };
+  UUID: { input: any; output: any };
 };
 
 export enum AddonType {
-  HOME_PICKUP = 'HOME_PICKUP',
-  HOME_WRAPPING = 'HOME_WRAPPING',
+  HomePickup = 'HOME_PICKUP',
+  HomeWrapping = 'HOME_WRAPPING',
 }
 
 export type AddressCoordinates = {
-  __typename: 'AddressCoordinates';
+  __typename?: 'AddressCoordinates';
   latitude: Scalars['Float']['output'];
   longitude: Scalars['Float']['output'];
 };
 
 export type Article = {
-  __typename: 'Article';
+  __typename?: 'Article';
   description: Scalars['String']['output'];
   id: Scalars['UUID']['output'];
   imagePath: Scalars['String']['output'];
@@ -60,12 +59,12 @@ export type ArticleInput = {
 };
 
 export type ArticleOutput = {
-  __typename: 'ArticleOutput';
+  __typename?: 'ArticleOutput';
   article: Article;
 };
 
 export type ArticlePricingRule = IPricingRule & {
-  __typename: 'ArticlePricingRule';
+  __typename?: 'ArticlePricingRule';
   article: PricingRuleArticle;
   articleVariant: PricingRuleArticleVariant;
   deliveryType: PricingRuleDeliveryType;
@@ -78,18 +77,18 @@ export type ArticlePricingRule = IPricingRule & {
 };
 
 export type ArticleVariant = {
-  __typename: 'ArticleVariant';
+  __typename?: 'ArticleVariant';
   id: Scalars['UUID']['output'];
   isEnabled: Scalars['Boolean']['output'];
   name: Scalars['String']['output'];
 };
 
 export type ArticlesInput = {
-  _: InputMaybe<Scalars['String']['input']>;
+  _?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type ArticlesOutput = {
-  __typename: 'ArticlesOutput';
+  __typename?: 'ArticlesOutput';
   articles: Array<Article>;
 };
 
@@ -99,8 +98,8 @@ export type ChangePasswordInput = {
 };
 
 export type ChangePasswordOutput = {
-  __typename: 'ChangePasswordOutput';
-  _: Maybe<Scalars['String']['output']>;
+  __typename?: 'ChangePasswordOutput';
+  _?: Maybe<Scalars['String']['output']>;
 };
 
 export type CitiesInput = {
@@ -108,12 +107,12 @@ export type CitiesInput = {
 };
 
 export type CitiesOutput = {
-  __typename: 'CitiesOutput';
+  __typename?: 'CitiesOutput';
   cities: Array<City>;
 };
 
 export type City = {
-  __typename: 'City';
+  __typename?: 'City';
   id: Scalars['UUID']['output'];
   name: Scalars['String']['output'];
   zipCodes: Array<Scalars['String']['output']>;
@@ -124,12 +123,12 @@ export type CityInput = {
 };
 
 export type CityOutput = {
-  __typename: 'CityOutput';
+  __typename?: 'CityOutput';
   city: City;
 };
 
 export type ClientUser = IUser & {
-  __typename: 'ClientUser';
+  __typename?: 'ClientUser';
   createdAt: Scalars['DateTime']['output'];
   email: Scalars['String']['output'];
   firstName: Scalars['String']['output'];
@@ -148,33 +147,33 @@ export type ClientUserInput = {
 };
 
 export type ClientUserOutput = {
-  __typename: 'ClientUserOutput';
+  __typename?: 'ClientUserOutput';
   clientUser: ClientUser;
 };
 
 export type ClientUsersInput = {
-  pagination: InputMaybe<Pagination>;
-  partnerId: InputMaybe<Scalars['UUID']['input']>;
-  sorting: InputMaybe<Sorting>;
+  pagination?: InputMaybe<Pagination>;
+  partnerId?: InputMaybe<Scalars['UUID']['input']>;
+  sorting?: InputMaybe<Sorting>;
 };
 
 export type ClientUsersOutput = {
-  __typename: 'ClientUsersOutput';
+  __typename?: 'ClientUsersOutput';
   clientUsers: Array<ClientUser>;
   total: Scalars['Int']['output'];
 };
 
 export type CountriesInput = {
-  _: InputMaybe<Scalars['String']['input']>;
+  _?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type CountriesOutput = {
-  __typename: 'CountriesOutput';
+  __typename?: 'CountriesOutput';
   countries: Array<Country>;
 };
 
 export type Country = {
-  __typename: 'Country';
+  __typename?: 'Country';
   id: Scalars['UUID']['output'];
   name: Scalars['String']['output'];
 };
@@ -184,7 +183,7 @@ export type CountryInput = {
 };
 
 export type CountryOutput = {
-  __typename: 'CountryOutput';
+  __typename?: 'CountryOutput';
   country: Country;
 };
 
@@ -196,7 +195,7 @@ export type CreateArticleInput = {
 };
 
 export type CreateArticleOutput = {
-  __typename: 'CreateArticleOutput';
+  __typename?: 'CreateArticleOutput';
   article: Article;
 };
 
@@ -211,7 +210,7 @@ export type CreateArticlePricingRuleInput = {
 };
 
 export type CreateArticlePricingRuleOutput = {
-  __typename: 'CreateArticlePricingRuleOutput';
+  __typename?: 'CreateArticlePricingRuleOutput';
   articlePricingRule: ArticlePricingRule;
 };
 
@@ -222,7 +221,7 @@ export type CreateArticleVariantInput = {
 };
 
 export type CreateArticleVariantOutput = {
-  __typename: 'CreateArticleVariantOutput';
+  __typename?: 'CreateArticleVariantOutput';
   articleVariant: ArticleVariant;
 };
 
@@ -233,7 +232,7 @@ export type CreateCityInput = {
 };
 
 export type CreateCityOutput = {
-  __typename: 'CreateCityOutput';
+  __typename?: 'CreateCityOutput';
   city: City;
 };
 
@@ -245,7 +244,7 @@ export type CreateDeliveryTypeInput = {
 };
 
 export type CreateDeliveryTypeOutput = {
-  __typename: 'CreateDeliveryTypeOutput';
+  __typename?: 'CreateDeliveryTypeOutput';
   deliveryType: DeliveryType;
 };
 
@@ -259,7 +258,7 @@ export type CreateDriverUserInput = {
 };
 
 export type CreateDriverUserOutput = {
-  __typename: 'CreateDriverUserOutput';
+  __typename?: 'CreateDriverUserOutput';
   driverUser: DriverUser;
 };
 
@@ -269,7 +268,7 @@ export type CreateMunicipalityInput = {
 };
 
 export type CreateMunicipalityOutput = {
-  __typename: 'CreateMunicipalityOutput';
+  __typename?: 'CreateMunicipalityOutput';
   municipality: Municipality;
 };
 
@@ -279,8 +278,17 @@ export type CreateNeighborhoodInput = {
 };
 
 export type CreateNeighborhoodOutput = {
-  __typename: 'CreateNeighborhoodOutput';
+  __typename?: 'CreateNeighborhoodOutput';
   neighborhood: Neighborhood;
+};
+
+export type CreatePartnerInput = {
+  name: Scalars['String']['input'];
+};
+
+export type CreatePartnerOutput = {
+  __typename?: 'CreatePartnerOutput';
+  partner: Partner;
 };
 
 export type CreatePartnerUserInput = {
@@ -293,7 +301,7 @@ export type CreatePartnerUserInput = {
 };
 
 export type CreatePartnerUserOutput = {
-  __typename: 'CreatePartnerUserOutput';
+  __typename?: 'CreatePartnerUserOutput';
   partnerUser: PartnerUser;
 };
 
@@ -303,7 +311,7 @@ export type CreatePresignPutFileUrlInput = {
 };
 
 export type CreatePresignPutFileUrlOutput = {
-  __typename: 'CreatePresignPutFileUrlOutput';
+  __typename?: 'CreatePresignPutFileUrlOutput';
   path: Scalars['String']['output'];
   url: Scalars['String']['output'];
 };
@@ -314,7 +322,7 @@ export type CreateProvinceInput = {
 };
 
 export type CreateProvinceOutput = {
-  __typename: 'CreateProvinceOutput';
+  __typename?: 'CreateProvinceOutput';
   province: Province;
 };
 
@@ -328,7 +336,7 @@ export type CreateStaffUserInput = {
 };
 
 export type CreateStaffUserOutput = {
-  __typename: 'CreateStaffUserOutput';
+  __typename?: 'CreateStaffUserOutput';
   staffUser: StaffUser;
 };
 
@@ -338,28 +346,28 @@ export type CreateStateInput = {
 };
 
 export type CreateStateOutput = {
-  __typename: 'CreateStateOutput';
+  __typename?: 'CreateStateOutput';
   state: State;
 };
 
 export type CurrentUserInput = {
-  _: InputMaybe<Scalars['String']['input']>;
+  _?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type CurrentUserOutput = {
-  __typename: 'CurrentUserOutput';
+  __typename?: 'CurrentUserOutput';
   user: User;
 };
 
 export type DeliveryOrder = Order & {
-  __typename: 'DeliveryOrder';
+  __typename?: 'DeliveryOrder';
   addons: Array<OrderAddon>;
   client: OrderClient;
   code: Scalars['String']['output'];
   createdAt: Scalars['DateTime']['output'];
   discount: Scalars['Int']['output'];
-  driver: Maybe<OrderDriver>;
-  externalId: Maybe<Scalars['String']['output']>;
+  driver?: Maybe<OrderDriver>;
+  externalId?: Maybe<Scalars['String']['output']>;
   id: Scalars['UUID']['output'];
   items: Array<OrderItem>;
   partner: OrderPartner;
@@ -374,7 +382,7 @@ export type DeliveryOrder = Order & {
 };
 
 export type DeliveryType = {
-  __typename: 'DeliveryType';
+  __typename?: 'DeliveryType';
   description: Scalars['String']['output'];
   icon: Scalars['String']['output'];
   id: Scalars['UUID']['output'];
@@ -387,16 +395,16 @@ export type DeliveryTypeInput = {
 };
 
 export type DeliveryTypeOutput = {
-  __typename: 'DeliveryTypeOutput';
+  __typename?: 'DeliveryTypeOutput';
   deliveryType: DeliveryType;
 };
 
 export type DeliveryTypesInput = {
-  _: InputMaybe<Scalars['String']['input']>;
+  _?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type DeliveryTypesOutput = {
-  __typename: 'DeliveryTypesOutput';
+  __typename?: 'DeliveryTypesOutput';
   deliveryTypes: Array<DeliveryType>;
 };
 
@@ -405,12 +413,12 @@ export type DisableUserInput = {
 };
 
 export type DisableUserOutput = {
-  __typename: 'DisableUserOutput';
-  _: Maybe<Scalars['String']['output']>;
+  __typename?: 'DisableUserOutput';
+  _?: Maybe<Scalars['String']['output']>;
 };
 
 export type DriverUser = IUser & {
-  __typename: 'DriverUser';
+  __typename?: 'DriverUser';
   createdAt: Scalars['DateTime']['output'];
   email: Scalars['String']['output'];
   firstName: Scalars['String']['output'];
@@ -429,18 +437,18 @@ export type DriverUserInput = {
 };
 
 export type DriverUserOutput = {
-  __typename: 'DriverUserOutput';
+  __typename?: 'DriverUserOutput';
   driverUser: DriverUser;
 };
 
 export type DriverUsersInput = {
-  pagination: InputMaybe<Pagination>;
-  partnerId: InputMaybe<Scalars['UUID']['input']>;
-  sorting: InputMaybe<Sorting>;
+  pagination?: InputMaybe<Pagination>;
+  partnerId?: InputMaybe<Scalars['UUID']['input']>;
+  sorting?: InputMaybe<Sorting>;
 };
 
 export type DriverUsersOutput = {
-  __typename: 'DriverUsersOutput';
+  __typename?: 'DriverUsersOutput';
   driverUsers: Array<DriverUser>;
   total: Scalars['Int']['output'];
 };
@@ -450,8 +458,8 @@ export type DropOffOrderInput = {
 };
 
 export type DropOffOrderOutput = {
-  __typename: 'DropOffOrderOutput';
-  _: Maybe<Scalars['String']['output']>;
+  __typename?: 'DropOffOrderOutput';
+  _?: Maybe<Scalars['String']['output']>;
 };
 
 export type EnableUserInput = {
@@ -459,14 +467,14 @@ export type EnableUserInput = {
 };
 
 export type EnableUserOutput = {
-  __typename: 'EnableUserOutput';
-  _: Maybe<Scalars['String']['output']>;
+  __typename?: 'EnableUserOutput';
+  _?: Maybe<Scalars['String']['output']>;
 };
 
 export enum FileType {
-  DRIVER_LICENSE_BACK = 'DRIVER_LICENSE_BACK',
-  DRIVER_LICENSE_FRONT = 'DRIVER_LICENSE_FRONT',
-  DRIVER_PHOTO = 'DRIVER_PHOTO',
+  DriverLicenseBack = 'DRIVER_LICENSE_BACK',
+  DriverLicenseFront = 'DRIVER_LICENSE_FRONT',
+  DriverPhoto = 'DRIVER_PHOTO',
 }
 
 export type IOrderAddon = {
@@ -510,16 +518,16 @@ export type IUser = {
 };
 
 export type Location = {
-  __typename: 'Location';
+  __typename?: 'Location';
   id: Scalars['UUID']['output'];
   name: Scalars['String']['output'];
   type: LocationType;
 };
 
 export enum LocationType {
-  MUNICIPALITY = 'MUNICIPALITY',
-  NEIGHBORHOOD = 'NEIGHBORHOOD',
-  PROVINCE = 'PROVINCE',
+  Municipality = 'MUNICIPALITY',
+  Neighborhood = 'NEIGHBORHOOD',
+  Province = 'PROVINCE',
 }
 
 export type MunicipalitiesInput = {
@@ -527,12 +535,12 @@ export type MunicipalitiesInput = {
 };
 
 export type MunicipalitiesOutput = {
-  __typename: 'MunicipalitiesOutput';
+  __typename?: 'MunicipalitiesOutput';
   municipalities: Array<Municipality>;
 };
 
 export type Municipality = {
-  __typename: 'Municipality';
+  __typename?: 'Municipality';
   id: Scalars['UUID']['output'];
   name: Scalars['String']['output'];
 };
@@ -542,13 +550,13 @@ export type MunicipalityInput = {
 };
 
 export type MunicipalityOutput = {
-  __typename: 'MunicipalityOutput';
+  __typename?: 'MunicipalityOutput';
   municipality: Municipality;
 };
 
 export type Mutation = {
-  __typename: 'Mutation';
-  _: Maybe<Scalars['String']['output']>;
+  __typename?: 'Mutation';
+  _?: Maybe<Scalars['String']['output']>;
   changePassword: ChangePasswordOutput;
   createArticle: CreateArticleOutput;
   createArticlePricingRule: CreateArticlePricingRuleOutput;
@@ -558,6 +566,7 @@ export type Mutation = {
   createDriverUser: CreateDriverUserOutput;
   createMunicipality: CreateMunicipalityOutput;
   createNeighborhood: CreateNeighborhoodOutput;
+  createPartner: CreatePartnerOutput;
   createPartnerUser: CreatePartnerUserOutput;
   createPresignPutFileUrl: CreatePresignPutFileUrlOutput;
   createProvince: CreateProvinceOutput;
@@ -579,6 +588,7 @@ export type Mutation = {
   updateDriverUser: UpdateDriverUserOutput;
   updateMunicipality: UpdateMunicipalityOutput;
   updateNeighborhood: UpdateNeighborhoodOutput;
+  updatePartner: UpdatePartnerOutput;
   updatePartnerUser: UpdatePartnerUserOutput;
   updateProvince: UpdateProvinceOutput;
   updateStaffUser: UpdateStaffUserOutput;
@@ -621,6 +631,10 @@ export type MutationCreateMunicipalityArgs = {
 
 export type MutationCreateNeighborhoodArgs = {
   input: CreateNeighborhoodInput;
+};
+
+export type MutationCreatePartnerArgs = {
+  input: CreatePartnerInput;
 };
 
 export type MutationCreatePartnerUserArgs = {
@@ -707,6 +721,10 @@ export type MutationUpdateNeighborhoodArgs = {
   input: UpdateNeighborhoodInput;
 };
 
+export type MutationUpdatePartnerArgs = {
+  input: UpdatePartnerInput;
+};
+
 export type MutationUpdatePartnerUserArgs = {
   input: UpdatePartnerUserInput;
 };
@@ -732,7 +750,7 @@ export type MutationVerifyPhoneArgs = {
 };
 
 export type Neighborhood = {
-  __typename: 'Neighborhood';
+  __typename?: 'Neighborhood';
   id: Scalars['UUID']['output'];
   name: Scalars['String']['output'];
 };
@@ -742,7 +760,7 @@ export type NeighborhoodInput = {
 };
 
 export type NeighborhoodOutput = {
-  __typename: 'NeighborhoodOutput';
+  __typename?: 'NeighborhoodOutput';
   neighborhood: Neighborhood;
 };
 
@@ -751,7 +769,7 @@ export type NeighborhoodsInput = {
 };
 
 export type NeighborhoodsOutput = {
-  __typename: 'NeighborhoodsOutput';
+  __typename?: 'NeighborhoodsOutput';
   neighborhoods: Array<Neighborhood>;
 };
 
@@ -761,8 +779,8 @@ export type Order = {
   code: Scalars['String']['output'];
   createdAt: Scalars['DateTime']['output'];
   discount: Scalars['Int']['output'];
-  driver: Maybe<OrderDriver>;
-  externalId: Maybe<Scalars['String']['output']>;
+  driver?: Maybe<OrderDriver>;
+  externalId?: Maybe<Scalars['String']['output']>;
   id: Scalars['UUID']['output'];
   items: Array<OrderItem>;
   partner: OrderPartner;
@@ -778,7 +796,7 @@ export type Order = {
 export type OrderAddon = OrderHomePickupAddon | OrderHomeWrappingAddon;
 
 export type OrderArticle = IOrderProduct & {
-  __typename: 'OrderArticle';
+  __typename?: 'OrderArticle';
   deliveryType: OrderDeliveryType;
   description: Scalars['String']['output'];
   id: Scalars['UUID']['output'];
@@ -790,13 +808,13 @@ export type OrderArticle = IOrderProduct & {
 };
 
 export type OrderArticleVariant = {
-  __typename: 'OrderArticleVariant';
+  __typename?: 'OrderArticleVariant';
   id: Scalars['UUID']['output'];
   name: Scalars['String']['output'];
 };
 
 export type OrderCard = IOrderPaymentMethod & {
-  __typename: 'OrderCard';
+  __typename?: 'OrderCard';
   brand: Scalars['String']['output'];
   expMonth: Scalars['Int']['output'];
   expYear: Scalars['Int']['output'];
@@ -806,26 +824,26 @@ export type OrderCard = IOrderPaymentMethod & {
 };
 
 export type OrderClient = {
-  __typename: 'OrderClient';
+  __typename?: 'OrderClient';
   firstName: Scalars['String']['output'];
   id: Scalars['UUID']['output'];
   lastName: Scalars['String']['output'];
 };
 
 export type OrderContentType = {
-  __typename: 'OrderContentType';
+  __typename?: 'OrderContentType';
   id: Scalars['UUID']['output'];
   name: Scalars['String']['output'];
 };
 
 export type OrderDeliveryType = {
-  __typename: 'OrderDeliveryType';
+  __typename?: 'OrderDeliveryType';
   id: Scalars['UUID']['output'];
   name: Scalars['String']['output'];
 };
 
 export type OrderDriver = {
-  __typename: 'OrderDriver';
+  __typename?: 'OrderDriver';
   firstName: Scalars['String']['output'];
   id: Scalars['UUID']['output'];
   lastName: Scalars['String']['output'];
@@ -833,7 +851,7 @@ export type OrderDriver = {
 };
 
 export type OrderHomePickupAddon = IOrderAddon & {
-  __typename: 'OrderHomePickupAddon';
+  __typename?: 'OrderHomePickupAddon';
   date: Scalars['Date']['output'];
   freeThresholdAmount: Scalars['Int']['output'];
   hourRange: OrderHomePickupAddonHourRange;
@@ -844,13 +862,13 @@ export type OrderHomePickupAddon = IOrderAddon & {
 };
 
 export type OrderHomePickupAddonHourRange = {
-  __typename: 'OrderHomePickupAddonHourRange';
+  __typename?: 'OrderHomePickupAddonHourRange';
   endAt: Scalars['String']['output'];
   startAt: Scalars['String']['output'];
 };
 
 export type OrderHomeWrappingAddon = IOrderAddon & {
-  __typename: 'OrderHomeWrappingAddon';
+  __typename?: 'OrderHomeWrappingAddon';
   date: Scalars['Date']['output'];
   freeThresholdAmount: Scalars['Int']['output'];
   hourRange: OrderHomeWrappingAddonHourRange;
@@ -861,7 +879,7 @@ export type OrderHomeWrappingAddon = IOrderAddon & {
 };
 
 export type OrderHomeWrappingAddonHourRange = {
-  __typename: 'OrderHomeWrappingAddonHourRange';
+  __typename?: 'OrderHomeWrappingAddonHourRange';
   endAt: Scalars['String']['output'];
   startAt: Scalars['String']['output'];
 };
@@ -871,7 +889,7 @@ export type OrderInput = {
 };
 
 export type OrderItem = {
-  __typename: 'OrderItem';
+  __typename?: 'OrderItem';
   id: Scalars['UUID']['output'];
   product: OrderProduct;
   quantity: Scalars['Int']['output'];
@@ -879,31 +897,31 @@ export type OrderItem = {
 };
 
 export type OrderLuggage = IOrderProduct & {
-  __typename: 'OrderLuggage';
+  __typename?: 'OrderLuggage';
   price: Scalars['Int']['output'];
   size: OrderLuggageSize;
   type: OrderProductType;
 };
 
 export type OrderLuggageSize = {
-  __typename: 'OrderLuggageSize';
+  __typename?: 'OrderLuggageSize';
   id: Scalars['UUID']['output'];
   price: Scalars['Int']['output'];
 };
 
 export type OrderOutput = {
-  __typename: 'OrderOutput';
+  __typename?: 'OrderOutput';
   order: Order;
 };
 
 export type OrderPartner = {
-  __typename: 'OrderPartner';
+  __typename?: 'OrderPartner';
   id: Scalars['UUID']['output'];
   name: Scalars['String']['output'];
 };
 
 export type OrderPartnerBalance = IOrderPaymentMethod & {
-  __typename: 'OrderPartnerBalance';
+  __typename?: 'OrderPartnerBalance';
   id: Scalars['UUID']['output'];
   type: PaymentMethodType;
 };
@@ -913,66 +931,66 @@ export type OrderPaymentMethod = OrderCard | OrderPartnerBalance;
 export type OrderProduct = OrderArticle | OrderLuggage;
 
 export enum OrderProductType {
-  ARTICLE = 'ARTICLE',
-  LUGGAGE = 'LUGGAGE',
-  PACKAGE = 'PACKAGE',
+  Article = 'ARTICLE',
+  Luggage = 'LUGGAGE',
+  Package = 'PACKAGE',
 }
 
 export type OrderRecipient = {
-  __typename: 'OrderRecipient';
+  __typename?: 'OrderRecipient';
   address: OrderRecipientAddress;
-  email: Maybe<Scalars['String']['output']>;
+  email?: Maybe<Scalars['String']['output']>;
   firstName: Scalars['String']['output'];
   identityCardNumber: Scalars['String']['output'];
   lastName: Scalars['String']['output'];
-  notes: Maybe<Scalars['String']['output']>;
+  notes?: Maybe<Scalars['String']['output']>;
   phone: Scalars['String']['output'];
 };
 
 export type OrderRecipientAddress = {
-  __typename: 'OrderRecipientAddress';
-  coordinates: Maybe<AddressCoordinates>;
+  __typename?: 'OrderRecipientAddress';
+  coordinates?: Maybe<AddressCoordinates>;
   line1: Scalars['String']['output'];
-  line2: Maybe<Scalars['String']['output']>;
+  line2?: Maybe<Scalars['String']['output']>;
   municipality: Scalars['String']['output'];
-  neighborhood: Maybe<Scalars['String']['output']>;
+  neighborhood?: Maybe<Scalars['String']['output']>;
   postalCode: Scalars['String']['output'];
   province: Scalars['String']['output'];
 };
 
 export type OrderSender = {
-  __typename: 'OrderSender';
+  __typename?: 'OrderSender';
   address: OrderSenderAddress;
-  email: Maybe<Scalars['String']['output']>;
+  email?: Maybe<Scalars['String']['output']>;
   firstName: Scalars['String']['output'];
   lastName: Scalars['String']['output'];
   phone: Scalars['String']['output'];
 };
 
 export type OrderSenderAddress = {
-  __typename: 'OrderSenderAddress';
+  __typename?: 'OrderSenderAddress';
   city: Scalars['String']['output'];
   coordinates: AddressCoordinates;
   line1: Scalars['String']['output'];
-  line2: Maybe<Scalars['String']['output']>;
+  line2?: Maybe<Scalars['String']['output']>;
   state: Scalars['String']['output'];
   zipCode: Scalars['String']['output'];
 };
 
 export enum OrderStatus {
-  ACCEPTED = 'ACCEPTED',
-  CANCELLED = 'CANCELLED',
-  CONFIRMED = 'CONFIRMED',
-  DELIVERED = 'DELIVERED',
-  DROPPED_OFF = 'DROPPED_OFF',
-  FAILED = 'FAILED',
-  PENDING = 'PENDING',
-  PICKED_UP = 'PICKED_UP',
-  SHIPPED = 'SHIPPED',
+  Accepted = 'ACCEPTED',
+  Cancelled = 'CANCELLED',
+  Confirmed = 'CONFIRMED',
+  Delivered = 'DELIVERED',
+  DroppedOff = 'DROPPED_OFF',
+  Failed = 'FAILED',
+  Pending = 'PENDING',
+  PickedUp = 'PICKED_UP',
+  Shipped = 'SHIPPED',
 }
 
 export type OrderVehicle = {
-  __typename: 'OrderVehicle';
+  __typename?: 'OrderVehicle';
   color: Scalars['String']['output'];
   id: Scalars['UUID']['output'];
   make: Scalars['String']['output'];
@@ -982,19 +1000,19 @@ export type OrderVehicle = {
 };
 
 export type OrdersInput = {
-  clientId: InputMaybe<Scalars['UUID']['input']>;
-  code: InputMaybe<Scalars['String']['input']>;
-  driverId: InputMaybe<Scalars['UUID']['input']>;
-  externalId: InputMaybe<Scalars['String']['input']>;
-  pagination: InputMaybe<Pagination>;
-  partnerId: InputMaybe<Scalars['UUID']['input']>;
-  serviceType: InputMaybe<ServiceType>;
-  sorting: InputMaybe<Sorting>;
-  status: InputMaybe<OrderStatus>;
+  clientId?: InputMaybe<Scalars['UUID']['input']>;
+  code?: InputMaybe<Scalars['String']['input']>;
+  driverId?: InputMaybe<Scalars['UUID']['input']>;
+  externalId?: InputMaybe<Scalars['String']['input']>;
+  pagination?: InputMaybe<Pagination>;
+  partnerId?: InputMaybe<Scalars['UUID']['input']>;
+  serviceType?: InputMaybe<ServiceType>;
+  sorting?: InputMaybe<Sorting>;
+  status?: InputMaybe<OrderStatus>;
 };
 
 export type OrdersOutput = {
-  __typename: 'OrdersOutput';
+  __typename?: 'OrdersOutput';
   orders: Array<Order>;
   total: Scalars['Int']['output'];
 };
@@ -1005,7 +1023,7 @@ export type Pagination = {
 };
 
 export type Partner = {
-  __typename: 'Partner';
+  __typename?: 'Partner';
   id: Scalars['UUID']['output'];
   name: Scalars['String']['output'];
 };
@@ -1015,12 +1033,12 @@ export type PartnerInput = {
 };
 
 export type PartnerOutput = {
-  __typename: 'PartnerOutput';
+  __typename?: 'PartnerOutput';
   partner: Partner;
 };
 
 export type PartnerUser = IUser & {
-  __typename: 'PartnerUser';
+  __typename?: 'PartnerUser';
   createdAt: Scalars['DateTime']['output'];
   email: Scalars['String']['output'];
   firstName: Scalars['String']['output'];
@@ -1035,41 +1053,41 @@ export type PartnerUser = IUser & {
 };
 
 export type PartnersInput = {
-  _: InputMaybe<Scalars['String']['input']>;
+  _?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type PartnersOutput = {
-  __typename: 'PartnersOutput';
+  __typename?: 'PartnersOutput';
   partners: Array<Partner>;
 };
 
 export enum PaymentMethodType {
-  CARD = 'CARD',
-  PARTNER_BALANCE = 'PARTNER_BALANCE',
+  Card = 'CARD',
+  PartnerBalance = 'PARTNER_BALANCE',
 }
 
 export type PricingRule = ArticlePricingRule;
 
 export type PricingRuleArticle = {
-  __typename: 'PricingRuleArticle';
+  __typename?: 'PricingRuleArticle';
   id: Scalars['UUID']['output'];
   name: Scalars['String']['output'];
 };
 
 export type PricingRuleArticleVariant = {
-  __typename: 'PricingRuleArticleVariant';
+  __typename?: 'PricingRuleArticleVariant';
   id: Scalars['UUID']['output'];
   name: Scalars['String']['output'];
 };
 
 export type PricingRuleContentType = {
-  __typename: 'PricingRuleContentType';
+  __typename?: 'PricingRuleContentType';
   id: Scalars['UUID']['output'];
   name: Scalars['String']['output'];
 };
 
 export type PricingRuleDeliveryType = {
-  __typename: 'PricingRuleDeliveryType';
+  __typename?: 'PricingRuleDeliveryType';
   id: Scalars['UUID']['output'];
   name: Scalars['String']['output'];
 };
@@ -1079,45 +1097,45 @@ export type PricingRuleInput = {
 };
 
 export type PricingRuleLocation = {
-  __typename: 'PricingRuleLocation';
+  __typename?: 'PricingRuleLocation';
   id: Scalars['UUID']['output'];
   name: Scalars['String']['output'];
 };
 
 export type PricingRuleOutput = {
-  __typename: 'PricingRuleOutput';
+  __typename?: 'PricingRuleOutput';
   pricingRule: PricingRule;
 };
 
 export type PricingRulePartner = {
-  __typename: 'PricingRulePartner';
+  __typename?: 'PricingRulePartner';
   id: Scalars['UUID']['output'];
   name: Scalars['String']['output'];
 };
 
 export enum PricingRuleType {
-  ARTICLE = 'ARTICLE',
-  PACKAGE = 'PACKAGE',
+  Article = 'ARTICLE',
+  Package = 'PACKAGE',
 }
 
 export type PricingRulesInput = {
-  articleId: InputMaybe<Scalars['UUID']['input']>;
-  articleVariantId: InputMaybe<Scalars['UUID']['input']>;
-  contentTypeId: InputMaybe<Scalars['UUID']['input']>;
-  deliveryTypeId: InputMaybe<Scalars['UUID']['input']>;
-  isEnabled: InputMaybe<Scalars['Boolean']['input']>;
-  locationId: InputMaybe<Scalars['UUID']['input']>;
-  partnerId: InputMaybe<Scalars['UUID']['input']>;
-  type: InputMaybe<PricingRuleType>;
+  articleId?: InputMaybe<Scalars['UUID']['input']>;
+  articleVariantId?: InputMaybe<Scalars['UUID']['input']>;
+  contentTypeId?: InputMaybe<Scalars['UUID']['input']>;
+  deliveryTypeId?: InputMaybe<Scalars['UUID']['input']>;
+  isEnabled?: InputMaybe<Scalars['Boolean']['input']>;
+  locationId?: InputMaybe<Scalars['UUID']['input']>;
+  partnerId?: InputMaybe<Scalars['UUID']['input']>;
+  type?: InputMaybe<PricingRuleType>;
 };
 
 export type PricingRulesOutput = {
-  __typename: 'PricingRulesOutput';
+  __typename?: 'PricingRulesOutput';
   pricingRules: Array<PricingRule>;
 };
 
 export type Province = {
-  __typename: 'Province';
+  __typename?: 'Province';
   id: Scalars['UUID']['output'];
   name: Scalars['String']['output'];
 };
@@ -1127,7 +1145,7 @@ export type ProvinceInput = {
 };
 
 export type ProvinceOutput = {
-  __typename: 'ProvinceOutput';
+  __typename?: 'ProvinceOutput';
   province: Province;
 };
 
@@ -1136,13 +1154,13 @@ export type ProvincesInput = {
 };
 
 export type ProvincesOutput = {
-  __typename: 'ProvincesOutput';
+  __typename?: 'ProvincesOutput';
   provinces: Array<Province>;
 };
 
 export type Query = {
-  __typename: 'Query';
-  _: Maybe<Scalars['String']['output']>;
+  __typename?: 'Query';
+  _?: Maybe<Scalars['String']['output']>;
   article: ArticleOutput;
   articles: ArticlesOutput;
   cities: CitiesOutput;
@@ -1291,11 +1309,11 @@ export type QueryStatesArgs = {
 };
 
 export type RefreshTokensInput = {
-  _: InputMaybe<Scalars['String']['input']>;
+  _?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type RefreshTokensOutput = {
-  __typename: 'RefreshTokensOutput';
+  __typename?: 'RefreshTokensOutput';
   tokens: Tokens;
 };
 
@@ -1304,8 +1322,8 @@ export type SendEmailVerificationInput = {
 };
 
 export type SendEmailVerificationOutput = {
-  __typename: 'SendEmailVerificationOutput';
-  _: Maybe<Scalars['String']['output']>;
+  __typename?: 'SendEmailVerificationOutput';
+  _?: Maybe<Scalars['String']['output']>;
 };
 
 export type SendPhoneVerificationInput = {
@@ -1313,33 +1331,33 @@ export type SendPhoneVerificationInput = {
 };
 
 export type SendPhoneVerificationOutput = {
-  __typename: 'SendPhoneVerificationOutput';
-  _: Maybe<Scalars['String']['output']>;
+  __typename?: 'SendPhoneVerificationOutput';
+  _?: Maybe<Scalars['String']['output']>;
 };
 
 export enum ServiceType {
-  DELIVERY = 'DELIVERY',
-  WRAPPING = 'WRAPPING',
+  Delivery = 'DELIVERY',
+  Wrapping = 'WRAPPING',
 }
 
 export type SignInInput = {
-  email: InputMaybe<Scalars['String']['input']>;
+  email?: InputMaybe<Scalars['String']['input']>;
   password: Scalars['String']['input'];
-  phone: InputMaybe<Scalars['String']['input']>;
+  phone?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type SignInOutput = {
-  __typename: 'SignInOutput';
+  __typename?: 'SignInOutput';
   tokens: Tokens;
 };
 
 export type SignOutInput = {
-  _: InputMaybe<Scalars['String']['input']>;
+  _?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type SignOutOutput = {
-  __typename: 'SignOutOutput';
-  _: Maybe<Scalars['String']['output']>;
+  __typename?: 'SignOutOutput';
+  _?: Maybe<Scalars['String']['output']>;
 };
 
 export type Sorting = {
@@ -1348,7 +1366,7 @@ export type Sorting = {
 };
 
 export type StaffUser = IUser & {
-  __typename: 'StaffUser';
+  __typename?: 'StaffUser';
   createdAt: Scalars['DateTime']['output'];
   email: Scalars['String']['output'];
   firstName: Scalars['String']['output'];
@@ -1367,24 +1385,24 @@ export type StaffUserInput = {
 };
 
 export type StaffUserOutput = {
-  __typename: 'StaffUserOutput';
+  __typename?: 'StaffUserOutput';
   staffUser: StaffUser;
 };
 
 export type StaffUsersInput = {
-  pagination: InputMaybe<Pagination>;
-  partnerId: InputMaybe<Scalars['UUID']['input']>;
-  sorting: InputMaybe<Sorting>;
+  pagination?: InputMaybe<Pagination>;
+  partnerId?: InputMaybe<Scalars['UUID']['input']>;
+  sorting?: InputMaybe<Sorting>;
 };
 
 export type StaffUsersOutput = {
-  __typename: 'StaffUsersOutput';
+  __typename?: 'StaffUsersOutput';
   staffUsers: Array<StaffUser>;
   total: Scalars['Int']['output'];
 };
 
 export type State = {
-  __typename: 'State';
+  __typename?: 'State';
   id: Scalars['UUID']['output'];
   name: Scalars['String']['output'];
 };
@@ -1394,7 +1412,7 @@ export type StateInput = {
 };
 
 export type StateOutput = {
-  __typename: 'StateOutput';
+  __typename?: 'StateOutput';
   state: State;
 };
 
@@ -1403,12 +1421,12 @@ export type StatesInput = {
 };
 
 export type StatesOutput = {
-  __typename: 'StatesOutput';
+  __typename?: 'StatesOutput';
   states: Array<State>;
 };
 
 export type Tokens = {
-  __typename: 'Tokens';
+  __typename?: 'Tokens';
   accessToken: Scalars['String']['output'];
   refreshToken: Scalars['String']['output'];
 };
@@ -1422,7 +1440,7 @@ export type UpdateArticleInput = {
 };
 
 export type UpdateArticleOutput = {
-  __typename: 'UpdateArticleOutput';
+  __typename?: 'UpdateArticleOutput';
   article: Article;
 };
 
@@ -1437,7 +1455,7 @@ export type UpdateArticlePricingRuleInput = {
 };
 
 export type UpdateArticlePricingRuleOutput = {
-  __typename: 'UpdateArticlePricingRuleOutput';
+  __typename?: 'UpdateArticlePricingRuleOutput';
   articlePricingRule: ArticlePricingRule;
 };
 
@@ -1448,7 +1466,7 @@ export type UpdateArticleVariantInput = {
 };
 
 export type UpdateArticleVariantOutput = {
-  __typename: 'UpdateArticleVariantOutput';
+  __typename?: 'UpdateArticleVariantOutput';
   articleVariant: ArticleVariant;
 };
 
@@ -1460,7 +1478,7 @@ export type UpdateCityInput = {
 };
 
 export type UpdateCityOutput = {
-  __typename: 'UpdateCityOutput';
+  __typename?: 'UpdateCityOutput';
   city: City;
 };
 
@@ -1473,7 +1491,7 @@ export type UpdateDeliveryTypeInput = {
 };
 
 export type UpdateDeliveryTypeOutput = {
-  __typename: 'UpdateDeliveryTypeOutput';
+  __typename?: 'UpdateDeliveryTypeOutput';
   deliveryType: DeliveryType;
 };
 
@@ -1486,7 +1504,7 @@ export type UpdateDriverUserInput = {
 };
 
 export type UpdateDriverUserOutput = {
-  __typename: 'UpdateDriverUserOutput';
+  __typename?: 'UpdateDriverUserOutput';
   driverUser: DriverUser;
 };
 
@@ -1497,7 +1515,7 @@ export type UpdateMunicipalityInput = {
 };
 
 export type UpdateMunicipalityOutput = {
-  __typename: 'UpdateMunicipalityOutput';
+  __typename?: 'UpdateMunicipalityOutput';
   municipality: Municipality;
 };
 
@@ -1508,8 +1526,18 @@ export type UpdateNeighborhoodInput = {
 };
 
 export type UpdateNeighborhoodOutput = {
-  __typename: 'UpdateNeighborhoodOutput';
+  __typename?: 'UpdateNeighborhoodOutput';
   neighborhood: Neighborhood;
+};
+
+export type UpdatePartnerInput = {
+  id: Scalars['UUID']['input'];
+  name: Scalars['String']['input'];
+};
+
+export type UpdatePartnerOutput = {
+  __typename?: 'UpdatePartnerOutput';
+  partner: Partner;
 };
 
 export type UpdatePartnerUserInput = {
@@ -1521,7 +1549,7 @@ export type UpdatePartnerUserInput = {
 };
 
 export type UpdatePartnerUserOutput = {
-  __typename: 'UpdatePartnerUserOutput';
+  __typename?: 'UpdatePartnerUserOutput';
   partnerUser: PartnerUser;
 };
 
@@ -1532,7 +1560,7 @@ export type UpdateProvinceInput = {
 };
 
 export type UpdateProvinceOutput = {
-  __typename: 'UpdateProvinceOutput';
+  __typename?: 'UpdateProvinceOutput';
   province: Province;
 };
 
@@ -1545,7 +1573,7 @@ export type UpdateStaffUserInput = {
 };
 
 export type UpdateStaffUserOutput = {
-  __typename: 'UpdateStaffUserOutput';
+  __typename?: 'UpdateStaffUserOutput';
   staffUser: StaffUser;
 };
 
@@ -1556,12 +1584,12 @@ export type UpdateStateInput = {
 };
 
 export type UpdateStateOutput = {
-  __typename: 'UpdateStateOutput';
+  __typename?: 'UpdateStateOutput';
   state: State;
 };
 
 export type User = {
-  __typename: 'User';
+  __typename?: 'User';
   createdAt: Scalars['DateTime']['output'];
   email: Scalars['String']['output'];
   firstName: Scalars['String']['output'];
@@ -1571,16 +1599,16 @@ export type User = {
 };
 
 export type UserPartner = {
-  __typename: 'UserPartner';
+  __typename?: 'UserPartner';
   id: Scalars['UUID']['output'];
   name: Scalars['String']['output'];
 };
 
 export enum UserType {
-  CLIENT = 'CLIENT',
-  DRIVER = 'DRIVER',
-  PARTNER = 'PARTNER',
-  STAFF = 'STAFF',
+  Client = 'CLIENT',
+  Driver = 'DRIVER',
+  Partner = 'PARTNER',
+  Staff = 'STAFF',
 }
 
 export type VerifyEmailInput = {
@@ -1589,7 +1617,7 @@ export type VerifyEmailInput = {
 };
 
 export type VerifyEmailOutput = {
-  __typename: 'VerifyEmailOutput';
+  __typename?: 'VerifyEmailOutput';
   tokens: Tokens;
 };
 
@@ -1599,19 +1627,19 @@ export type VerifyPhoneInput = {
 };
 
 export type VerifyPhoneOutput = {
-  __typename: 'VerifyPhoneOutput';
+  __typename?: 'VerifyPhoneOutput';
   tokens: Tokens;
 };
 
 export type WrappingOrder = Order & {
-  __typename: 'WrappingOrder';
+  __typename?: 'WrappingOrder';
   addons: Array<OrderAddon>;
   client: OrderClient;
   code: Scalars['String']['output'];
   createdAt: Scalars['DateTime']['output'];
   discount: Scalars['Int']['output'];
-  driver: Maybe<OrderDriver>;
-  externalId: Maybe<Scalars['String']['output']>;
+  driver?: Maybe<OrderDriver>;
+  externalId?: Maybe<Scalars['String']['output']>;
   id: Scalars['UUID']['output'];
   items: Array<OrderItem>;
   partner: OrderPartner;
@@ -1629,10 +1657,14 @@ export type SignInMutationVariables = Exact<{
 }>;
 
 export type SignInMutation = {
-  __typename: 'Mutation';
+  __typename?: 'Mutation';
   signIn: {
-    __typename: 'SignInOutput';
-    tokens: { __typename: 'Tokens'; accessToken: string; refreshToken: string };
+    __typename?: 'SignInOutput';
+    tokens: {
+      __typename?: 'Tokens';
+      accessToken: string;
+      refreshToken: string;
+    };
   };
 };
 
@@ -1641,8 +1673,8 @@ export type SignOutMutationVariables = Exact<{
 }>;
 
 export type SignOutMutation = {
-  __typename: 'Mutation';
-  signOut: { __typename: 'SignOutOutput'; _: string | null };
+  __typename?: 'Mutation';
+  signOut: { __typename?: 'SignOutOutput'; _?: string | null };
 };
 
 export type RefreshTokensMutationVariables = Exact<{
@@ -1650,11 +1682,80 @@ export type RefreshTokensMutationVariables = Exact<{
 }>;
 
 export type RefreshTokensMutation = {
-  __typename: 'Mutation';
+  __typename?: 'Mutation';
   refreshTokens: {
-    __typename: 'RefreshTokensOutput';
-    tokens: { __typename: 'Tokens'; accessToken: string; refreshToken: string };
+    __typename?: 'RefreshTokensOutput';
+    tokens: {
+      __typename?: 'Tokens';
+      accessToken: string;
+      refreshToken: string;
+    };
   };
+};
+
+export type VerifyEmailMutationVariables = Exact<{
+  input: VerifyEmailInput;
+}>;
+
+export type VerifyEmailMutation = {
+  __typename?: 'Mutation';
+  verifyEmail: {
+    __typename?: 'VerifyEmailOutput';
+    tokens: {
+      __typename?: 'Tokens';
+      accessToken: string;
+      refreshToken: string;
+    };
+  };
+};
+
+export type VerifyPhoneMutationVariables = Exact<{
+  input: VerifyPhoneInput;
+}>;
+
+export type VerifyPhoneMutation = {
+  __typename?: 'Mutation';
+  verifyPhone: {
+    __typename?: 'VerifyPhoneOutput';
+    tokens: {
+      __typename?: 'Tokens';
+      accessToken: string;
+      refreshToken: string;
+    };
+  };
+};
+
+export type SendEmailVerificationMutationVariables = Exact<{
+  input: SendEmailVerificationInput;
+}>;
+
+export type SendEmailVerificationMutation = {
+  __typename?: 'Mutation';
+  sendEmailVerification: {
+    __typename?: 'SendEmailVerificationOutput';
+    _?: string | null;
+  };
+};
+
+export type SendPhoneVerificationMutationVariables = Exact<{
+  input: SendPhoneVerificationInput;
+}>;
+
+export type SendPhoneVerificationMutation = {
+  __typename?: 'Mutation';
+  sendPhoneVerification: {
+    __typename?: 'SendPhoneVerificationOutput';
+    _?: string | null;
+  };
+};
+
+export type ChangePasswordMutationVariables = Exact<{
+  input: ChangePasswordInput;
+}>;
+
+export type ChangePasswordMutation = {
+  __typename?: 'Mutation';
+  changePassword: { __typename?: 'ChangePasswordOutput'; _?: string | null };
 };
 
 export type EnableUserMutationVariables = Exact<{
@@ -1662,8 +1763,8 @@ export type EnableUserMutationVariables = Exact<{
 }>;
 
 export type EnableUserMutation = {
-  __typename: 'Mutation';
-  enableUser: { __typename: 'EnableUserOutput'; _: string | null };
+  __typename?: 'Mutation';
+  enableUser: { __typename?: 'EnableUserOutput'; _?: string | null };
 };
 
 export type DisableUserMutationVariables = Exact<{
@@ -1671,8 +1772,158 @@ export type DisableUserMutationVariables = Exact<{
 }>;
 
 export type DisableUserMutation = {
-  __typename: 'Mutation';
-  disableUser: { __typename: 'DisableUserOutput'; _: string | null };
+  __typename?: 'Mutation';
+  disableUser: { __typename?: 'DisableUserOutput'; _?: string | null };
+};
+
+export type CreateDriverUserMutationVariables = Exact<{
+  input: CreateDriverUserInput;
+}>;
+
+export type CreateDriverUserMutation = {
+  __typename?: 'Mutation';
+  createDriverUser: {
+    __typename?: 'CreateDriverUserOutput';
+    driverUser: {
+      __typename?: 'DriverUser';
+      id: any;
+      type: UserType;
+      isEnabled: boolean;
+      firstName: string;
+      lastName: string;
+      email: string;
+      isEmailVerified: boolean;
+      phone: string;
+      isPhoneVerified: boolean;
+      createdAt: any;
+      partner: { __typename?: 'UserPartner'; id: any; name: string };
+    };
+  };
+};
+
+export type CreatePartnerUserMutationVariables = Exact<{
+  input: CreatePartnerUserInput;
+}>;
+
+export type CreatePartnerUserMutation = {
+  __typename?: 'Mutation';
+  createPartnerUser: {
+    __typename?: 'CreatePartnerUserOutput';
+    partnerUser: {
+      __typename?: 'PartnerUser';
+      id: any;
+      type: UserType;
+      isEnabled: boolean;
+      firstName: string;
+      lastName: string;
+      email: string;
+      isEmailVerified: boolean;
+      phone: string;
+      isPhoneVerified: boolean;
+      createdAt: any;
+      partner: { __typename?: 'UserPartner'; id: any; name: string };
+    };
+  };
+};
+
+export type CreateStaffUserMutationVariables = Exact<{
+  input: CreateStaffUserInput;
+}>;
+
+export type CreateStaffUserMutation = {
+  __typename?: 'Mutation';
+  createStaffUser: {
+    __typename?: 'CreateStaffUserOutput';
+    staffUser: {
+      __typename?: 'StaffUser';
+      id: any;
+      type: UserType;
+      isEnabled: boolean;
+      firstName: string;
+      lastName: string;
+      email: string;
+      isEmailVerified: boolean;
+      phone: string;
+      isPhoneVerified: boolean;
+      createdAt: any;
+      partner: { __typename?: 'UserPartner'; id: any; name: string };
+    };
+  };
+};
+
+export type UpdateDriverUserMutationVariables = Exact<{
+  input: UpdateDriverUserInput;
+}>;
+
+export type UpdateDriverUserMutation = {
+  __typename?: 'Mutation';
+  updateDriverUser: {
+    __typename?: 'UpdateDriverUserOutput';
+    driverUser: {
+      __typename?: 'DriverUser';
+      id: any;
+      type: UserType;
+      isEnabled: boolean;
+      firstName: string;
+      lastName: string;
+      email: string;
+      isEmailVerified: boolean;
+      phone: string;
+      isPhoneVerified: boolean;
+      createdAt: any;
+      partner: { __typename?: 'UserPartner'; id: any; name: string };
+    };
+  };
+};
+
+export type UpdatePartnerUserMutationVariables = Exact<{
+  input: UpdatePartnerUserInput;
+}>;
+
+export type UpdatePartnerUserMutation = {
+  __typename?: 'Mutation';
+  updatePartnerUser: {
+    __typename?: 'UpdatePartnerUserOutput';
+    partnerUser: {
+      __typename?: 'PartnerUser';
+      id: any;
+      type: UserType;
+      isEnabled: boolean;
+      firstName: string;
+      lastName: string;
+      email: string;
+      isEmailVerified: boolean;
+      phone: string;
+      isPhoneVerified: boolean;
+      createdAt: any;
+      partner: { __typename?: 'UserPartner'; id: any; name: string };
+    };
+  };
+};
+
+export type UpdateStaffUserMutationVariables = Exact<{
+  input: UpdateStaffUserInput;
+}>;
+
+export type UpdateStaffUserMutation = {
+  __typename?: 'Mutation';
+  updateStaffUser: {
+    __typename?: 'UpdateStaffUserOutput';
+    staffUser: {
+      __typename?: 'StaffUser';
+      id: any;
+      type: UserType;
+      isEnabled: boolean;
+      firstName: string;
+      lastName: string;
+      email: string;
+      isEmailVerified: boolean;
+      phone: string;
+      isPhoneVerified: boolean;
+      createdAt: any;
+      partner: { __typename?: 'UserPartner'; id: any; name: string };
+    };
+  };
 };
 
 export type DropOffOrderMutationVariables = Exact<{
@@ -1680,8 +1931,8 @@ export type DropOffOrderMutationVariables = Exact<{
 }>;
 
 export type DropOffOrderMutation = {
-  __typename: 'Mutation';
-  dropOffOrder: { __typename: 'DropOffOrderOutput'; _: string | null };
+  __typename?: 'Mutation';
+  dropOffOrder: { __typename?: 'DropOffOrderOutput'; _?: string | null };
 };
 
 export type CreateArticleMutationVariables = Exact<{
@@ -1689,16 +1940,22 @@ export type CreateArticleMutationVariables = Exact<{
 }>;
 
 export type CreateArticleMutation = {
-  __typename: 'Mutation';
+  __typename?: 'Mutation';
   createArticle: {
-    __typename: 'CreateArticleOutput';
+    __typename?: 'CreateArticleOutput';
     article: {
-      __typename: 'Article';
-      id: string;
+      __typename?: 'Article';
+      id: any;
       name: string;
       description: string;
       imagePath: string;
       isEnabled: boolean;
+      variants: Array<{
+        __typename?: 'ArticleVariant';
+        id: any;
+        name: string;
+        isEnabled: boolean;
+      }>;
     };
   };
 };
@@ -1708,15 +1965,55 @@ export type UpdateArticleMutationVariables = Exact<{
 }>;
 
 export type UpdateArticleMutation = {
-  __typename: 'Mutation';
+  __typename?: 'Mutation';
   updateArticle: {
-    __typename: 'UpdateArticleOutput';
+    __typename?: 'UpdateArticleOutput';
     article: {
-      __typename: 'Article';
-      id: string;
+      __typename?: 'Article';
+      id: any;
       name: string;
       description: string;
       imagePath: string;
+      isEnabled: boolean;
+      variants: Array<{
+        __typename?: 'ArticleVariant';
+        id: any;
+        name: string;
+        isEnabled: boolean;
+      }>;
+    };
+  };
+};
+
+export type CreateArticleVariantMutationVariables = Exact<{
+  input: CreateArticleVariantInput;
+}>;
+
+export type CreateArticleVariantMutation = {
+  __typename?: 'Mutation';
+  createArticleVariant: {
+    __typename?: 'CreateArticleVariantOutput';
+    articleVariant: {
+      __typename?: 'ArticleVariant';
+      id: any;
+      name: string;
+      isEnabled: boolean;
+    };
+  };
+};
+
+export type UpdateArticleVariantMutationVariables = Exact<{
+  input: UpdateArticleVariantInput;
+}>;
+
+export type UpdateArticleVariantMutation = {
+  __typename?: 'Mutation';
+  updateArticleVariant: {
+    __typename?: 'UpdateArticleVariantOutput';
+    articleVariant: {
+      __typename?: 'ArticleVariant';
+      id: any;
+      name: string;
       isEnabled: boolean;
     };
   };
@@ -1727,13 +2024,14 @@ export type CreateDeliveryTypeMutationVariables = Exact<{
 }>;
 
 export type CreateDeliveryTypeMutation = {
-  __typename: 'Mutation';
+  __typename?: 'Mutation';
   createDeliveryType: {
-    __typename: 'CreateDeliveryTypeOutput';
+    __typename?: 'CreateDeliveryTypeOutput';
     deliveryType: {
-      __typename: 'DeliveryType';
-      id: string;
+      __typename?: 'DeliveryType';
+      id: any;
       name: string;
+      icon: string;
       description: string;
       isEnabled: boolean;
     };
@@ -1745,15 +2043,78 @@ export type UpdateDeliveryTypeMutationVariables = Exact<{
 }>;
 
 export type UpdateDeliveryTypeMutation = {
-  __typename: 'Mutation';
+  __typename?: 'Mutation';
   updateDeliveryType: {
-    __typename: 'UpdateDeliveryTypeOutput';
+    __typename?: 'UpdateDeliveryTypeOutput';
     deliveryType: {
-      __typename: 'DeliveryType';
-      id: string;
+      __typename?: 'DeliveryType';
+      id: any;
       name: string;
+      icon: string;
       description: string;
       isEnabled: boolean;
+    };
+  };
+};
+
+export type CreateArticlePricingRuleMutationVariables = Exact<{
+  input: CreateArticlePricingRuleInput;
+}>;
+
+export type CreateArticlePricingRuleMutation = {
+  __typename?: 'Mutation';
+  createArticlePricingRule: {
+    __typename?: 'CreateArticlePricingRuleOutput';
+    articlePricingRule: {
+      __typename?: 'ArticlePricingRule';
+      id: any;
+      type: PricingRuleType;
+      isEnabled: boolean;
+      price: number;
+      partner: { __typename?: 'PricingRulePartner'; id: any; name: string };
+      location: { __typename?: 'PricingRuleLocation'; id: any; name: string };
+      deliveryType: {
+        __typename?: 'PricingRuleDeliveryType';
+        id: any;
+        name: string;
+      };
+      article: { __typename?: 'PricingRuleArticle'; id: any; name: string };
+      articleVariant: {
+        __typename?: 'PricingRuleArticleVariant';
+        id: any;
+        name: string;
+      };
+    };
+  };
+};
+
+export type UpdateArticlePricingRuleMutationVariables = Exact<{
+  input: UpdateArticlePricingRuleInput;
+}>;
+
+export type UpdateArticlePricingRuleMutation = {
+  __typename?: 'Mutation';
+  updateArticlePricingRule: {
+    __typename?: 'UpdateArticlePricingRuleOutput';
+    articlePricingRule: {
+      __typename?: 'ArticlePricingRule';
+      id: any;
+      type: PricingRuleType;
+      isEnabled: boolean;
+      price: number;
+      partner: { __typename?: 'PricingRulePartner'; id: any; name: string };
+      location: { __typename?: 'PricingRuleLocation'; id: any; name: string };
+      deliveryType: {
+        __typename?: 'PricingRuleDeliveryType';
+        id: any;
+        name: string;
+      };
+      article: { __typename?: 'PricingRuleArticle'; id: any; name: string };
+      articleVariant: {
+        __typename?: 'PricingRuleArticleVariant';
+        id: any;
+        name: string;
+      };
     };
   };
 };
@@ -1763,10 +2124,10 @@ export type CreateStateMutationVariables = Exact<{
 }>;
 
 export type CreateStateMutation = {
-  __typename: 'Mutation';
+  __typename?: 'Mutation';
   createState: {
-    __typename: 'CreateStateOutput';
-    state: { __typename: 'State'; id: string; name: string };
+    __typename?: 'CreateStateOutput';
+    state: { __typename?: 'State'; id: any; name: string };
   };
 };
 
@@ -1775,10 +2136,10 @@ export type UpdateStateMutationVariables = Exact<{
 }>;
 
 export type UpdateStateMutation = {
-  __typename: 'Mutation';
+  __typename?: 'Mutation';
   updateState: {
-    __typename: 'UpdateStateOutput';
-    state: { __typename: 'State'; id: string; name: string };
+    __typename?: 'UpdateStateOutput';
+    state: { __typename?: 'State'; id: any; name: string };
   };
 };
 
@@ -1787,12 +2148,12 @@ export type CreateCityMutationVariables = Exact<{
 }>;
 
 export type CreateCityMutation = {
-  __typename: 'Mutation';
+  __typename?: 'Mutation';
   createCity: {
-    __typename: 'CreateCityOutput';
+    __typename?: 'CreateCityOutput';
     city: {
-      __typename: 'City';
-      id: string;
+      __typename?: 'City';
+      id: any;
       name: string;
       zipCodes: Array<string>;
     };
@@ -1804,12 +2165,12 @@ export type UpdateCityMutationVariables = Exact<{
 }>;
 
 export type UpdateCityMutation = {
-  __typename: 'Mutation';
+  __typename?: 'Mutation';
   updateCity: {
-    __typename: 'UpdateCityOutput';
+    __typename?: 'UpdateCityOutput';
     city: {
-      __typename: 'City';
-      id: string;
+      __typename?: 'City';
+      id: any;
       name: string;
       zipCodes: Array<string>;
     };
@@ -1821,10 +2182,10 @@ export type CreateProvinceMutationVariables = Exact<{
 }>;
 
 export type CreateProvinceMutation = {
-  __typename: 'Mutation';
+  __typename?: 'Mutation';
   createProvince: {
-    __typename: 'CreateProvinceOutput';
-    province: { __typename: 'Province'; id: string; name: string };
+    __typename?: 'CreateProvinceOutput';
+    province: { __typename?: 'Province'; id: any; name: string };
   };
 };
 
@@ -1833,10 +2194,10 @@ export type UpdateProvinceMutationVariables = Exact<{
 }>;
 
 export type UpdateProvinceMutation = {
-  __typename: 'Mutation';
+  __typename?: 'Mutation';
   updateProvince: {
-    __typename: 'UpdateProvinceOutput';
-    province: { __typename: 'Province'; id: string; name: string };
+    __typename?: 'UpdateProvinceOutput';
+    province: { __typename?: 'Province'; id: any; name: string };
   };
 };
 
@@ -1845,10 +2206,10 @@ export type CreateMunicipalityMutationVariables = Exact<{
 }>;
 
 export type CreateMunicipalityMutation = {
-  __typename: 'Mutation';
+  __typename?: 'Mutation';
   createMunicipality: {
-    __typename: 'CreateMunicipalityOutput';
-    municipality: { __typename: 'Municipality'; id: string; name: string };
+    __typename?: 'CreateMunicipalityOutput';
+    municipality: { __typename?: 'Municipality'; id: any; name: string };
   };
 };
 
@@ -1857,10 +2218,10 @@ export type UpdateMunicipalityMutationVariables = Exact<{
 }>;
 
 export type UpdateMunicipalityMutation = {
-  __typename: 'Mutation';
+  __typename?: 'Mutation';
   updateMunicipality: {
-    __typename: 'UpdateMunicipalityOutput';
-    municipality: { __typename: 'Municipality'; id: string; name: string };
+    __typename?: 'UpdateMunicipalityOutput';
+    municipality: { __typename?: 'Municipality'; id: any; name: string };
   };
 };
 
@@ -1869,10 +2230,10 @@ export type CreateNeighborhoodMutationVariables = Exact<{
 }>;
 
 export type CreateNeighborhoodMutation = {
-  __typename: 'Mutation';
+  __typename?: 'Mutation';
   createNeighborhood: {
-    __typename: 'CreateNeighborhoodOutput';
-    neighborhood: { __typename: 'Neighborhood'; id: string; name: string };
+    __typename?: 'CreateNeighborhoodOutput';
+    neighborhood: { __typename?: 'Neighborhood'; id: any; name: string };
   };
 };
 
@@ -1881,10 +2242,10 @@ export type UpdateNeighborhoodMutationVariables = Exact<{
 }>;
 
 export type UpdateNeighborhoodMutation = {
-  __typename: 'Mutation';
+  __typename?: 'Mutation';
   updateNeighborhood: {
-    __typename: 'UpdateNeighborhoodOutput';
-    neighborhood: { __typename: 'Neighborhood'; id: string; name: string };
+    __typename?: 'UpdateNeighborhoodOutput';
+    neighborhood: { __typename?: 'Neighborhood'; id: any; name: string };
   };
 };
 
@@ -1893,543 +2254,1137 @@ export type CreatePresignPutFileUrlMutationVariables = Exact<{
 }>;
 
 export type CreatePresignPutFileUrlMutation = {
-  __typename: 'Mutation';
+  __typename?: 'Mutation';
   createPresignPutFileUrl: {
-    __typename: 'CreatePresignPutFileUrlOutput';
+    __typename?: 'CreatePresignPutFileUrlOutput';
     url: string;
+    path: string;
   };
 };
 
-export type ArticleFragmentFragment = {
-  __typename: 'Article';
-  id: string;
-  name: string;
-  description: string;
-  imagePath: string;
-  isEnabled: boolean;
-};
-
-export type ArticleVariantFragmentFragment = {
-  __typename: 'ArticleVariant';
-  id: string;
-  name: string;
-  isEnabled: boolean;
-};
-
-export type CountryFragmentFragment = {
-  __typename: 'Country';
-  id: string;
-  name: string;
-};
-
-export type StateFragmentFragment = {
-  __typename: 'State';
-  id: string;
-  name: string;
-};
-
-export type CityFragmentFragment = {
-  __typename: 'City';
-  id: string;
-  name: string;
-  zipCodes: Array<string>;
-};
-
-export type ProvinceFragmentFragment = {
-  __typename: 'Province';
-  id: string;
-  name: string;
-};
-
-export type MunicipalityFragmentFragment = {
-  __typename: 'Municipality';
-  id: string;
-  name: string;
-};
-
-export type NeighborhoodFragmentFragment = {
-  __typename: 'Neighborhood';
-  id: string;
-  name: string;
-};
-
-export type DeliveryTypeFragmentFragment = {
-  __typename: 'DeliveryType';
-  id: string;
-  name: string;
-  icon: string;
-  description: string;
-  isEnabled: boolean;
-};
-
-export type PartnerFragmentFragment = {
-  __typename: 'Partner';
-  id: string;
-  name: string;
-};
-
-export type UserFragmentFragment = {
-  __typename: 'User';
-  id: string;
-  firstName: string;
-  lastName: string;
-  email: string;
-  phone: string;
-};
-
-export type CurrentUserQueryVariables = Exact<{
-  input: CurrentUserInput;
-}>;
+export type CurrentUserQueryVariables = Exact<{ [key: string]: never }>;
 
 export type CurrentUserQuery = {
-  __typename: 'Query';
+  __typename?: 'Query';
   currentUser: {
-    __typename: 'CurrentUserOutput';
+    __typename?: 'CurrentUserOutput';
     user: {
-      __typename: 'User';
-      id: string;
+      __typename?: 'User';
+      id: any;
       firstName: string;
       lastName: string;
       email: string;
       phone: string;
+      createdAt: any;
     };
   };
 };
 
-export type GetArticlesQueryVariables = Exact<{
-  input: ArticlesInput;
+export type PartnersQueryVariables = Exact<{
+  input: PartnersInput;
 }>;
 
-export type GetArticlesQuery = {
-  __typename: 'Query';
-  articles: {
-    __typename: 'ArticlesOutput';
-    articles: Array<{
-      __typename: 'Article';
-      id: string;
-      name: string;
-      description: string;
-      imagePath: string;
+export type PartnersQuery = {
+  __typename?: 'Query';
+  partners: {
+    __typename?: 'PartnersOutput';
+    partners: Array<{ __typename?: 'Partner'; id: any; name: string }>;
+  };
+};
+
+export type PartnerQueryVariables = Exact<{
+  input: PartnerInput;
+}>;
+
+export type PartnerQuery = {
+  __typename?: 'Query';
+  partner: {
+    __typename?: 'PartnerOutput';
+    partner: { __typename?: 'Partner'; id: any; name: string };
+  };
+};
+
+export type StaffUsersQueryVariables = Exact<{
+  input: StaffUsersInput;
+}>;
+
+export type StaffUsersQuery = {
+  __typename?: 'Query';
+  staffUsers: {
+    __typename?: 'StaffUsersOutput';
+    total: number;
+    staffUsers: Array<{
+      __typename?: 'StaffUser';
+      id: any;
+      type: UserType;
       isEnabled: boolean;
-      variants: Array<{
-        __typename: 'ArticleVariant';
-        id: string;
-        name: string;
-        isEnabled: boolean;
-      }>;
+      firstName: string;
+      lastName: string;
+      email: string;
+      isEmailVerified: boolean;
+      phone: string;
+      isPhoneVerified: boolean;
+      createdAt: any;
+      partner: { __typename?: 'UserPartner'; id: any; name: string };
     }>;
   };
 };
 
-export type GetArticleQueryVariables = Exact<{
-  input: ArticleInput;
+export type StaffUserQueryVariables = Exact<{
+  input: StaffUserInput;
 }>;
 
-export type GetArticleQuery = {
-  __typename: 'Query';
-  article: {
-    __typename: 'ArticleOutput';
-    article: {
-      __typename: 'Article';
-      id: string;
-      name: string;
-      description: string;
-      imagePath: string;
+export type StaffUserQuery = {
+  __typename?: 'Query';
+  staffUser: {
+    __typename?: 'StaffUserOutput';
+    staffUser: {
+      __typename?: 'StaffUser';
+      id: any;
+      type: UserType;
       isEnabled: boolean;
-      variants: Array<{
-        __typename: 'ArticleVariant';
-        id: string;
-        name: string;
-        isEnabled: boolean;
-      }>;
+      firstName: string;
+      lastName: string;
+      email: string;
+      isEmailVerified: boolean;
+      phone: string;
+      isPhoneVerified: boolean;
+      createdAt: any;
+      partner: { __typename?: 'UserPartner'; id: any; name: string };
     };
   };
 };
 
-export type GetDeliveryTypesQueryVariables = Exact<{
-  input: DeliveryTypesInput;
+export type ClientUsersQueryVariables = Exact<{
+  input: ClientUsersInput;
 }>;
 
-export type GetDeliveryTypesQuery = {
-  __typename: 'Query';
-  deliveryTypes: {
-    __typename: 'DeliveryTypesOutput';
-    deliveryTypes: Array<{
-      __typename: 'DeliveryType';
-      id: string;
-      name: string;
-      icon: string;
-      description: string;
+export type ClientUsersQuery = {
+  __typename?: 'Query';
+  clientUsers: {
+    __typename?: 'ClientUsersOutput';
+    total: number;
+    clientUsers: Array<{
+      __typename?: 'ClientUser';
+      id: any;
+      type: UserType;
       isEnabled: boolean;
+      firstName: string;
+      lastName: string;
+      email: string;
+      isEmailVerified: boolean;
+      phone: string;
+      isPhoneVerified: boolean;
+      createdAt: any;
+      partner: { __typename?: 'UserPartner'; id: any; name: string };
     }>;
   };
 };
 
-export type GetDeliveryTypeQueryVariables = Exact<{
-  input: DeliveryTypeInput;
+export type ClientUserQueryVariables = Exact<{
+  input: ClientUserInput;
 }>;
 
-export type GetDeliveryTypeQuery = {
-  __typename: 'Query';
-  deliveryType: {
-    __typename: 'DeliveryTypeOutput';
-    deliveryType: {
-      __typename: 'DeliveryType';
-      id: string;
-      name: string;
-      icon: string;
-      description: string;
+export type ClientUserQuery = {
+  __typename?: 'Query';
+  clientUser: {
+    __typename?: 'ClientUserOutput';
+    clientUser: {
+      __typename?: 'ClientUser';
+      id: any;
+      type: UserType;
       isEnabled: boolean;
+      firstName: string;
+      lastName: string;
+      email: string;
+      isEmailVerified: boolean;
+      phone: string;
+      isPhoneVerified: boolean;
+      createdAt: any;
+      partner: { __typename?: 'UserPartner'; id: any; name: string };
     };
   };
 };
 
-export type GetCountriesQueryVariables = Exact<{
-  input: CountriesInput;
+export type DriverUsersQueryVariables = Exact<{
+  input: DriverUsersInput;
 }>;
 
-export type GetCountriesQuery = {
-  __typename: 'Query';
-  countries: {
-    __typename: 'CountriesOutput';
-    countries: Array<{ __typename: 'Country'; id: string; name: string }>;
-  };
-};
-
-export type GetCountryQueryVariables = Exact<{
-  input: CountryInput;
-}>;
-
-export type GetCountryQuery = {
-  __typename: 'Query';
-  country: {
-    __typename: 'CountryOutput';
-    country: { __typename: 'Country'; id: string; name: string };
-  };
-};
-
-export type GetStatesQueryVariables = Exact<{
-  input: StatesInput;
-}>;
-
-export type GetStatesQuery = {
-  __typename: 'Query';
-  states: {
-    __typename: 'StatesOutput';
-    states: Array<{ __typename: 'State'; id: string; name: string }>;
-  };
-};
-
-export type GetStateQueryVariables = Exact<{
-  input: StateInput;
-}>;
-
-export type GetStateQuery = {
-  __typename: 'Query';
-  state: {
-    __typename: 'StateOutput';
-    state: { __typename: 'State'; id: string; name: string };
-  };
-};
-
-export type GetCitiesQueryVariables = Exact<{
-  input: CitiesInput;
-}>;
-
-export type GetCitiesQuery = {
-  __typename: 'Query';
-  cities: {
-    __typename: 'CitiesOutput';
-    cities: Array<{
-      __typename: 'City';
-      id: string;
-      name: string;
-      zipCodes: Array<string>;
+export type DriverUsersQuery = {
+  __typename?: 'Query';
+  driverUsers: {
+    __typename?: 'DriverUsersOutput';
+    total: number;
+    driverUsers: Array<{
+      __typename?: 'DriverUser';
+      id: any;
+      type: UserType;
+      isEnabled: boolean;
+      firstName: string;
+      lastName: string;
+      email: string;
+      isEmailVerified: boolean;
+      phone: string;
+      isPhoneVerified: boolean;
+      createdAt: any;
+      partner: { __typename?: 'UserPartner'; id: any; name: string };
     }>;
   };
 };
 
-export type GetCityQueryVariables = Exact<{
-  input: CityInput;
+export type DriverUserQueryVariables = Exact<{
+  input: DriverUserInput;
 }>;
 
-export type GetCityQuery = {
-  __typename: 'Query';
-  city: {
-    __typename: 'CityOutput';
-    city: {
-      __typename: 'City';
-      id: string;
-      name: string;
-      zipCodes: Array<string>;
+export type DriverUserQuery = {
+  __typename?: 'Query';
+  driverUser: {
+    __typename?: 'DriverUserOutput';
+    driverUser: {
+      __typename?: 'DriverUser';
+      id: any;
+      type: UserType;
+      isEnabled: boolean;
+      firstName: string;
+      lastName: string;
+      email: string;
+      isEmailVerified: boolean;
+      phone: string;
+      isPhoneVerified: boolean;
+      createdAt: any;
+      partner: { __typename?: 'UserPartner'; id: any; name: string };
     };
   };
 };
 
-export type GetProvincesQueryVariables = Exact<{
-  input: ProvincesInput;
-}>;
-
-export type GetProvincesQuery = {
-  __typename: 'Query';
-  provinces: {
-    __typename: 'ProvincesOutput';
-    provinces: Array<{ __typename: 'Province'; id: string; name: string }>;
-  };
-};
-
-export type GetProvinceQueryVariables = Exact<{
-  input: ProvinceInput;
-}>;
-
-export type GetProvinceQuery = {
-  __typename: 'Query';
-  province: {
-    __typename: 'ProvinceOutput';
-    province: { __typename: 'Province'; id: string; name: string };
-  };
-};
-
-export type GetMunicipalitiesQueryVariables = Exact<{
-  input: MunicipalitiesInput;
-}>;
-
-export type GetMunicipalitiesQuery = {
-  __typename: 'Query';
-  municipalities: {
-    __typename: 'MunicipalitiesOutput';
-    municipalities: Array<{
-      __typename: 'Municipality';
-      id: string;
-      name: string;
-    }>;
-  };
-};
-
-export type GetMunicipalityQueryVariables = Exact<{
-  input: MunicipalityInput;
-}>;
-
-export type GetMunicipalityQuery = {
-  __typename: 'Query';
-  municipality: {
-    __typename: 'MunicipalityOutput';
-    municipality: { __typename: 'Municipality'; id: string; name: string };
-  };
-};
-
-export type GetNeighborhoodsQueryVariables = Exact<{
-  input: NeighborhoodsInput;
-}>;
-
-export type GetNeighborhoodsQuery = {
-  __typename: 'Query';
-  neighborhoods: {
-    __typename: 'NeighborhoodsOutput';
-    neighborhoods: Array<{
-      __typename: 'Neighborhood';
-      id: string;
-      name: string;
-    }>;
-  };
-};
-
-export type GetNeighborhoodQueryVariables = Exact<{
-  input: NeighborhoodInput;
-}>;
-
-export type GetNeighborhoodQuery = {
-  __typename: 'Query';
-  neighborhood: {
-    __typename: 'NeighborhoodOutput';
-    neighborhood: { __typename: 'Neighborhood'; id: string; name: string };
-  };
-};
-
-export type GetOrdersQueryVariables = Exact<{
+export type OrdersQueryVariables = Exact<{
   input: OrdersInput;
 }>;
 
-export type GetOrdersQuery = {
-  __typename: 'Query';
+export type OrdersQuery = {
+  __typename?: 'Query';
   orders: {
-    __typename: 'OrdersOutput';
+    __typename?: 'OrdersOutput';
+    total: number;
     orders: Array<
       | {
-          __typename: 'DeliveryOrder';
-          id: string;
-          status: OrderStatus;
+          __typename?: 'DeliveryOrder';
+          id: any;
+          code: string;
+          externalId?: string | null;
           serviceType: ServiceType;
+          status: OrderStatus;
+          subtotal: number;
+          discount: number;
+          vat: number;
+          total: number;
+          createdAt: any;
+          recipient: {
+            __typename?: 'OrderRecipient';
+            firstName: string;
+            lastName: string;
+            phone: string;
+            email?: string | null;
+            identityCardNumber: string;
+            notes?: string | null;
+            address: {
+              __typename?: 'OrderRecipientAddress';
+              line1: string;
+              line2?: string | null;
+              neighborhood?: string | null;
+              municipality: string;
+              province: string;
+              postalCode: string;
+              coordinates?: {
+                __typename?: 'AddressCoordinates';
+                latitude: number;
+                longitude: number;
+              } | null;
+            };
+          };
+          client: {
+            __typename?: 'OrderClient';
+            id: any;
+            firstName: string;
+            lastName: string;
+          };
+          driver?: {
+            __typename?: 'OrderDriver';
+            id: any;
+            firstName: string;
+            lastName: string;
+            vehicle: {
+              __typename?: 'OrderVehicle';
+              id: any;
+              make: string;
+              model: string;
+              year: number;
+              color: string;
+              plate: string;
+            };
+          } | null;
+          partner: { __typename?: 'OrderPartner'; id: any; name: string };
+          sender: {
+            __typename?: 'OrderSender';
+            firstName: string;
+            lastName: string;
+            phone: string;
+            email?: string | null;
+            address: {
+              __typename?: 'OrderSenderAddress';
+              line1: string;
+              line2?: string | null;
+              city: string;
+              state: string;
+              zipCode: string;
+              coordinates: {
+                __typename?: 'AddressCoordinates';
+                latitude: number;
+                longitude: number;
+              };
+            };
+          };
+          paymentMethod:
+            | {
+                __typename?: 'OrderCard';
+                id: any;
+                type: PaymentMethodType;
+                brand: string;
+                last4: string;
+                expMonth: number;
+                expYear: number;
+              }
+            | {
+                __typename?: 'OrderPartnerBalance';
+                id: any;
+                type: PaymentMethodType;
+              };
+          items: Array<{
+            __typename?: 'OrderItem';
+            id: any;
+            quantity: number;
+            total: number;
+            product:
+              | {
+                  __typename?: 'OrderArticle';
+                  id: any;
+                  type: OrderProductType;
+                  price: number;
+                  name: string;
+                  description: string;
+                  imagePath: string;
+                  variant: {
+                    __typename?: 'OrderArticleVariant';
+                    id: any;
+                    name: string;
+                  };
+                  deliveryType: {
+                    __typename?: 'OrderDeliveryType';
+                    id: any;
+                    name: string;
+                  };
+                }
+              | {
+                  __typename?: 'OrderLuggage';
+                  type: OrderProductType;
+                  price: number;
+                  size: {
+                    __typename?: 'OrderLuggageSize';
+                    id: any;
+                    price: number;
+                  };
+                };
+          }>;
+          addons: Array<
+            | {
+                __typename?: 'OrderHomePickupAddon';
+                id: any;
+                type: AddonType;
+                total: number;
+                price: number;
+                freeThresholdAmount: number;
+                date: any;
+                hourRange: {
+                  __typename?: 'OrderHomePickupAddonHourRange';
+                  startAt: string;
+                  endAt: string;
+                };
+              }
+            | {
+                __typename?: 'OrderHomeWrappingAddon';
+                id: any;
+                type: AddonType;
+                total: number;
+                price: number;
+                freeThresholdAmount: number;
+                date: any;
+                hourRange: {
+                  __typename?: 'OrderHomeWrappingAddonHourRange';
+                  startAt: string;
+                  endAt: string;
+                };
+              }
+          >;
         }
       | {
-          __typename: 'WrappingOrder';
-          id: string;
-          status: OrderStatus;
+          __typename?: 'WrappingOrder';
+          id: any;
+          code: string;
+          externalId?: string | null;
           serviceType: ServiceType;
+          status: OrderStatus;
+          subtotal: number;
+          discount: number;
+          vat: number;
+          total: number;
+          createdAt: any;
+          client: {
+            __typename?: 'OrderClient';
+            id: any;
+            firstName: string;
+            lastName: string;
+          };
+          driver?: {
+            __typename?: 'OrderDriver';
+            id: any;
+            firstName: string;
+            lastName: string;
+            vehicle: {
+              __typename?: 'OrderVehicle';
+              id: any;
+              make: string;
+              model: string;
+              year: number;
+              color: string;
+              plate: string;
+            };
+          } | null;
+          partner: { __typename?: 'OrderPartner'; id: any; name: string };
+          sender: {
+            __typename?: 'OrderSender';
+            firstName: string;
+            lastName: string;
+            phone: string;
+            email?: string | null;
+            address: {
+              __typename?: 'OrderSenderAddress';
+              line1: string;
+              line2?: string | null;
+              city: string;
+              state: string;
+              zipCode: string;
+              coordinates: {
+                __typename?: 'AddressCoordinates';
+                latitude: number;
+                longitude: number;
+              };
+            };
+          };
+          paymentMethod:
+            | {
+                __typename?: 'OrderCard';
+                id: any;
+                type: PaymentMethodType;
+                brand: string;
+                last4: string;
+                expMonth: number;
+                expYear: number;
+              }
+            | {
+                __typename?: 'OrderPartnerBalance';
+                id: any;
+                type: PaymentMethodType;
+              };
+          items: Array<{
+            __typename?: 'OrderItem';
+            id: any;
+            quantity: number;
+            total: number;
+            product:
+              | {
+                  __typename?: 'OrderArticle';
+                  id: any;
+                  type: OrderProductType;
+                  price: number;
+                  name: string;
+                  description: string;
+                  imagePath: string;
+                  variant: {
+                    __typename?: 'OrderArticleVariant';
+                    id: any;
+                    name: string;
+                  };
+                  deliveryType: {
+                    __typename?: 'OrderDeliveryType';
+                    id: any;
+                    name: string;
+                  };
+                }
+              | {
+                  __typename?: 'OrderLuggage';
+                  type: OrderProductType;
+                  price: number;
+                  size: {
+                    __typename?: 'OrderLuggageSize';
+                    id: any;
+                    price: number;
+                  };
+                };
+          }>;
+          addons: Array<
+            | {
+                __typename?: 'OrderHomePickupAddon';
+                id: any;
+                type: AddonType;
+                total: number;
+                price: number;
+                freeThresholdAmount: number;
+                date: any;
+                hourRange: {
+                  __typename?: 'OrderHomePickupAddonHourRange';
+                  startAt: string;
+                  endAt: string;
+                };
+              }
+            | {
+                __typename?: 'OrderHomeWrappingAddon';
+                id: any;
+                type: AddonType;
+                total: number;
+                price: number;
+                freeThresholdAmount: number;
+                date: any;
+                hourRange: {
+                  __typename?: 'OrderHomeWrappingAddonHourRange';
+                  startAt: string;
+                  endAt: string;
+                };
+              }
+          >;
         }
     >;
   };
 };
 
-export type GetOrderQueryVariables = Exact<{
+export type OrderQueryVariables = Exact<{
   input: OrderInput;
 }>;
 
-export type GetOrderQuery = {
-  __typename: 'Query';
+export type OrderQuery = {
+  __typename?: 'Query';
   order: {
-    __typename: 'OrderOutput';
+    __typename?: 'OrderOutput';
     order:
       | {
-          __typename: 'DeliveryOrder';
-          id: string;
-          status: OrderStatus;
+          __typename?: 'DeliveryOrder';
+          id: any;
+          code: string;
+          externalId?: string | null;
           serviceType: ServiceType;
+          status: OrderStatus;
+          subtotal: number;
+          discount: number;
+          vat: number;
+          total: number;
+          createdAt: any;
+          recipient: {
+            __typename?: 'OrderRecipient';
+            firstName: string;
+            lastName: string;
+            phone: string;
+            email?: string | null;
+            identityCardNumber: string;
+            notes?: string | null;
+            address: {
+              __typename?: 'OrderRecipientAddress';
+              line1: string;
+              line2?: string | null;
+              neighborhood?: string | null;
+              municipality: string;
+              province: string;
+              postalCode: string;
+              coordinates?: {
+                __typename?: 'AddressCoordinates';
+                latitude: number;
+                longitude: number;
+              } | null;
+            };
+          };
+          client: {
+            __typename?: 'OrderClient';
+            id: any;
+            firstName: string;
+            lastName: string;
+          };
+          driver?: {
+            __typename?: 'OrderDriver';
+            id: any;
+            firstName: string;
+            lastName: string;
+            vehicle: {
+              __typename?: 'OrderVehicle';
+              id: any;
+              make: string;
+              model: string;
+              year: number;
+              color: string;
+              plate: string;
+            };
+          } | null;
+          partner: { __typename?: 'OrderPartner'; id: any; name: string };
+          sender: {
+            __typename?: 'OrderSender';
+            firstName: string;
+            lastName: string;
+            phone: string;
+            email?: string | null;
+            address: {
+              __typename?: 'OrderSenderAddress';
+              line1: string;
+              line2?: string | null;
+              city: string;
+              state: string;
+              zipCode: string;
+              coordinates: {
+                __typename?: 'AddressCoordinates';
+                latitude: number;
+                longitude: number;
+              };
+            };
+          };
+          paymentMethod:
+            | {
+                __typename?: 'OrderCard';
+                id: any;
+                type: PaymentMethodType;
+                brand: string;
+                last4: string;
+                expMonth: number;
+                expYear: number;
+              }
+            | {
+                __typename?: 'OrderPartnerBalance';
+                id: any;
+                type: PaymentMethodType;
+              };
+          items: Array<{
+            __typename?: 'OrderItem';
+            id: any;
+            quantity: number;
+            total: number;
+            product:
+              | {
+                  __typename?: 'OrderArticle';
+                  id: any;
+                  type: OrderProductType;
+                  price: number;
+                  name: string;
+                  description: string;
+                  imagePath: string;
+                  variant: {
+                    __typename?: 'OrderArticleVariant';
+                    id: any;
+                    name: string;
+                  };
+                  deliveryType: {
+                    __typename?: 'OrderDeliveryType';
+                    id: any;
+                    name: string;
+                  };
+                }
+              | {
+                  __typename?: 'OrderLuggage';
+                  type: OrderProductType;
+                  price: number;
+                  size: {
+                    __typename?: 'OrderLuggageSize';
+                    id: any;
+                    price: number;
+                  };
+                };
+          }>;
+          addons: Array<
+            | {
+                __typename?: 'OrderHomePickupAddon';
+                id: any;
+                type: AddonType;
+                total: number;
+                price: number;
+                freeThresholdAmount: number;
+                date: any;
+                hourRange: {
+                  __typename?: 'OrderHomePickupAddonHourRange';
+                  startAt: string;
+                  endAt: string;
+                };
+              }
+            | {
+                __typename?: 'OrderHomeWrappingAddon';
+                id: any;
+                type: AddonType;
+                total: number;
+                price: number;
+                freeThresholdAmount: number;
+                date: any;
+                hourRange: {
+                  __typename?: 'OrderHomeWrappingAddonHourRange';
+                  startAt: string;
+                  endAt: string;
+                };
+              }
+          >;
         }
       | {
-          __typename: 'WrappingOrder';
-          id: string;
-          status: OrderStatus;
+          __typename?: 'WrappingOrder';
+          id: any;
+          code: string;
+          externalId?: string | null;
           serviceType: ServiceType;
+          status: OrderStatus;
+          subtotal: number;
+          discount: number;
+          vat: number;
+          total: number;
+          createdAt: any;
+          client: {
+            __typename?: 'OrderClient';
+            id: any;
+            firstName: string;
+            lastName: string;
+          };
+          driver?: {
+            __typename?: 'OrderDriver';
+            id: any;
+            firstName: string;
+            lastName: string;
+            vehicle: {
+              __typename?: 'OrderVehicle';
+              id: any;
+              make: string;
+              model: string;
+              year: number;
+              color: string;
+              plate: string;
+            };
+          } | null;
+          partner: { __typename?: 'OrderPartner'; id: any; name: string };
+          sender: {
+            __typename?: 'OrderSender';
+            firstName: string;
+            lastName: string;
+            phone: string;
+            email?: string | null;
+            address: {
+              __typename?: 'OrderSenderAddress';
+              line1: string;
+              line2?: string | null;
+              city: string;
+              state: string;
+              zipCode: string;
+              coordinates: {
+                __typename?: 'AddressCoordinates';
+                latitude: number;
+                longitude: number;
+              };
+            };
+          };
+          paymentMethod:
+            | {
+                __typename?: 'OrderCard';
+                id: any;
+                type: PaymentMethodType;
+                brand: string;
+                last4: string;
+                expMonth: number;
+                expYear: number;
+              }
+            | {
+                __typename?: 'OrderPartnerBalance';
+                id: any;
+                type: PaymentMethodType;
+              };
+          items: Array<{
+            __typename?: 'OrderItem';
+            id: any;
+            quantity: number;
+            total: number;
+            product:
+              | {
+                  __typename?: 'OrderArticle';
+                  id: any;
+                  type: OrderProductType;
+                  price: number;
+                  name: string;
+                  description: string;
+                  imagePath: string;
+                  variant: {
+                    __typename?: 'OrderArticleVariant';
+                    id: any;
+                    name: string;
+                  };
+                  deliveryType: {
+                    __typename?: 'OrderDeliveryType';
+                    id: any;
+                    name: string;
+                  };
+                }
+              | {
+                  __typename?: 'OrderLuggage';
+                  type: OrderProductType;
+                  price: number;
+                  size: {
+                    __typename?: 'OrderLuggageSize';
+                    id: any;
+                    price: number;
+                  };
+                };
+          }>;
+          addons: Array<
+            | {
+                __typename?: 'OrderHomePickupAddon';
+                id: any;
+                type: AddonType;
+                total: number;
+                price: number;
+                freeThresholdAmount: number;
+                date: any;
+                hourRange: {
+                  __typename?: 'OrderHomePickupAddonHourRange';
+                  startAt: string;
+                  endAt: string;
+                };
+              }
+            | {
+                __typename?: 'OrderHomeWrappingAddon';
+                id: any;
+                type: AddonType;
+                total: number;
+                price: number;
+                freeThresholdAmount: number;
+                date: any;
+                hourRange: {
+                  __typename?: 'OrderHomeWrappingAddonHourRange';
+                  startAt: string;
+                  endAt: string;
+                };
+              }
+          >;
         };
   };
 };
 
-export type GetPartnersQueryVariables = Exact<{
-  input: PartnersInput;
+export type ArticlesQueryVariables = Exact<{
+  input: ArticlesInput;
 }>;
 
-export type GetPartnersQuery = {
-  __typename: 'Query';
-  partners: {
-    __typename: 'PartnersOutput';
-    partners: Array<{ __typename: 'Partner'; id: string; name: string }>;
+export type ArticlesQuery = {
+  __typename?: 'Query';
+  articles: {
+    __typename?: 'ArticlesOutput';
+    articles: Array<{
+      __typename?: 'Article';
+      id: any;
+      name: string;
+      description: string;
+      imagePath: string;
+      isEnabled: boolean;
+      variants: Array<{
+        __typename?: 'ArticleVariant';
+        id: any;
+        name: string;
+        isEnabled: boolean;
+      }>;
+    }>;
   };
 };
 
-export type GetPartnerQueryVariables = Exact<{
-  input: PartnerInput;
+export type ArticleQueryVariables = Exact<{
+  input: ArticleInput;
 }>;
 
-export type GetPartnerQuery = {
-  __typename: 'Query';
-  partner: {
-    __typename: 'PartnerOutput';
-    partner: { __typename: 'Partner'; id: string; name: string };
+export type ArticleQuery = {
+  __typename?: 'Query';
+  article: {
+    __typename?: 'ArticleOutput';
+    article: {
+      __typename?: 'Article';
+      id: any;
+      name: string;
+      description: string;
+      imagePath: string;
+      isEnabled: boolean;
+      variants: Array<{
+        __typename?: 'ArticleVariant';
+        id: any;
+        name: string;
+        isEnabled: boolean;
+      }>;
+    };
   };
 };
 
-export type GetPricingRulesQueryVariables = Exact<{
-  input: PricingRulesInput;
+export type DeliveryTypesQueryVariables = Exact<{
+  input: DeliveryTypesInput;
 }>;
 
-export type GetPricingRulesQuery = {
-  __typename: 'Query';
-  pricingRules: {
-    __typename: 'PricingRulesOutput';
-    pricingRules: Array<{
-      __typename: 'ArticlePricingRule';
-      id: string;
-      type: PricingRuleType;
+export type DeliveryTypesQuery = {
+  __typename?: 'Query';
+  deliveryTypes: {
+    __typename?: 'DeliveryTypesOutput';
+    deliveryTypes: Array<{
+      __typename?: 'DeliveryType';
+      id: any;
+      name: string;
+      icon: string;
+      description: string;
       isEnabled: boolean;
     }>;
   };
 };
 
-export type GetPricingRuleQueryVariables = Exact<{
-  input: PricingRuleInput;
+export type DeliveryTypeQueryVariables = Exact<{
+  input: DeliveryTypeInput;
 }>;
 
-export type GetPricingRuleQuery = {
-  __typename: 'Query';
-  pricingRule: {
-    __typename: 'PricingRuleOutput';
-    pricingRule: {
-      __typename: 'ArticlePricingRule';
-      id: string;
-      type: PricingRuleType;
+export type DeliveryTypeQuery = {
+  __typename?: 'Query';
+  deliveryType: {
+    __typename?: 'DeliveryTypeOutput';
+    deliveryType: {
+      __typename?: 'DeliveryType';
+      id: any;
+      name: string;
+      icon: string;
+      description: string;
       isEnabled: boolean;
     };
   };
 };
 
-export const ArticleFragmentFragmentDoc = gql`
-  fragment ArticleFragment on Article {
-    id
-    name
-    description
-    imagePath
-    isEnabled
-  }
-`;
-export const ArticleVariantFragmentFragmentDoc = gql`
-  fragment ArticleVariantFragment on ArticleVariant {
-    id
-    name
-    isEnabled
-  }
-`;
-export const CountryFragmentFragmentDoc = gql`
-  fragment CountryFragment on Country {
-    id
-    name
-  }
-`;
-export const StateFragmentFragmentDoc = gql`
-  fragment StateFragment on State {
-    id
-    name
-  }
-`;
-export const CityFragmentFragmentDoc = gql`
-  fragment CityFragment on City {
-    id
-    name
-    zipCodes
-  }
-`;
-export const ProvinceFragmentFragmentDoc = gql`
-  fragment ProvinceFragment on Province {
-    id
-    name
-  }
-`;
-export const MunicipalityFragmentFragmentDoc = gql`
-  fragment MunicipalityFragment on Municipality {
-    id
-    name
-  }
-`;
-export const NeighborhoodFragmentFragmentDoc = gql`
-  fragment NeighborhoodFragment on Neighborhood {
-    id
-    name
-  }
-`;
-export const DeliveryTypeFragmentFragmentDoc = gql`
-  fragment DeliveryTypeFragment on DeliveryType {
-    id
-    name
-    icon
-    description
-    isEnabled
-  }
-`;
-export const PartnerFragmentFragmentDoc = gql`
-  fragment PartnerFragment on Partner {
-    id
-    name
-  }
-`;
-export const UserFragmentFragmentDoc = gql`
-  fragment UserFragment on User {
-    id
-    firstName
-    lastName
-    email
-    phone
-  }
-`;
+export type PricingRulesQueryVariables = Exact<{
+  input: PricingRulesInput;
+}>;
+
+export type PricingRulesQuery = {
+  __typename?: 'Query';
+  pricingRules: {
+    __typename?: 'PricingRulesOutput';
+    pricingRules: Array<{
+      __typename?: 'ArticlePricingRule';
+      id: any;
+      type: PricingRuleType;
+      isEnabled: boolean;
+      price: number;
+      partner: { __typename?: 'PricingRulePartner'; id: any; name: string };
+      location: { __typename?: 'PricingRuleLocation'; id: any; name: string };
+      deliveryType: {
+        __typename?: 'PricingRuleDeliveryType';
+        id: any;
+        name: string;
+      };
+      article: { __typename?: 'PricingRuleArticle'; id: any; name: string };
+      articleVariant: {
+        __typename?: 'PricingRuleArticleVariant';
+        id: any;
+        name: string;
+      };
+    }>;
+  };
+};
+
+export type PricingRuleQueryVariables = Exact<{
+  input: PricingRuleInput;
+}>;
+
+export type PricingRuleQuery = {
+  __typename?: 'Query';
+  pricingRule: {
+    __typename?: 'PricingRuleOutput';
+    pricingRule: {
+      __typename?: 'ArticlePricingRule';
+      id: any;
+      type: PricingRuleType;
+      isEnabled: boolean;
+      price: number;
+      partner: { __typename?: 'PricingRulePartner'; id: any; name: string };
+      location: { __typename?: 'PricingRuleLocation'; id: any; name: string };
+      deliveryType: {
+        __typename?: 'PricingRuleDeliveryType';
+        id: any;
+        name: string;
+      };
+      article: { __typename?: 'PricingRuleArticle'; id: any; name: string };
+      articleVariant: {
+        __typename?: 'PricingRuleArticleVariant';
+        id: any;
+        name: string;
+      };
+    };
+  };
+};
+
+export type CountriesQueryVariables = Exact<{
+  input: CountriesInput;
+}>;
+
+export type CountriesQuery = {
+  __typename?: 'Query';
+  countries: {
+    __typename?: 'CountriesOutput';
+    countries: Array<{ __typename?: 'Country'; id: any; name: string }>;
+  };
+};
+
+export type CountryQueryVariables = Exact<{
+  input: CountryInput;
+}>;
+
+export type CountryQuery = {
+  __typename?: 'Query';
+  country: {
+    __typename?: 'CountryOutput';
+    country: { __typename?: 'Country'; id: any; name: string };
+  };
+};
+
+export type StatesQueryVariables = Exact<{
+  input: StatesInput;
+}>;
+
+export type StatesQuery = {
+  __typename?: 'Query';
+  states: {
+    __typename?: 'StatesOutput';
+    states: Array<{ __typename?: 'State'; id: any; name: string }>;
+  };
+};
+
+export type StateQueryVariables = Exact<{
+  input: StateInput;
+}>;
+
+export type StateQuery = {
+  __typename?: 'Query';
+  state: {
+    __typename?: 'StateOutput';
+    state: { __typename?: 'State'; id: any; name: string };
+  };
+};
+
+export type CitiesQueryVariables = Exact<{
+  input: CitiesInput;
+}>;
+
+export type CitiesQuery = {
+  __typename?: 'Query';
+  cities: {
+    __typename?: 'CitiesOutput';
+    cities: Array<{
+      __typename?: 'City';
+      id: any;
+      name: string;
+      zipCodes: Array<string>;
+    }>;
+  };
+};
+
+export type CityQueryVariables = Exact<{
+  input: CityInput;
+}>;
+
+export type CityQuery = {
+  __typename?: 'Query';
+  city: {
+    __typename?: 'CityOutput';
+    city: {
+      __typename?: 'City';
+      id: any;
+      name: string;
+      zipCodes: Array<string>;
+    };
+  };
+};
+
+export type ProvincesQueryVariables = Exact<{
+  input: ProvincesInput;
+}>;
+
+export type ProvincesQuery = {
+  __typename?: 'Query';
+  provinces: {
+    __typename?: 'ProvincesOutput';
+    provinces: Array<{ __typename?: 'Province'; id: any; name: string }>;
+  };
+};
+
+export type ProvinceQueryVariables = Exact<{
+  input: ProvinceInput;
+}>;
+
+export type ProvinceQuery = {
+  __typename?: 'Query';
+  province: {
+    __typename?: 'ProvinceOutput';
+    province: { __typename?: 'Province'; id: any; name: string };
+  };
+};
+
+export type MunicipalitiesQueryVariables = Exact<{
+  input: MunicipalitiesInput;
+}>;
+
+export type MunicipalitiesQuery = {
+  __typename?: 'Query';
+  municipalities: {
+    __typename?: 'MunicipalitiesOutput';
+    municipalities: Array<{
+      __typename?: 'Municipality';
+      id: any;
+      name: string;
+    }>;
+  };
+};
+
+export type MunicipalityQueryVariables = Exact<{
+  input: MunicipalityInput;
+}>;
+
+export type MunicipalityQuery = {
+  __typename?: 'Query';
+  municipality: {
+    __typename?: 'MunicipalityOutput';
+    municipality: { __typename?: 'Municipality'; id: any; name: string };
+  };
+};
+
+export type NeighborhoodsQueryVariables = Exact<{
+  input: NeighborhoodsInput;
+}>;
+
+export type NeighborhoodsQuery = {
+  __typename?: 'Query';
+  neighborhoods: {
+    __typename?: 'NeighborhoodsOutput';
+    neighborhoods: Array<{
+      __typename?: 'Neighborhood';
+      id: any;
+      name: string;
+    }>;
+  };
+};
+
+export type NeighborhoodQueryVariables = Exact<{
+  input: NeighborhoodInput;
+}>;
+
+export type NeighborhoodQuery = {
+  __typename?: 'Query';
+  neighborhood: {
+    __typename?: 'NeighborhoodOutput';
+    neighborhood: { __typename?: 'Neighborhood'; id: any; name: string };
+  };
+};
+
 export const SignInDocument = gql`
   mutation SignIn($input: SignInInput!) {
     signIn(input: $input) {
@@ -2463,13 +3418,13 @@ export type SignInMutationFn = Apollo.MutationFunction<
  * });
  */
 export function useSignInMutation(
-  baseOptions?: ApolloReactHooks.MutationHookOptions<
+  baseOptions?: Apollo.MutationHookOptions<
     SignInMutation,
     SignInMutationVariables
   >
 ) {
   const options = { ...defaultOptions, ...baseOptions };
-  return ApolloReactHooks.useMutation<SignInMutation, SignInMutationVariables>(
+  return Apollo.useMutation<SignInMutation, SignInMutationVariables>(
     SignInDocument,
     options
   );
@@ -2510,16 +3465,16 @@ export type SignOutMutationFn = Apollo.MutationFunction<
  * });
  */
 export function useSignOutMutation(
-  baseOptions?: ApolloReactHooks.MutationHookOptions<
+  baseOptions?: Apollo.MutationHookOptions<
     SignOutMutation,
     SignOutMutationVariables
   >
 ) {
   const options = { ...defaultOptions, ...baseOptions };
-  return ApolloReactHooks.useMutation<
-    SignOutMutation,
-    SignOutMutationVariables
-  >(SignOutDocument, options);
+  return Apollo.useMutation<SignOutMutation, SignOutMutationVariables>(
+    SignOutDocument,
+    options
+  );
 }
 export type SignOutMutationHookResult = ReturnType<typeof useSignOutMutation>;
 export type SignOutMutationResult = Apollo.MutationResult<SignOutMutation>;
@@ -2560,13 +3515,13 @@ export type RefreshTokensMutationFn = Apollo.MutationFunction<
  * });
  */
 export function useRefreshTokensMutation(
-  baseOptions?: ApolloReactHooks.MutationHookOptions<
+  baseOptions?: Apollo.MutationHookOptions<
     RefreshTokensMutation,
     RefreshTokensMutationVariables
   >
 ) {
   const options = { ...defaultOptions, ...baseOptions };
-  return ApolloReactHooks.useMutation<
+  return Apollo.useMutation<
     RefreshTokensMutation,
     RefreshTokensMutationVariables
   >(RefreshTokensDocument, options);
@@ -2579,6 +3534,262 @@ export type RefreshTokensMutationResult =
 export type RefreshTokensMutationOptions = Apollo.BaseMutationOptions<
   RefreshTokensMutation,
   RefreshTokensMutationVariables
+>;
+export const VerifyEmailDocument = gql`
+  mutation VerifyEmail($input: VerifyEmailInput!) {
+    verifyEmail(input: $input) {
+      tokens {
+        accessToken
+        refreshToken
+      }
+    }
+  }
+`;
+export type VerifyEmailMutationFn = Apollo.MutationFunction<
+  VerifyEmailMutation,
+  VerifyEmailMutationVariables
+>;
+
+/**
+ * __useVerifyEmailMutation__
+ *
+ * To run a mutation, you first call `useVerifyEmailMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useVerifyEmailMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [verifyEmailMutation, { data, loading, error }] = useVerifyEmailMutation({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useVerifyEmailMutation(
+  baseOptions?: Apollo.MutationHookOptions<
+    VerifyEmailMutation,
+    VerifyEmailMutationVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useMutation<VerifyEmailMutation, VerifyEmailMutationVariables>(
+    VerifyEmailDocument,
+    options
+  );
+}
+export type VerifyEmailMutationHookResult = ReturnType<
+  typeof useVerifyEmailMutation
+>;
+export type VerifyEmailMutationResult =
+  Apollo.MutationResult<VerifyEmailMutation>;
+export type VerifyEmailMutationOptions = Apollo.BaseMutationOptions<
+  VerifyEmailMutation,
+  VerifyEmailMutationVariables
+>;
+export const VerifyPhoneDocument = gql`
+  mutation VerifyPhone($input: VerifyPhoneInput!) {
+    verifyPhone(input: $input) {
+      tokens {
+        accessToken
+        refreshToken
+      }
+    }
+  }
+`;
+export type VerifyPhoneMutationFn = Apollo.MutationFunction<
+  VerifyPhoneMutation,
+  VerifyPhoneMutationVariables
+>;
+
+/**
+ * __useVerifyPhoneMutation__
+ *
+ * To run a mutation, you first call `useVerifyPhoneMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useVerifyPhoneMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [verifyPhoneMutation, { data, loading, error }] = useVerifyPhoneMutation({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useVerifyPhoneMutation(
+  baseOptions?: Apollo.MutationHookOptions<
+    VerifyPhoneMutation,
+    VerifyPhoneMutationVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useMutation<VerifyPhoneMutation, VerifyPhoneMutationVariables>(
+    VerifyPhoneDocument,
+    options
+  );
+}
+export type VerifyPhoneMutationHookResult = ReturnType<
+  typeof useVerifyPhoneMutation
+>;
+export type VerifyPhoneMutationResult =
+  Apollo.MutationResult<VerifyPhoneMutation>;
+export type VerifyPhoneMutationOptions = Apollo.BaseMutationOptions<
+  VerifyPhoneMutation,
+  VerifyPhoneMutationVariables
+>;
+export const SendEmailVerificationDocument = gql`
+  mutation SendEmailVerification($input: SendEmailVerificationInput!) {
+    sendEmailVerification(input: $input) {
+      _
+    }
+  }
+`;
+export type SendEmailVerificationMutationFn = Apollo.MutationFunction<
+  SendEmailVerificationMutation,
+  SendEmailVerificationMutationVariables
+>;
+
+/**
+ * __useSendEmailVerificationMutation__
+ *
+ * To run a mutation, you first call `useSendEmailVerificationMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useSendEmailVerificationMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [sendEmailVerificationMutation, { data, loading, error }] = useSendEmailVerificationMutation({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useSendEmailVerificationMutation(
+  baseOptions?: Apollo.MutationHookOptions<
+    SendEmailVerificationMutation,
+    SendEmailVerificationMutationVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useMutation<
+    SendEmailVerificationMutation,
+    SendEmailVerificationMutationVariables
+  >(SendEmailVerificationDocument, options);
+}
+export type SendEmailVerificationMutationHookResult = ReturnType<
+  typeof useSendEmailVerificationMutation
+>;
+export type SendEmailVerificationMutationResult =
+  Apollo.MutationResult<SendEmailVerificationMutation>;
+export type SendEmailVerificationMutationOptions = Apollo.BaseMutationOptions<
+  SendEmailVerificationMutation,
+  SendEmailVerificationMutationVariables
+>;
+export const SendPhoneVerificationDocument = gql`
+  mutation SendPhoneVerification($input: SendPhoneVerificationInput!) {
+    sendPhoneVerification(input: $input) {
+      _
+    }
+  }
+`;
+export type SendPhoneVerificationMutationFn = Apollo.MutationFunction<
+  SendPhoneVerificationMutation,
+  SendPhoneVerificationMutationVariables
+>;
+
+/**
+ * __useSendPhoneVerificationMutation__
+ *
+ * To run a mutation, you first call `useSendPhoneVerificationMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useSendPhoneVerificationMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [sendPhoneVerificationMutation, { data, loading, error }] = useSendPhoneVerificationMutation({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useSendPhoneVerificationMutation(
+  baseOptions?: Apollo.MutationHookOptions<
+    SendPhoneVerificationMutation,
+    SendPhoneVerificationMutationVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useMutation<
+    SendPhoneVerificationMutation,
+    SendPhoneVerificationMutationVariables
+  >(SendPhoneVerificationDocument, options);
+}
+export type SendPhoneVerificationMutationHookResult = ReturnType<
+  typeof useSendPhoneVerificationMutation
+>;
+export type SendPhoneVerificationMutationResult =
+  Apollo.MutationResult<SendPhoneVerificationMutation>;
+export type SendPhoneVerificationMutationOptions = Apollo.BaseMutationOptions<
+  SendPhoneVerificationMutation,
+  SendPhoneVerificationMutationVariables
+>;
+export const ChangePasswordDocument = gql`
+  mutation ChangePassword($input: ChangePasswordInput!) {
+    changePassword(input: $input) {
+      _
+    }
+  }
+`;
+export type ChangePasswordMutationFn = Apollo.MutationFunction<
+  ChangePasswordMutation,
+  ChangePasswordMutationVariables
+>;
+
+/**
+ * __useChangePasswordMutation__
+ *
+ * To run a mutation, you first call `useChangePasswordMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useChangePasswordMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [changePasswordMutation, { data, loading, error }] = useChangePasswordMutation({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useChangePasswordMutation(
+  baseOptions?: Apollo.MutationHookOptions<
+    ChangePasswordMutation,
+    ChangePasswordMutationVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useMutation<
+    ChangePasswordMutation,
+    ChangePasswordMutationVariables
+  >(ChangePasswordDocument, options);
+}
+export type ChangePasswordMutationHookResult = ReturnType<
+  typeof useChangePasswordMutation
+>;
+export type ChangePasswordMutationResult =
+  Apollo.MutationResult<ChangePasswordMutation>;
+export type ChangePasswordMutationOptions = Apollo.BaseMutationOptions<
+  ChangePasswordMutation,
+  ChangePasswordMutationVariables
 >;
 export const EnableUserDocument = gql`
   mutation EnableUser($input: EnableUserInput!) {
@@ -2610,16 +3821,16 @@ export type EnableUserMutationFn = Apollo.MutationFunction<
  * });
  */
 export function useEnableUserMutation(
-  baseOptions?: ApolloReactHooks.MutationHookOptions<
+  baseOptions?: Apollo.MutationHookOptions<
     EnableUserMutation,
     EnableUserMutationVariables
   >
 ) {
   const options = { ...defaultOptions, ...baseOptions };
-  return ApolloReactHooks.useMutation<
-    EnableUserMutation,
-    EnableUserMutationVariables
-  >(EnableUserDocument, options);
+  return Apollo.useMutation<EnableUserMutation, EnableUserMutationVariables>(
+    EnableUserDocument,
+    options
+  );
 }
 export type EnableUserMutationHookResult = ReturnType<
   typeof useEnableUserMutation
@@ -2660,16 +3871,16 @@ export type DisableUserMutationFn = Apollo.MutationFunction<
  * });
  */
 export function useDisableUserMutation(
-  baseOptions?: ApolloReactHooks.MutationHookOptions<
+  baseOptions?: Apollo.MutationHookOptions<
     DisableUserMutation,
     DisableUserMutationVariables
   >
 ) {
   const options = { ...defaultOptions, ...baseOptions };
-  return ApolloReactHooks.useMutation<
-    DisableUserMutation,
-    DisableUserMutationVariables
-  >(DisableUserDocument, options);
+  return Apollo.useMutation<DisableUserMutation, DisableUserMutationVariables>(
+    DisableUserDocument,
+    options
+  );
 }
 export type DisableUserMutationHookResult = ReturnType<
   typeof useDisableUserMutation
@@ -2679,6 +3890,396 @@ export type DisableUserMutationResult =
 export type DisableUserMutationOptions = Apollo.BaseMutationOptions<
   DisableUserMutation,
   DisableUserMutationVariables
+>;
+export const CreateDriverUserDocument = gql`
+  mutation CreateDriverUser($input: CreateDriverUserInput!) {
+    createDriverUser(input: $input) {
+      driverUser {
+        id
+        type
+        isEnabled
+        partner {
+          id
+          name
+        }
+        firstName
+        lastName
+        email
+        isEmailVerified
+        phone
+        isPhoneVerified
+        createdAt
+      }
+    }
+  }
+`;
+export type CreateDriverUserMutationFn = Apollo.MutationFunction<
+  CreateDriverUserMutation,
+  CreateDriverUserMutationVariables
+>;
+
+/**
+ * __useCreateDriverUserMutation__
+ *
+ * To run a mutation, you first call `useCreateDriverUserMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateDriverUserMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createDriverUserMutation, { data, loading, error }] = useCreateDriverUserMutation({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useCreateDriverUserMutation(
+  baseOptions?: Apollo.MutationHookOptions<
+    CreateDriverUserMutation,
+    CreateDriverUserMutationVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useMutation<
+    CreateDriverUserMutation,
+    CreateDriverUserMutationVariables
+  >(CreateDriverUserDocument, options);
+}
+export type CreateDriverUserMutationHookResult = ReturnType<
+  typeof useCreateDriverUserMutation
+>;
+export type CreateDriverUserMutationResult =
+  Apollo.MutationResult<CreateDriverUserMutation>;
+export type CreateDriverUserMutationOptions = Apollo.BaseMutationOptions<
+  CreateDriverUserMutation,
+  CreateDriverUserMutationVariables
+>;
+export const CreatePartnerUserDocument = gql`
+  mutation CreatePartnerUser($input: CreatePartnerUserInput!) {
+    createPartnerUser(input: $input) {
+      partnerUser {
+        id
+        type
+        isEnabled
+        partner {
+          id
+          name
+        }
+        firstName
+        lastName
+        email
+        isEmailVerified
+        phone
+        isPhoneVerified
+        createdAt
+      }
+    }
+  }
+`;
+export type CreatePartnerUserMutationFn = Apollo.MutationFunction<
+  CreatePartnerUserMutation,
+  CreatePartnerUserMutationVariables
+>;
+
+/**
+ * __useCreatePartnerUserMutation__
+ *
+ * To run a mutation, you first call `useCreatePartnerUserMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreatePartnerUserMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createPartnerUserMutation, { data, loading, error }] = useCreatePartnerUserMutation({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useCreatePartnerUserMutation(
+  baseOptions?: Apollo.MutationHookOptions<
+    CreatePartnerUserMutation,
+    CreatePartnerUserMutationVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useMutation<
+    CreatePartnerUserMutation,
+    CreatePartnerUserMutationVariables
+  >(CreatePartnerUserDocument, options);
+}
+export type CreatePartnerUserMutationHookResult = ReturnType<
+  typeof useCreatePartnerUserMutation
+>;
+export type CreatePartnerUserMutationResult =
+  Apollo.MutationResult<CreatePartnerUserMutation>;
+export type CreatePartnerUserMutationOptions = Apollo.BaseMutationOptions<
+  CreatePartnerUserMutation,
+  CreatePartnerUserMutationVariables
+>;
+export const CreateStaffUserDocument = gql`
+  mutation CreateStaffUser($input: CreateStaffUserInput!) {
+    createStaffUser(input: $input) {
+      staffUser {
+        id
+        type
+        isEnabled
+        partner {
+          id
+          name
+        }
+        firstName
+        lastName
+        email
+        isEmailVerified
+        phone
+        isPhoneVerified
+        createdAt
+      }
+    }
+  }
+`;
+export type CreateStaffUserMutationFn = Apollo.MutationFunction<
+  CreateStaffUserMutation,
+  CreateStaffUserMutationVariables
+>;
+
+/**
+ * __useCreateStaffUserMutation__
+ *
+ * To run a mutation, you first call `useCreateStaffUserMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateStaffUserMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createStaffUserMutation, { data, loading, error }] = useCreateStaffUserMutation({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useCreateStaffUserMutation(
+  baseOptions?: Apollo.MutationHookOptions<
+    CreateStaffUserMutation,
+    CreateStaffUserMutationVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useMutation<
+    CreateStaffUserMutation,
+    CreateStaffUserMutationVariables
+  >(CreateStaffUserDocument, options);
+}
+export type CreateStaffUserMutationHookResult = ReturnType<
+  typeof useCreateStaffUserMutation
+>;
+export type CreateStaffUserMutationResult =
+  Apollo.MutationResult<CreateStaffUserMutation>;
+export type CreateStaffUserMutationOptions = Apollo.BaseMutationOptions<
+  CreateStaffUserMutation,
+  CreateStaffUserMutationVariables
+>;
+export const UpdateDriverUserDocument = gql`
+  mutation UpdateDriverUser($input: UpdateDriverUserInput!) {
+    updateDriverUser(input: $input) {
+      driverUser {
+        id
+        type
+        isEnabled
+        partner {
+          id
+          name
+        }
+        firstName
+        lastName
+        email
+        isEmailVerified
+        phone
+        isPhoneVerified
+        createdAt
+      }
+    }
+  }
+`;
+export type UpdateDriverUserMutationFn = Apollo.MutationFunction<
+  UpdateDriverUserMutation,
+  UpdateDriverUserMutationVariables
+>;
+
+/**
+ * __useUpdateDriverUserMutation__
+ *
+ * To run a mutation, you first call `useUpdateDriverUserMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdateDriverUserMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [updateDriverUserMutation, { data, loading, error }] = useUpdateDriverUserMutation({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useUpdateDriverUserMutation(
+  baseOptions?: Apollo.MutationHookOptions<
+    UpdateDriverUserMutation,
+    UpdateDriverUserMutationVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useMutation<
+    UpdateDriverUserMutation,
+    UpdateDriverUserMutationVariables
+  >(UpdateDriverUserDocument, options);
+}
+export type UpdateDriverUserMutationHookResult = ReturnType<
+  typeof useUpdateDriverUserMutation
+>;
+export type UpdateDriverUserMutationResult =
+  Apollo.MutationResult<UpdateDriverUserMutation>;
+export type UpdateDriverUserMutationOptions = Apollo.BaseMutationOptions<
+  UpdateDriverUserMutation,
+  UpdateDriverUserMutationVariables
+>;
+export const UpdatePartnerUserDocument = gql`
+  mutation UpdatePartnerUser($input: UpdatePartnerUserInput!) {
+    updatePartnerUser(input: $input) {
+      partnerUser {
+        id
+        type
+        isEnabled
+        partner {
+          id
+          name
+        }
+        firstName
+        lastName
+        email
+        isEmailVerified
+        phone
+        isPhoneVerified
+        createdAt
+      }
+    }
+  }
+`;
+export type UpdatePartnerUserMutationFn = Apollo.MutationFunction<
+  UpdatePartnerUserMutation,
+  UpdatePartnerUserMutationVariables
+>;
+
+/**
+ * __useUpdatePartnerUserMutation__
+ *
+ * To run a mutation, you first call `useUpdatePartnerUserMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdatePartnerUserMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [updatePartnerUserMutation, { data, loading, error }] = useUpdatePartnerUserMutation({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useUpdatePartnerUserMutation(
+  baseOptions?: Apollo.MutationHookOptions<
+    UpdatePartnerUserMutation,
+    UpdatePartnerUserMutationVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useMutation<
+    UpdatePartnerUserMutation,
+    UpdatePartnerUserMutationVariables
+  >(UpdatePartnerUserDocument, options);
+}
+export type UpdatePartnerUserMutationHookResult = ReturnType<
+  typeof useUpdatePartnerUserMutation
+>;
+export type UpdatePartnerUserMutationResult =
+  Apollo.MutationResult<UpdatePartnerUserMutation>;
+export type UpdatePartnerUserMutationOptions = Apollo.BaseMutationOptions<
+  UpdatePartnerUserMutation,
+  UpdatePartnerUserMutationVariables
+>;
+export const UpdateStaffUserDocument = gql`
+  mutation UpdateStaffUser($input: UpdateStaffUserInput!) {
+    updateStaffUser(input: $input) {
+      staffUser {
+        id
+        type
+        isEnabled
+        partner {
+          id
+          name
+        }
+        firstName
+        lastName
+        email
+        isEmailVerified
+        phone
+        isPhoneVerified
+        createdAt
+      }
+    }
+  }
+`;
+export type UpdateStaffUserMutationFn = Apollo.MutationFunction<
+  UpdateStaffUserMutation,
+  UpdateStaffUserMutationVariables
+>;
+
+/**
+ * __useUpdateStaffUserMutation__
+ *
+ * To run a mutation, you first call `useUpdateStaffUserMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdateStaffUserMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [updateStaffUserMutation, { data, loading, error }] = useUpdateStaffUserMutation({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useUpdateStaffUserMutation(
+  baseOptions?: Apollo.MutationHookOptions<
+    UpdateStaffUserMutation,
+    UpdateStaffUserMutationVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useMutation<
+    UpdateStaffUserMutation,
+    UpdateStaffUserMutationVariables
+  >(UpdateStaffUserDocument, options);
+}
+export type UpdateStaffUserMutationHookResult = ReturnType<
+  typeof useUpdateStaffUserMutation
+>;
+export type UpdateStaffUserMutationResult =
+  Apollo.MutationResult<UpdateStaffUserMutation>;
+export type UpdateStaffUserMutationOptions = Apollo.BaseMutationOptions<
+  UpdateStaffUserMutation,
+  UpdateStaffUserMutationVariables
 >;
 export const DropOffOrderDocument = gql`
   mutation DropOffOrder($input: DropOffOrderInput!) {
@@ -2710,13 +4311,13 @@ export type DropOffOrderMutationFn = Apollo.MutationFunction<
  * });
  */
 export function useDropOffOrderMutation(
-  baseOptions?: ApolloReactHooks.MutationHookOptions<
+  baseOptions?: Apollo.MutationHookOptions<
     DropOffOrderMutation,
     DropOffOrderMutationVariables
   >
 ) {
   const options = { ...defaultOptions, ...baseOptions };
-  return ApolloReactHooks.useMutation<
+  return Apollo.useMutation<
     DropOffOrderMutation,
     DropOffOrderMutationVariables
   >(DropOffOrderDocument, options);
@@ -2739,6 +4340,11 @@ export const CreateArticleDocument = gql`
         description
         imagePath
         isEnabled
+        variants {
+          id
+          name
+          isEnabled
+        }
       }
     }
   }
@@ -2766,13 +4372,13 @@ export type CreateArticleMutationFn = Apollo.MutationFunction<
  * });
  */
 export function useCreateArticleMutation(
-  baseOptions?: ApolloReactHooks.MutationHookOptions<
+  baseOptions?: Apollo.MutationHookOptions<
     CreateArticleMutation,
     CreateArticleMutationVariables
   >
 ) {
   const options = { ...defaultOptions, ...baseOptions };
-  return ApolloReactHooks.useMutation<
+  return Apollo.useMutation<
     CreateArticleMutation,
     CreateArticleMutationVariables
   >(CreateArticleDocument, options);
@@ -2795,6 +4401,11 @@ export const UpdateArticleDocument = gql`
         description
         imagePath
         isEnabled
+        variants {
+          id
+          name
+          isEnabled
+        }
       }
     }
   }
@@ -2822,13 +4433,13 @@ export type UpdateArticleMutationFn = Apollo.MutationFunction<
  * });
  */
 export function useUpdateArticleMutation(
-  baseOptions?: ApolloReactHooks.MutationHookOptions<
+  baseOptions?: Apollo.MutationHookOptions<
     UpdateArticleMutation,
     UpdateArticleMutationVariables
   >
 ) {
   const options = { ...defaultOptions, ...baseOptions };
-  return ApolloReactHooks.useMutation<
+  return Apollo.useMutation<
     UpdateArticleMutation,
     UpdateArticleMutationVariables
   >(UpdateArticleDocument, options);
@@ -2842,12 +4453,121 @@ export type UpdateArticleMutationOptions = Apollo.BaseMutationOptions<
   UpdateArticleMutation,
   UpdateArticleMutationVariables
 >;
+export const CreateArticleVariantDocument = gql`
+  mutation CreateArticleVariant($input: CreateArticleVariantInput!) {
+    createArticleVariant(input: $input) {
+      articleVariant {
+        id
+        name
+        isEnabled
+      }
+    }
+  }
+`;
+export type CreateArticleVariantMutationFn = Apollo.MutationFunction<
+  CreateArticleVariantMutation,
+  CreateArticleVariantMutationVariables
+>;
+
+/**
+ * __useCreateArticleVariantMutation__
+ *
+ * To run a mutation, you first call `useCreateArticleVariantMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateArticleVariantMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createArticleVariantMutation, { data, loading, error }] = useCreateArticleVariantMutation({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useCreateArticleVariantMutation(
+  baseOptions?: Apollo.MutationHookOptions<
+    CreateArticleVariantMutation,
+    CreateArticleVariantMutationVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useMutation<
+    CreateArticleVariantMutation,
+    CreateArticleVariantMutationVariables
+  >(CreateArticleVariantDocument, options);
+}
+export type CreateArticleVariantMutationHookResult = ReturnType<
+  typeof useCreateArticleVariantMutation
+>;
+export type CreateArticleVariantMutationResult =
+  Apollo.MutationResult<CreateArticleVariantMutation>;
+export type CreateArticleVariantMutationOptions = Apollo.BaseMutationOptions<
+  CreateArticleVariantMutation,
+  CreateArticleVariantMutationVariables
+>;
+export const UpdateArticleVariantDocument = gql`
+  mutation UpdateArticleVariant($input: UpdateArticleVariantInput!) {
+    updateArticleVariant(input: $input) {
+      articleVariant {
+        id
+        name
+        isEnabled
+      }
+    }
+  }
+`;
+export type UpdateArticleVariantMutationFn = Apollo.MutationFunction<
+  UpdateArticleVariantMutation,
+  UpdateArticleVariantMutationVariables
+>;
+
+/**
+ * __useUpdateArticleVariantMutation__
+ *
+ * To run a mutation, you first call `useUpdateArticleVariantMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdateArticleVariantMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [updateArticleVariantMutation, { data, loading, error }] = useUpdateArticleVariantMutation({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useUpdateArticleVariantMutation(
+  baseOptions?: Apollo.MutationHookOptions<
+    UpdateArticleVariantMutation,
+    UpdateArticleVariantMutationVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useMutation<
+    UpdateArticleVariantMutation,
+    UpdateArticleVariantMutationVariables
+  >(UpdateArticleVariantDocument, options);
+}
+export type UpdateArticleVariantMutationHookResult = ReturnType<
+  typeof useUpdateArticleVariantMutation
+>;
+export type UpdateArticleVariantMutationResult =
+  Apollo.MutationResult<UpdateArticleVariantMutation>;
+export type UpdateArticleVariantMutationOptions = Apollo.BaseMutationOptions<
+  UpdateArticleVariantMutation,
+  UpdateArticleVariantMutationVariables
+>;
 export const CreateDeliveryTypeDocument = gql`
   mutation CreateDeliveryType($input: CreateDeliveryTypeInput!) {
     createDeliveryType(input: $input) {
       deliveryType {
         id
         name
+        icon
         description
         isEnabled
       }
@@ -2877,13 +4597,13 @@ export type CreateDeliveryTypeMutationFn = Apollo.MutationFunction<
  * });
  */
 export function useCreateDeliveryTypeMutation(
-  baseOptions?: ApolloReactHooks.MutationHookOptions<
+  baseOptions?: Apollo.MutationHookOptions<
     CreateDeliveryTypeMutation,
     CreateDeliveryTypeMutationVariables
   >
 ) {
   const options = { ...defaultOptions, ...baseOptions };
-  return ApolloReactHooks.useMutation<
+  return Apollo.useMutation<
     CreateDeliveryTypeMutation,
     CreateDeliveryTypeMutationVariables
   >(CreateDeliveryTypeDocument, options);
@@ -2903,6 +4623,7 @@ export const UpdateDeliveryTypeDocument = gql`
       deliveryType {
         id
         name
+        icon
         description
         isEnabled
       }
@@ -2932,13 +4653,13 @@ export type UpdateDeliveryTypeMutationFn = Apollo.MutationFunction<
  * });
  */
 export function useUpdateDeliveryTypeMutation(
-  baseOptions?: ApolloReactHooks.MutationHookOptions<
+  baseOptions?: Apollo.MutationHookOptions<
     UpdateDeliveryTypeMutation,
     UpdateDeliveryTypeMutationVariables
   >
 ) {
   const options = { ...defaultOptions, ...baseOptions };
-  return ApolloReactHooks.useMutation<
+  return Apollo.useMutation<
     UpdateDeliveryTypeMutation,
     UpdateDeliveryTypeMutationVariables
   >(UpdateDeliveryTypeDocument, options);
@@ -2952,6 +4673,158 @@ export type UpdateDeliveryTypeMutationOptions = Apollo.BaseMutationOptions<
   UpdateDeliveryTypeMutation,
   UpdateDeliveryTypeMutationVariables
 >;
+export const CreateArticlePricingRuleDocument = gql`
+  mutation CreateArticlePricingRule($input: CreateArticlePricingRuleInput!) {
+    createArticlePricingRule(input: $input) {
+      articlePricingRule {
+        id
+        type
+        isEnabled
+        price
+        partner {
+          id
+          name
+        }
+        location {
+          id
+          name
+        }
+        deliveryType {
+          id
+          name
+        }
+        article {
+          id
+          name
+        }
+        articleVariant {
+          id
+          name
+        }
+      }
+    }
+  }
+`;
+export type CreateArticlePricingRuleMutationFn = Apollo.MutationFunction<
+  CreateArticlePricingRuleMutation,
+  CreateArticlePricingRuleMutationVariables
+>;
+
+/**
+ * __useCreateArticlePricingRuleMutation__
+ *
+ * To run a mutation, you first call `useCreateArticlePricingRuleMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateArticlePricingRuleMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createArticlePricingRuleMutation, { data, loading, error }] = useCreateArticlePricingRuleMutation({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useCreateArticlePricingRuleMutation(
+  baseOptions?: Apollo.MutationHookOptions<
+    CreateArticlePricingRuleMutation,
+    CreateArticlePricingRuleMutationVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useMutation<
+    CreateArticlePricingRuleMutation,
+    CreateArticlePricingRuleMutationVariables
+  >(CreateArticlePricingRuleDocument, options);
+}
+export type CreateArticlePricingRuleMutationHookResult = ReturnType<
+  typeof useCreateArticlePricingRuleMutation
+>;
+export type CreateArticlePricingRuleMutationResult =
+  Apollo.MutationResult<CreateArticlePricingRuleMutation>;
+export type CreateArticlePricingRuleMutationOptions =
+  Apollo.BaseMutationOptions<
+    CreateArticlePricingRuleMutation,
+    CreateArticlePricingRuleMutationVariables
+  >;
+export const UpdateArticlePricingRuleDocument = gql`
+  mutation UpdateArticlePricingRule($input: UpdateArticlePricingRuleInput!) {
+    updateArticlePricingRule(input: $input) {
+      articlePricingRule {
+        id
+        type
+        isEnabled
+        price
+        partner {
+          id
+          name
+        }
+        location {
+          id
+          name
+        }
+        deliveryType {
+          id
+          name
+        }
+        article {
+          id
+          name
+        }
+        articleVariant {
+          id
+          name
+        }
+      }
+    }
+  }
+`;
+export type UpdateArticlePricingRuleMutationFn = Apollo.MutationFunction<
+  UpdateArticlePricingRuleMutation,
+  UpdateArticlePricingRuleMutationVariables
+>;
+
+/**
+ * __useUpdateArticlePricingRuleMutation__
+ *
+ * To run a mutation, you first call `useUpdateArticlePricingRuleMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdateArticlePricingRuleMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [updateArticlePricingRuleMutation, { data, loading, error }] = useUpdateArticlePricingRuleMutation({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useUpdateArticlePricingRuleMutation(
+  baseOptions?: Apollo.MutationHookOptions<
+    UpdateArticlePricingRuleMutation,
+    UpdateArticlePricingRuleMutationVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useMutation<
+    UpdateArticlePricingRuleMutation,
+    UpdateArticlePricingRuleMutationVariables
+  >(UpdateArticlePricingRuleDocument, options);
+}
+export type UpdateArticlePricingRuleMutationHookResult = ReturnType<
+  typeof useUpdateArticlePricingRuleMutation
+>;
+export type UpdateArticlePricingRuleMutationResult =
+  Apollo.MutationResult<UpdateArticlePricingRuleMutation>;
+export type UpdateArticlePricingRuleMutationOptions =
+  Apollo.BaseMutationOptions<
+    UpdateArticlePricingRuleMutation,
+    UpdateArticlePricingRuleMutationVariables
+  >;
 export const CreateStateDocument = gql`
   mutation CreateState($input: CreateStateInput!) {
     createState(input: $input) {
@@ -2985,16 +4858,16 @@ export type CreateStateMutationFn = Apollo.MutationFunction<
  * });
  */
 export function useCreateStateMutation(
-  baseOptions?: ApolloReactHooks.MutationHookOptions<
+  baseOptions?: Apollo.MutationHookOptions<
     CreateStateMutation,
     CreateStateMutationVariables
   >
 ) {
   const options = { ...defaultOptions, ...baseOptions };
-  return ApolloReactHooks.useMutation<
-    CreateStateMutation,
-    CreateStateMutationVariables
-  >(CreateStateDocument, options);
+  return Apollo.useMutation<CreateStateMutation, CreateStateMutationVariables>(
+    CreateStateDocument,
+    options
+  );
 }
 export type CreateStateMutationHookResult = ReturnType<
   typeof useCreateStateMutation
@@ -3038,16 +4911,16 @@ export type UpdateStateMutationFn = Apollo.MutationFunction<
  * });
  */
 export function useUpdateStateMutation(
-  baseOptions?: ApolloReactHooks.MutationHookOptions<
+  baseOptions?: Apollo.MutationHookOptions<
     UpdateStateMutation,
     UpdateStateMutationVariables
   >
 ) {
   const options = { ...defaultOptions, ...baseOptions };
-  return ApolloReactHooks.useMutation<
-    UpdateStateMutation,
-    UpdateStateMutationVariables
-  >(UpdateStateDocument, options);
+  return Apollo.useMutation<UpdateStateMutation, UpdateStateMutationVariables>(
+    UpdateStateDocument,
+    options
+  );
 }
 export type UpdateStateMutationHookResult = ReturnType<
   typeof useUpdateStateMutation
@@ -3092,16 +4965,16 @@ export type CreateCityMutationFn = Apollo.MutationFunction<
  * });
  */
 export function useCreateCityMutation(
-  baseOptions?: ApolloReactHooks.MutationHookOptions<
+  baseOptions?: Apollo.MutationHookOptions<
     CreateCityMutation,
     CreateCityMutationVariables
   >
 ) {
   const options = { ...defaultOptions, ...baseOptions };
-  return ApolloReactHooks.useMutation<
-    CreateCityMutation,
-    CreateCityMutationVariables
-  >(CreateCityDocument, options);
+  return Apollo.useMutation<CreateCityMutation, CreateCityMutationVariables>(
+    CreateCityDocument,
+    options
+  );
 }
 export type CreateCityMutationHookResult = ReturnType<
   typeof useCreateCityMutation
@@ -3146,16 +5019,16 @@ export type UpdateCityMutationFn = Apollo.MutationFunction<
  * });
  */
 export function useUpdateCityMutation(
-  baseOptions?: ApolloReactHooks.MutationHookOptions<
+  baseOptions?: Apollo.MutationHookOptions<
     UpdateCityMutation,
     UpdateCityMutationVariables
   >
 ) {
   const options = { ...defaultOptions, ...baseOptions };
-  return ApolloReactHooks.useMutation<
-    UpdateCityMutation,
-    UpdateCityMutationVariables
-  >(UpdateCityDocument, options);
+  return Apollo.useMutation<UpdateCityMutation, UpdateCityMutationVariables>(
+    UpdateCityDocument,
+    options
+  );
 }
 export type UpdateCityMutationHookResult = ReturnType<
   typeof useUpdateCityMutation
@@ -3199,13 +5072,13 @@ export type CreateProvinceMutationFn = Apollo.MutationFunction<
  * });
  */
 export function useCreateProvinceMutation(
-  baseOptions?: ApolloReactHooks.MutationHookOptions<
+  baseOptions?: Apollo.MutationHookOptions<
     CreateProvinceMutation,
     CreateProvinceMutationVariables
   >
 ) {
   const options = { ...defaultOptions, ...baseOptions };
-  return ApolloReactHooks.useMutation<
+  return Apollo.useMutation<
     CreateProvinceMutation,
     CreateProvinceMutationVariables
   >(CreateProvinceDocument, options);
@@ -3252,13 +5125,13 @@ export type UpdateProvinceMutationFn = Apollo.MutationFunction<
  * });
  */
 export function useUpdateProvinceMutation(
-  baseOptions?: ApolloReactHooks.MutationHookOptions<
+  baseOptions?: Apollo.MutationHookOptions<
     UpdateProvinceMutation,
     UpdateProvinceMutationVariables
   >
 ) {
   const options = { ...defaultOptions, ...baseOptions };
-  return ApolloReactHooks.useMutation<
+  return Apollo.useMutation<
     UpdateProvinceMutation,
     UpdateProvinceMutationVariables
   >(UpdateProvinceDocument, options);
@@ -3305,13 +5178,13 @@ export type CreateMunicipalityMutationFn = Apollo.MutationFunction<
  * });
  */
 export function useCreateMunicipalityMutation(
-  baseOptions?: ApolloReactHooks.MutationHookOptions<
+  baseOptions?: Apollo.MutationHookOptions<
     CreateMunicipalityMutation,
     CreateMunicipalityMutationVariables
   >
 ) {
   const options = { ...defaultOptions, ...baseOptions };
-  return ApolloReactHooks.useMutation<
+  return Apollo.useMutation<
     CreateMunicipalityMutation,
     CreateMunicipalityMutationVariables
   >(CreateMunicipalityDocument, options);
@@ -3358,13 +5231,13 @@ export type UpdateMunicipalityMutationFn = Apollo.MutationFunction<
  * });
  */
 export function useUpdateMunicipalityMutation(
-  baseOptions?: ApolloReactHooks.MutationHookOptions<
+  baseOptions?: Apollo.MutationHookOptions<
     UpdateMunicipalityMutation,
     UpdateMunicipalityMutationVariables
   >
 ) {
   const options = { ...defaultOptions, ...baseOptions };
-  return ApolloReactHooks.useMutation<
+  return Apollo.useMutation<
     UpdateMunicipalityMutation,
     UpdateMunicipalityMutationVariables
   >(UpdateMunicipalityDocument, options);
@@ -3411,13 +5284,13 @@ export type CreateNeighborhoodMutationFn = Apollo.MutationFunction<
  * });
  */
 export function useCreateNeighborhoodMutation(
-  baseOptions?: ApolloReactHooks.MutationHookOptions<
+  baseOptions?: Apollo.MutationHookOptions<
     CreateNeighborhoodMutation,
     CreateNeighborhoodMutationVariables
   >
 ) {
   const options = { ...defaultOptions, ...baseOptions };
-  return ApolloReactHooks.useMutation<
+  return Apollo.useMutation<
     CreateNeighborhoodMutation,
     CreateNeighborhoodMutationVariables
   >(CreateNeighborhoodDocument, options);
@@ -3464,13 +5337,13 @@ export type UpdateNeighborhoodMutationFn = Apollo.MutationFunction<
  * });
  */
 export function useUpdateNeighborhoodMutation(
-  baseOptions?: ApolloReactHooks.MutationHookOptions<
+  baseOptions?: Apollo.MutationHookOptions<
     UpdateNeighborhoodMutation,
     UpdateNeighborhoodMutationVariables
   >
 ) {
   const options = { ...defaultOptions, ...baseOptions };
-  return ApolloReactHooks.useMutation<
+  return Apollo.useMutation<
     UpdateNeighborhoodMutation,
     UpdateNeighborhoodMutationVariables
   >(UpdateNeighborhoodDocument, options);
@@ -3488,6 +5361,7 @@ export const CreatePresignPutFileUrlDocument = gql`
   mutation CreatePresignPutFileUrl($input: CreatePresignPutFileUrlInput!) {
     createPresignPutFileUrl(input: $input) {
       url
+      path
     }
   }
 `;
@@ -3514,13 +5388,13 @@ export type CreatePresignPutFileUrlMutationFn = Apollo.MutationFunction<
  * });
  */
 export function useCreatePresignPutFileUrlMutation(
-  baseOptions?: ApolloReactHooks.MutationHookOptions<
+  baseOptions?: Apollo.MutationHookOptions<
     CreatePresignPutFileUrlMutation,
     CreatePresignPutFileUrlMutationVariables
   >
 ) {
   const options = { ...defaultOptions, ...baseOptions };
-  return ApolloReactHooks.useMutation<
+  return Apollo.useMutation<
     CreatePresignPutFileUrlMutation,
     CreatePresignPutFileUrlMutationVariables
   >(CreatePresignPutFileUrlDocument, options);
@@ -3535,14 +5409,18 @@ export type CreatePresignPutFileUrlMutationOptions = Apollo.BaseMutationOptions<
   CreatePresignPutFileUrlMutationVariables
 >;
 export const CurrentUserDocument = gql`
-  query CurrentUser($input: CurrentUserInput!) {
-    currentUser(input: $input) {
+  query CurrentUser {
+    currentUser(input: {}) {
       user {
-        ...UserFragment
+        id
+        firstName
+        lastName
+        email
+        phone
+        createdAt
       }
     }
   }
-  ${UserFragmentFragmentDoc}
 `;
 
 /**
@@ -3557,1740 +5435,1237 @@ export const CurrentUserDocument = gql`
  * @example
  * const { data, loading, error } = useCurrentUserQuery({
  *   variables: {
- *      input: // value for 'input'
  *   },
  * });
  */
 export function useCurrentUserQuery(
-  baseOptions: ApolloReactHooks.QueryHookOptions<
+  baseOptions?: Apollo.QueryHookOptions<
     CurrentUserQuery,
     CurrentUserQueryVariables
-  > &
-    (
-      | { variables: CurrentUserQueryVariables; skip?: boolean }
-      | { skip: boolean }
-    )
+  >
 ) {
   const options = { ...defaultOptions, ...baseOptions };
-  return ApolloReactHooks.useQuery<CurrentUserQuery, CurrentUserQueryVariables>(
+  return Apollo.useQuery<CurrentUserQuery, CurrentUserQueryVariables>(
     CurrentUserDocument,
     options
   );
 }
 export function useCurrentUserLazyQuery(
-  baseOptions?: ApolloReactHooks.LazyQueryHookOptions<
+  baseOptions?: Apollo.LazyQueryHookOptions<
     CurrentUserQuery,
     CurrentUserQueryVariables
   >
 ) {
   const options = { ...defaultOptions, ...baseOptions };
-  return ApolloReactHooks.useLazyQuery<
-    CurrentUserQuery,
-    CurrentUserQueryVariables
-  >(CurrentUserDocument, options);
-}
-export function useCurrentUserSuspenseQuery(
-  baseOptions?:
-    | ApolloReactHooks.SkipToken
-    | ApolloReactHooks.SuspenseQueryHookOptions<
-        CurrentUserQuery,
-        CurrentUserQueryVariables
-      >
-) {
-  const options =
-    baseOptions === ApolloReactHooks.skipToken
-      ? baseOptions
-      : { ...defaultOptions, ...baseOptions };
-  return ApolloReactHooks.useSuspenseQuery<
-    CurrentUserQuery,
-    CurrentUserQueryVariables
-  >(CurrentUserDocument, options);
+  return Apollo.useLazyQuery<CurrentUserQuery, CurrentUserQueryVariables>(
+    CurrentUserDocument,
+    options
+  );
 }
 export type CurrentUserQueryHookResult = ReturnType<typeof useCurrentUserQuery>;
 export type CurrentUserLazyQueryHookResult = ReturnType<
   typeof useCurrentUserLazyQuery
 >;
-export type CurrentUserSuspenseQueryHookResult = ReturnType<
-  typeof useCurrentUserSuspenseQuery
->;
 export type CurrentUserQueryResult = Apollo.QueryResult<
   CurrentUserQuery,
   CurrentUserQueryVariables
 >;
-export const GetArticlesDocument = gql`
-  query GetArticles($input: ArticlesInput!) {
-    articles(input: $input) {
-      articles {
-        ...ArticleFragment
-        variants {
-          ...ArticleVariantFragment
+export const PartnersDocument = gql`
+  query Partners($input: PartnersInput!) {
+    partners(input: $input) {
+      partners {
+        id
+        name
+      }
+    }
+  }
+`;
+
+/**
+ * __usePartnersQuery__
+ *
+ * To run a query within a React component, call `usePartnersQuery` and pass it any options that fit your needs.
+ * When your component renders, `usePartnersQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = usePartnersQuery({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function usePartnersQuery(
+  baseOptions: Apollo.QueryHookOptions<PartnersQuery, PartnersQueryVariables>
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<PartnersQuery, PartnersQueryVariables>(
+    PartnersDocument,
+    options
+  );
+}
+export function usePartnersLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    PartnersQuery,
+    PartnersQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<PartnersQuery, PartnersQueryVariables>(
+    PartnersDocument,
+    options
+  );
+}
+export type PartnersQueryHookResult = ReturnType<typeof usePartnersQuery>;
+export type PartnersLazyQueryHookResult = ReturnType<
+  typeof usePartnersLazyQuery
+>;
+export type PartnersQueryResult = Apollo.QueryResult<
+  PartnersQuery,
+  PartnersQueryVariables
+>;
+export const PartnerDocument = gql`
+  query Partner($input: PartnerInput!) {
+    partner(input: $input) {
+      partner {
+        id
+        name
+      }
+    }
+  }
+`;
+
+/**
+ * __usePartnerQuery__
+ *
+ * To run a query within a React component, call `usePartnerQuery` and pass it any options that fit your needs.
+ * When your component renders, `usePartnerQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = usePartnerQuery({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function usePartnerQuery(
+  baseOptions: Apollo.QueryHookOptions<PartnerQuery, PartnerQueryVariables>
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<PartnerQuery, PartnerQueryVariables>(
+    PartnerDocument,
+    options
+  );
+}
+export function usePartnerLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<PartnerQuery, PartnerQueryVariables>
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<PartnerQuery, PartnerQueryVariables>(
+    PartnerDocument,
+    options
+  );
+}
+export type PartnerQueryHookResult = ReturnType<typeof usePartnerQuery>;
+export type PartnerLazyQueryHookResult = ReturnType<typeof usePartnerLazyQuery>;
+export type PartnerQueryResult = Apollo.QueryResult<
+  PartnerQuery,
+  PartnerQueryVariables
+>;
+export const StaffUsersDocument = gql`
+  query StaffUsers($input: StaffUsersInput!) {
+    staffUsers(input: $input) {
+      total
+      staffUsers {
+        id
+        type
+        isEnabled
+        partner {
+          id
+          name
         }
+        firstName
+        lastName
+        email
+        isEmailVerified
+        phone
+        isPhoneVerified
+        createdAt
       }
     }
   }
-  ${ArticleFragmentFragmentDoc}
-  ${ArticleVariantFragmentFragmentDoc}
 `;
 
 /**
- * __useGetArticlesQuery__
+ * __useStaffUsersQuery__
  *
- * To run a query within a React component, call `useGetArticlesQuery` and pass it any options that fit your needs.
- * When your component renders, `useGetArticlesQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * To run a query within a React component, call `useStaffUsersQuery` and pass it any options that fit your needs.
+ * When your component renders, `useStaffUsersQuery` returns an object from Apollo Client that contains loading, error, and data properties
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
  *
  * @example
- * const { data, loading, error } = useGetArticlesQuery({
+ * const { data, loading, error } = useStaffUsersQuery({
  *   variables: {
  *      input: // value for 'input'
  *   },
  * });
  */
-export function useGetArticlesQuery(
-  baseOptions: ApolloReactHooks.QueryHookOptions<
-    GetArticlesQuery,
-    GetArticlesQueryVariables
-  > &
-    (
-      | { variables: GetArticlesQueryVariables; skip?: boolean }
-      | { skip: boolean }
-    )
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return ApolloReactHooks.useQuery<GetArticlesQuery, GetArticlesQueryVariables>(
-    GetArticlesDocument,
-    options
-  );
-}
-export function useGetArticlesLazyQuery(
-  baseOptions?: ApolloReactHooks.LazyQueryHookOptions<
-    GetArticlesQuery,
-    GetArticlesQueryVariables
+export function useStaffUsersQuery(
+  baseOptions: Apollo.QueryHookOptions<
+    StaffUsersQuery,
+    StaffUsersQueryVariables
   >
 ) {
   const options = { ...defaultOptions, ...baseOptions };
-  return ApolloReactHooks.useLazyQuery<
-    GetArticlesQuery,
-    GetArticlesQueryVariables
-  >(GetArticlesDocument, options);
+  return Apollo.useQuery<StaffUsersQuery, StaffUsersQueryVariables>(
+    StaffUsersDocument,
+    options
+  );
 }
-export function useGetArticlesSuspenseQuery(
-  baseOptions?:
-    | ApolloReactHooks.SkipToken
-    | ApolloReactHooks.SuspenseQueryHookOptions<
-        GetArticlesQuery,
-        GetArticlesQueryVariables
-      >
+export function useStaffUsersLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    StaffUsersQuery,
+    StaffUsersQueryVariables
+  >
 ) {
-  const options =
-    baseOptions === ApolloReactHooks.skipToken
-      ? baseOptions
-      : { ...defaultOptions, ...baseOptions };
-  return ApolloReactHooks.useSuspenseQuery<
-    GetArticlesQuery,
-    GetArticlesQueryVariables
-  >(GetArticlesDocument, options);
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<StaffUsersQuery, StaffUsersQueryVariables>(
+    StaffUsersDocument,
+    options
+  );
 }
-export type GetArticlesQueryHookResult = ReturnType<typeof useGetArticlesQuery>;
-export type GetArticlesLazyQueryHookResult = ReturnType<
-  typeof useGetArticlesLazyQuery
+export type StaffUsersQueryHookResult = ReturnType<typeof useStaffUsersQuery>;
+export type StaffUsersLazyQueryHookResult = ReturnType<
+  typeof useStaffUsersLazyQuery
 >;
-export type GetArticlesSuspenseQueryHookResult = ReturnType<
-  typeof useGetArticlesSuspenseQuery
+export type StaffUsersQueryResult = Apollo.QueryResult<
+  StaffUsersQuery,
+  StaffUsersQueryVariables
 >;
-export type GetArticlesQueryResult = Apollo.QueryResult<
-  GetArticlesQuery,
-  GetArticlesQueryVariables
->;
-export const GetArticleDocument = gql`
-  query GetArticle($input: ArticleInput!) {
-    article(input: $input) {
-      article {
-        ...ArticleFragment
-        variants {
-          ...ArticleVariantFragment
+export const StaffUserDocument = gql`
+  query StaffUser($input: StaffUserInput!) {
+    staffUser(input: $input) {
+      staffUser {
+        id
+        type
+        isEnabled
+        partner {
+          id
+          name
         }
+        firstName
+        lastName
+        email
+        isEmailVerified
+        phone
+        isPhoneVerified
+        createdAt
       }
     }
   }
-  ${ArticleFragmentFragmentDoc}
-  ${ArticleVariantFragmentFragmentDoc}
 `;
 
 /**
- * __useGetArticleQuery__
+ * __useStaffUserQuery__
  *
- * To run a query within a React component, call `useGetArticleQuery` and pass it any options that fit your needs.
- * When your component renders, `useGetArticleQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * To run a query within a React component, call `useStaffUserQuery` and pass it any options that fit your needs.
+ * When your component renders, `useStaffUserQuery` returns an object from Apollo Client that contains loading, error, and data properties
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
  *
  * @example
- * const { data, loading, error } = useGetArticleQuery({
+ * const { data, loading, error } = useStaffUserQuery({
  *   variables: {
  *      input: // value for 'input'
  *   },
  * });
  */
-export function useGetArticleQuery(
-  baseOptions: ApolloReactHooks.QueryHookOptions<
-    GetArticleQuery,
-    GetArticleQueryVariables
-  > &
-    (
-      | { variables: GetArticleQueryVariables; skip?: boolean }
-      | { skip: boolean }
-    )
+export function useStaffUserQuery(
+  baseOptions: Apollo.QueryHookOptions<StaffUserQuery, StaffUserQueryVariables>
 ) {
   const options = { ...defaultOptions, ...baseOptions };
-  return ApolloReactHooks.useQuery<GetArticleQuery, GetArticleQueryVariables>(
-    GetArticleDocument,
+  return Apollo.useQuery<StaffUserQuery, StaffUserQueryVariables>(
+    StaffUserDocument,
     options
   );
 }
-export function useGetArticleLazyQuery(
-  baseOptions?: ApolloReactHooks.LazyQueryHookOptions<
-    GetArticleQuery,
-    GetArticleQueryVariables
+export function useStaffUserLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    StaffUserQuery,
+    StaffUserQueryVariables
   >
 ) {
   const options = { ...defaultOptions, ...baseOptions };
-  return ApolloReactHooks.useLazyQuery<
-    GetArticleQuery,
-    GetArticleQueryVariables
-  >(GetArticleDocument, options);
-}
-export function useGetArticleSuspenseQuery(
-  baseOptions?:
-    | ApolloReactHooks.SkipToken
-    | ApolloReactHooks.SuspenseQueryHookOptions<
-        GetArticleQuery,
-        GetArticleQueryVariables
-      >
-) {
-  const options =
-    baseOptions === ApolloReactHooks.skipToken
-      ? baseOptions
-      : { ...defaultOptions, ...baseOptions };
-  return ApolloReactHooks.useSuspenseQuery<
-    GetArticleQuery,
-    GetArticleQueryVariables
-  >(GetArticleDocument, options);
-}
-export type GetArticleQueryHookResult = ReturnType<typeof useGetArticleQuery>;
-export type GetArticleLazyQueryHookResult = ReturnType<
-  typeof useGetArticleLazyQuery
->;
-export type GetArticleSuspenseQueryHookResult = ReturnType<
-  typeof useGetArticleSuspenseQuery
->;
-export type GetArticleQueryResult = Apollo.QueryResult<
-  GetArticleQuery,
-  GetArticleQueryVariables
->;
-export const GetDeliveryTypesDocument = gql`
-  query GetDeliveryTypes($input: DeliveryTypesInput!) {
-    deliveryTypes(input: $input) {
-      deliveryTypes {
-        ...DeliveryTypeFragment
-      }
-    }
-  }
-  ${DeliveryTypeFragmentFragmentDoc}
-`;
-
-/**
- * __useGetDeliveryTypesQuery__
- *
- * To run a query within a React component, call `useGetDeliveryTypesQuery` and pass it any options that fit your needs.
- * When your component renders, `useGetDeliveryTypesQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useGetDeliveryTypesQuery({
- *   variables: {
- *      input: // value for 'input'
- *   },
- * });
- */
-export function useGetDeliveryTypesQuery(
-  baseOptions: ApolloReactHooks.QueryHookOptions<
-    GetDeliveryTypesQuery,
-    GetDeliveryTypesQueryVariables
-  > &
-    (
-      | { variables: GetDeliveryTypesQueryVariables; skip?: boolean }
-      | { skip: boolean }
-    )
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return ApolloReactHooks.useQuery<
-    GetDeliveryTypesQuery,
-    GetDeliveryTypesQueryVariables
-  >(GetDeliveryTypesDocument, options);
-}
-export function useGetDeliveryTypesLazyQuery(
-  baseOptions?: ApolloReactHooks.LazyQueryHookOptions<
-    GetDeliveryTypesQuery,
-    GetDeliveryTypesQueryVariables
-  >
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return ApolloReactHooks.useLazyQuery<
-    GetDeliveryTypesQuery,
-    GetDeliveryTypesQueryVariables
-  >(GetDeliveryTypesDocument, options);
-}
-export function useGetDeliveryTypesSuspenseQuery(
-  baseOptions?:
-    | ApolloReactHooks.SkipToken
-    | ApolloReactHooks.SuspenseQueryHookOptions<
-        GetDeliveryTypesQuery,
-        GetDeliveryTypesQueryVariables
-      >
-) {
-  const options =
-    baseOptions === ApolloReactHooks.skipToken
-      ? baseOptions
-      : { ...defaultOptions, ...baseOptions };
-  return ApolloReactHooks.useSuspenseQuery<
-    GetDeliveryTypesQuery,
-    GetDeliveryTypesQueryVariables
-  >(GetDeliveryTypesDocument, options);
-}
-export type GetDeliveryTypesQueryHookResult = ReturnType<
-  typeof useGetDeliveryTypesQuery
->;
-export type GetDeliveryTypesLazyQueryHookResult = ReturnType<
-  typeof useGetDeliveryTypesLazyQuery
->;
-export type GetDeliveryTypesSuspenseQueryHookResult = ReturnType<
-  typeof useGetDeliveryTypesSuspenseQuery
->;
-export type GetDeliveryTypesQueryResult = Apollo.QueryResult<
-  GetDeliveryTypesQuery,
-  GetDeliveryTypesQueryVariables
->;
-export const GetDeliveryTypeDocument = gql`
-  query GetDeliveryType($input: DeliveryTypeInput!) {
-    deliveryType(input: $input) {
-      deliveryType {
-        ...DeliveryTypeFragment
-      }
-    }
-  }
-  ${DeliveryTypeFragmentFragmentDoc}
-`;
-
-/**
- * __useGetDeliveryTypeQuery__
- *
- * To run a query within a React component, call `useGetDeliveryTypeQuery` and pass it any options that fit your needs.
- * When your component renders, `useGetDeliveryTypeQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useGetDeliveryTypeQuery({
- *   variables: {
- *      input: // value for 'input'
- *   },
- * });
- */
-export function useGetDeliveryTypeQuery(
-  baseOptions: ApolloReactHooks.QueryHookOptions<
-    GetDeliveryTypeQuery,
-    GetDeliveryTypeQueryVariables
-  > &
-    (
-      | { variables: GetDeliveryTypeQueryVariables; skip?: boolean }
-      | { skip: boolean }
-    )
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return ApolloReactHooks.useQuery<
-    GetDeliveryTypeQuery,
-    GetDeliveryTypeQueryVariables
-  >(GetDeliveryTypeDocument, options);
-}
-export function useGetDeliveryTypeLazyQuery(
-  baseOptions?: ApolloReactHooks.LazyQueryHookOptions<
-    GetDeliveryTypeQuery,
-    GetDeliveryTypeQueryVariables
-  >
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return ApolloReactHooks.useLazyQuery<
-    GetDeliveryTypeQuery,
-    GetDeliveryTypeQueryVariables
-  >(GetDeliveryTypeDocument, options);
-}
-export function useGetDeliveryTypeSuspenseQuery(
-  baseOptions?:
-    | ApolloReactHooks.SkipToken
-    | ApolloReactHooks.SuspenseQueryHookOptions<
-        GetDeliveryTypeQuery,
-        GetDeliveryTypeQueryVariables
-      >
-) {
-  const options =
-    baseOptions === ApolloReactHooks.skipToken
-      ? baseOptions
-      : { ...defaultOptions, ...baseOptions };
-  return ApolloReactHooks.useSuspenseQuery<
-    GetDeliveryTypeQuery,
-    GetDeliveryTypeQueryVariables
-  >(GetDeliveryTypeDocument, options);
-}
-export type GetDeliveryTypeQueryHookResult = ReturnType<
-  typeof useGetDeliveryTypeQuery
->;
-export type GetDeliveryTypeLazyQueryHookResult = ReturnType<
-  typeof useGetDeliveryTypeLazyQuery
->;
-export type GetDeliveryTypeSuspenseQueryHookResult = ReturnType<
-  typeof useGetDeliveryTypeSuspenseQuery
->;
-export type GetDeliveryTypeQueryResult = Apollo.QueryResult<
-  GetDeliveryTypeQuery,
-  GetDeliveryTypeQueryVariables
->;
-export const GetCountriesDocument = gql`
-  query GetCountries($input: CountriesInput!) {
-    countries(input: $input) {
-      countries {
-        ...CountryFragment
-      }
-    }
-  }
-  ${CountryFragmentFragmentDoc}
-`;
-
-/**
- * __useGetCountriesQuery__
- *
- * To run a query within a React component, call `useGetCountriesQuery` and pass it any options that fit your needs.
- * When your component renders, `useGetCountriesQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useGetCountriesQuery({
- *   variables: {
- *      input: // value for 'input'
- *   },
- * });
- */
-export function useGetCountriesQuery(
-  baseOptions: ApolloReactHooks.QueryHookOptions<
-    GetCountriesQuery,
-    GetCountriesQueryVariables
-  > &
-    (
-      | { variables: GetCountriesQueryVariables; skip?: boolean }
-      | { skip: boolean }
-    )
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return ApolloReactHooks.useQuery<
-    GetCountriesQuery,
-    GetCountriesQueryVariables
-  >(GetCountriesDocument, options);
-}
-export function useGetCountriesLazyQuery(
-  baseOptions?: ApolloReactHooks.LazyQueryHookOptions<
-    GetCountriesQuery,
-    GetCountriesQueryVariables
-  >
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return ApolloReactHooks.useLazyQuery<
-    GetCountriesQuery,
-    GetCountriesQueryVariables
-  >(GetCountriesDocument, options);
-}
-export function useGetCountriesSuspenseQuery(
-  baseOptions?:
-    | ApolloReactHooks.SkipToken
-    | ApolloReactHooks.SuspenseQueryHookOptions<
-        GetCountriesQuery,
-        GetCountriesQueryVariables
-      >
-) {
-  const options =
-    baseOptions === ApolloReactHooks.skipToken
-      ? baseOptions
-      : { ...defaultOptions, ...baseOptions };
-  return ApolloReactHooks.useSuspenseQuery<
-    GetCountriesQuery,
-    GetCountriesQueryVariables
-  >(GetCountriesDocument, options);
-}
-export type GetCountriesQueryHookResult = ReturnType<
-  typeof useGetCountriesQuery
->;
-export type GetCountriesLazyQueryHookResult = ReturnType<
-  typeof useGetCountriesLazyQuery
->;
-export type GetCountriesSuspenseQueryHookResult = ReturnType<
-  typeof useGetCountriesSuspenseQuery
->;
-export type GetCountriesQueryResult = Apollo.QueryResult<
-  GetCountriesQuery,
-  GetCountriesQueryVariables
->;
-export const GetCountryDocument = gql`
-  query GetCountry($input: CountryInput!) {
-    country(input: $input) {
-      country {
-        ...CountryFragment
-      }
-    }
-  }
-  ${CountryFragmentFragmentDoc}
-`;
-
-/**
- * __useGetCountryQuery__
- *
- * To run a query within a React component, call `useGetCountryQuery` and pass it any options that fit your needs.
- * When your component renders, `useGetCountryQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useGetCountryQuery({
- *   variables: {
- *      input: // value for 'input'
- *   },
- * });
- */
-export function useGetCountryQuery(
-  baseOptions: ApolloReactHooks.QueryHookOptions<
-    GetCountryQuery,
-    GetCountryQueryVariables
-  > &
-    (
-      | { variables: GetCountryQueryVariables; skip?: boolean }
-      | { skip: boolean }
-    )
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return ApolloReactHooks.useQuery<GetCountryQuery, GetCountryQueryVariables>(
-    GetCountryDocument,
+  return Apollo.useLazyQuery<StaffUserQuery, StaffUserQueryVariables>(
+    StaffUserDocument,
     options
   );
 }
-export function useGetCountryLazyQuery(
-  baseOptions?: ApolloReactHooks.LazyQueryHookOptions<
-    GetCountryQuery,
-    GetCountryQueryVariables
-  >
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return ApolloReactHooks.useLazyQuery<
-    GetCountryQuery,
-    GetCountryQueryVariables
-  >(GetCountryDocument, options);
-}
-export function useGetCountrySuspenseQuery(
-  baseOptions?:
-    | ApolloReactHooks.SkipToken
-    | ApolloReactHooks.SuspenseQueryHookOptions<
-        GetCountryQuery,
-        GetCountryQueryVariables
-      >
-) {
-  const options =
-    baseOptions === ApolloReactHooks.skipToken
-      ? baseOptions
-      : { ...defaultOptions, ...baseOptions };
-  return ApolloReactHooks.useSuspenseQuery<
-    GetCountryQuery,
-    GetCountryQueryVariables
-  >(GetCountryDocument, options);
-}
-export type GetCountryQueryHookResult = ReturnType<typeof useGetCountryQuery>;
-export type GetCountryLazyQueryHookResult = ReturnType<
-  typeof useGetCountryLazyQuery
+export type StaffUserQueryHookResult = ReturnType<typeof useStaffUserQuery>;
+export type StaffUserLazyQueryHookResult = ReturnType<
+  typeof useStaffUserLazyQuery
 >;
-export type GetCountrySuspenseQueryHookResult = ReturnType<
-  typeof useGetCountrySuspenseQuery
+export type StaffUserQueryResult = Apollo.QueryResult<
+  StaffUserQuery,
+  StaffUserQueryVariables
 >;
-export type GetCountryQueryResult = Apollo.QueryResult<
-  GetCountryQuery,
-  GetCountryQueryVariables
->;
-export const GetStatesDocument = gql`
-  query GetStates($input: StatesInput!) {
-    states(input: $input) {
-      states {
-        ...StateFragment
+export const ClientUsersDocument = gql`
+  query ClientUsers($input: ClientUsersInput!) {
+    clientUsers(input: $input) {
+      total
+      clientUsers {
+        id
+        type
+        isEnabled
+        partner {
+          id
+          name
+        }
+        firstName
+        lastName
+        email
+        isEmailVerified
+        phone
+        isPhoneVerified
+        createdAt
       }
     }
   }
-  ${StateFragmentFragmentDoc}
 `;
 
 /**
- * __useGetStatesQuery__
+ * __useClientUsersQuery__
  *
- * To run a query within a React component, call `useGetStatesQuery` and pass it any options that fit your needs.
- * When your component renders, `useGetStatesQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * To run a query within a React component, call `useClientUsersQuery` and pass it any options that fit your needs.
+ * When your component renders, `useClientUsersQuery` returns an object from Apollo Client that contains loading, error, and data properties
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
  *
  * @example
- * const { data, loading, error } = useGetStatesQuery({
+ * const { data, loading, error } = useClientUsersQuery({
  *   variables: {
  *      input: // value for 'input'
  *   },
  * });
  */
-export function useGetStatesQuery(
-  baseOptions: ApolloReactHooks.QueryHookOptions<
-    GetStatesQuery,
-    GetStatesQueryVariables
-  > &
-    ({ variables: GetStatesQueryVariables; skip?: boolean } | { skip: boolean })
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return ApolloReactHooks.useQuery<GetStatesQuery, GetStatesQueryVariables>(
-    GetStatesDocument,
-    options
-  );
-}
-export function useGetStatesLazyQuery(
-  baseOptions?: ApolloReactHooks.LazyQueryHookOptions<
-    GetStatesQuery,
-    GetStatesQueryVariables
+export function useClientUsersQuery(
+  baseOptions: Apollo.QueryHookOptions<
+    ClientUsersQuery,
+    ClientUsersQueryVariables
   >
 ) {
   const options = { ...defaultOptions, ...baseOptions };
-  return ApolloReactHooks.useLazyQuery<GetStatesQuery, GetStatesQueryVariables>(
-    GetStatesDocument,
+  return Apollo.useQuery<ClientUsersQuery, ClientUsersQueryVariables>(
+    ClientUsersDocument,
     options
   );
 }
-export function useGetStatesSuspenseQuery(
-  baseOptions?:
-    | ApolloReactHooks.SkipToken
-    | ApolloReactHooks.SuspenseQueryHookOptions<
-        GetStatesQuery,
-        GetStatesQueryVariables
-      >
+export function useClientUsersLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    ClientUsersQuery,
+    ClientUsersQueryVariables
+  >
 ) {
-  const options =
-    baseOptions === ApolloReactHooks.skipToken
-      ? baseOptions
-      : { ...defaultOptions, ...baseOptions };
-  return ApolloReactHooks.useSuspenseQuery<
-    GetStatesQuery,
-    GetStatesQueryVariables
-  >(GetStatesDocument, options);
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<ClientUsersQuery, ClientUsersQueryVariables>(
+    ClientUsersDocument,
+    options
+  );
 }
-export type GetStatesQueryHookResult = ReturnType<typeof useGetStatesQuery>;
-export type GetStatesLazyQueryHookResult = ReturnType<
-  typeof useGetStatesLazyQuery
+export type ClientUsersQueryHookResult = ReturnType<typeof useClientUsersQuery>;
+export type ClientUsersLazyQueryHookResult = ReturnType<
+  typeof useClientUsersLazyQuery
 >;
-export type GetStatesSuspenseQueryHookResult = ReturnType<
-  typeof useGetStatesSuspenseQuery
+export type ClientUsersQueryResult = Apollo.QueryResult<
+  ClientUsersQuery,
+  ClientUsersQueryVariables
 >;
-export type GetStatesQueryResult = Apollo.QueryResult<
-  GetStatesQuery,
-  GetStatesQueryVariables
->;
-export const GetStateDocument = gql`
-  query GetState($input: StateInput!) {
-    state(input: $input) {
-      state {
-        ...StateFragment
+export const ClientUserDocument = gql`
+  query ClientUser($input: ClientUserInput!) {
+    clientUser(input: $input) {
+      clientUser {
+        id
+        type
+        isEnabled
+        partner {
+          id
+          name
+        }
+        firstName
+        lastName
+        email
+        isEmailVerified
+        phone
+        isPhoneVerified
+        createdAt
       }
     }
   }
-  ${StateFragmentFragmentDoc}
 `;
 
 /**
- * __useGetStateQuery__
+ * __useClientUserQuery__
  *
- * To run a query within a React component, call `useGetStateQuery` and pass it any options that fit your needs.
- * When your component renders, `useGetStateQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * To run a query within a React component, call `useClientUserQuery` and pass it any options that fit your needs.
+ * When your component renders, `useClientUserQuery` returns an object from Apollo Client that contains loading, error, and data properties
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
  *
  * @example
- * const { data, loading, error } = useGetStateQuery({
+ * const { data, loading, error } = useClientUserQuery({
  *   variables: {
  *      input: // value for 'input'
  *   },
  * });
  */
-export function useGetStateQuery(
-  baseOptions: ApolloReactHooks.QueryHookOptions<
-    GetStateQuery,
-    GetStateQueryVariables
-  > &
-    ({ variables: GetStateQueryVariables; skip?: boolean } | { skip: boolean })
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return ApolloReactHooks.useQuery<GetStateQuery, GetStateQueryVariables>(
-    GetStateDocument,
-    options
-  );
-}
-export function useGetStateLazyQuery(
-  baseOptions?: ApolloReactHooks.LazyQueryHookOptions<
-    GetStateQuery,
-    GetStateQueryVariables
+export function useClientUserQuery(
+  baseOptions: Apollo.QueryHookOptions<
+    ClientUserQuery,
+    ClientUserQueryVariables
   >
 ) {
   const options = { ...defaultOptions, ...baseOptions };
-  return ApolloReactHooks.useLazyQuery<GetStateQuery, GetStateQueryVariables>(
-    GetStateDocument,
+  return Apollo.useQuery<ClientUserQuery, ClientUserQueryVariables>(
+    ClientUserDocument,
     options
   );
 }
-export function useGetStateSuspenseQuery(
-  baseOptions?:
-    | ApolloReactHooks.SkipToken
-    | ApolloReactHooks.SuspenseQueryHookOptions<
-        GetStateQuery,
-        GetStateQueryVariables
-      >
+export function useClientUserLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    ClientUserQuery,
+    ClientUserQueryVariables
+  >
 ) {
-  const options =
-    baseOptions === ApolloReactHooks.skipToken
-      ? baseOptions
-      : { ...defaultOptions, ...baseOptions };
-  return ApolloReactHooks.useSuspenseQuery<
-    GetStateQuery,
-    GetStateQueryVariables
-  >(GetStateDocument, options);
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<ClientUserQuery, ClientUserQueryVariables>(
+    ClientUserDocument,
+    options
+  );
 }
-export type GetStateQueryHookResult = ReturnType<typeof useGetStateQuery>;
-export type GetStateLazyQueryHookResult = ReturnType<
-  typeof useGetStateLazyQuery
+export type ClientUserQueryHookResult = ReturnType<typeof useClientUserQuery>;
+export type ClientUserLazyQueryHookResult = ReturnType<
+  typeof useClientUserLazyQuery
 >;
-export type GetStateSuspenseQueryHookResult = ReturnType<
-  typeof useGetStateSuspenseQuery
+export type ClientUserQueryResult = Apollo.QueryResult<
+  ClientUserQuery,
+  ClientUserQueryVariables
 >;
-export type GetStateQueryResult = Apollo.QueryResult<
-  GetStateQuery,
-  GetStateQueryVariables
->;
-export const GetCitiesDocument = gql`
-  query GetCities($input: CitiesInput!) {
-    cities(input: $input) {
-      cities {
-        ...CityFragment
+export const DriverUsersDocument = gql`
+  query DriverUsers($input: DriverUsersInput!) {
+    driverUsers(input: $input) {
+      total
+      driverUsers {
+        id
+        type
+        isEnabled
+        partner {
+          id
+          name
+        }
+        firstName
+        lastName
+        email
+        isEmailVerified
+        phone
+        isPhoneVerified
+        createdAt
       }
     }
   }
-  ${CityFragmentFragmentDoc}
 `;
 
 /**
- * __useGetCitiesQuery__
+ * __useDriverUsersQuery__
  *
- * To run a query within a React component, call `useGetCitiesQuery` and pass it any options that fit your needs.
- * When your component renders, `useGetCitiesQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * To run a query within a React component, call `useDriverUsersQuery` and pass it any options that fit your needs.
+ * When your component renders, `useDriverUsersQuery` returns an object from Apollo Client that contains loading, error, and data properties
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
  *
  * @example
- * const { data, loading, error } = useGetCitiesQuery({
+ * const { data, loading, error } = useDriverUsersQuery({
  *   variables: {
  *      input: // value for 'input'
  *   },
  * });
  */
-export function useGetCitiesQuery(
-  baseOptions: ApolloReactHooks.QueryHookOptions<
-    GetCitiesQuery,
-    GetCitiesQueryVariables
-  > &
-    ({ variables: GetCitiesQueryVariables; skip?: boolean } | { skip: boolean })
+export function useDriverUsersQuery(
+  baseOptions: Apollo.QueryHookOptions<
+    DriverUsersQuery,
+    DriverUsersQueryVariables
+  >
 ) {
   const options = { ...defaultOptions, ...baseOptions };
-  return ApolloReactHooks.useQuery<GetCitiesQuery, GetCitiesQueryVariables>(
-    GetCitiesDocument,
+  return Apollo.useQuery<DriverUsersQuery, DriverUsersQueryVariables>(
+    DriverUsersDocument,
     options
   );
 }
-export function useGetCitiesLazyQuery(
-  baseOptions?: ApolloReactHooks.LazyQueryHookOptions<
-    GetCitiesQuery,
-    GetCitiesQueryVariables
+export function useDriverUsersLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    DriverUsersQuery,
+    DriverUsersQueryVariables
   >
 ) {
   const options = { ...defaultOptions, ...baseOptions };
-  return ApolloReactHooks.useLazyQuery<GetCitiesQuery, GetCitiesQueryVariables>(
-    GetCitiesDocument,
+  return Apollo.useLazyQuery<DriverUsersQuery, DriverUsersQueryVariables>(
+    DriverUsersDocument,
     options
   );
 }
-export function useGetCitiesSuspenseQuery(
-  baseOptions?:
-    | ApolloReactHooks.SkipToken
-    | ApolloReactHooks.SuspenseQueryHookOptions<
-        GetCitiesQuery,
-        GetCitiesQueryVariables
-      >
-) {
-  const options =
-    baseOptions === ApolloReactHooks.skipToken
-      ? baseOptions
-      : { ...defaultOptions, ...baseOptions };
-  return ApolloReactHooks.useSuspenseQuery<
-    GetCitiesQuery,
-    GetCitiesQueryVariables
-  >(GetCitiesDocument, options);
-}
-export type GetCitiesQueryHookResult = ReturnType<typeof useGetCitiesQuery>;
-export type GetCitiesLazyQueryHookResult = ReturnType<
-  typeof useGetCitiesLazyQuery
+export type DriverUsersQueryHookResult = ReturnType<typeof useDriverUsersQuery>;
+export type DriverUsersLazyQueryHookResult = ReturnType<
+  typeof useDriverUsersLazyQuery
 >;
-export type GetCitiesSuspenseQueryHookResult = ReturnType<
-  typeof useGetCitiesSuspenseQuery
+export type DriverUsersQueryResult = Apollo.QueryResult<
+  DriverUsersQuery,
+  DriverUsersQueryVariables
 >;
-export type GetCitiesQueryResult = Apollo.QueryResult<
-  GetCitiesQuery,
-  GetCitiesQueryVariables
->;
-export const GetCityDocument = gql`
-  query GetCity($input: CityInput!) {
-    city(input: $input) {
-      city {
-        ...CityFragment
+export const DriverUserDocument = gql`
+  query DriverUser($input: DriverUserInput!) {
+    driverUser(input: $input) {
+      driverUser {
+        id
+        type
+        isEnabled
+        partner {
+          id
+          name
+        }
+        firstName
+        lastName
+        email
+        isEmailVerified
+        phone
+        isPhoneVerified
+        createdAt
       }
     }
   }
-  ${CityFragmentFragmentDoc}
 `;
 
 /**
- * __useGetCityQuery__
+ * __useDriverUserQuery__
  *
- * To run a query within a React component, call `useGetCityQuery` and pass it any options that fit your needs.
- * When your component renders, `useGetCityQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * To run a query within a React component, call `useDriverUserQuery` and pass it any options that fit your needs.
+ * When your component renders, `useDriverUserQuery` returns an object from Apollo Client that contains loading, error, and data properties
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
  *
  * @example
- * const { data, loading, error } = useGetCityQuery({
+ * const { data, loading, error } = useDriverUserQuery({
  *   variables: {
  *      input: // value for 'input'
  *   },
  * });
  */
-export function useGetCityQuery(
-  baseOptions: ApolloReactHooks.QueryHookOptions<
-    GetCityQuery,
-    GetCityQueryVariables
-  > &
-    ({ variables: GetCityQueryVariables; skip?: boolean } | { skip: boolean })
+export function useDriverUserQuery(
+  baseOptions: Apollo.QueryHookOptions<
+    DriverUserQuery,
+    DriverUserQueryVariables
+  >
 ) {
   const options = { ...defaultOptions, ...baseOptions };
-  return ApolloReactHooks.useQuery<GetCityQuery, GetCityQueryVariables>(
-    GetCityDocument,
+  return Apollo.useQuery<DriverUserQuery, DriverUserQueryVariables>(
+    DriverUserDocument,
     options
   );
 }
-export function useGetCityLazyQuery(
-  baseOptions?: ApolloReactHooks.LazyQueryHookOptions<
-    GetCityQuery,
-    GetCityQueryVariables
+export function useDriverUserLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    DriverUserQuery,
+    DriverUserQueryVariables
   >
 ) {
   const options = { ...defaultOptions, ...baseOptions };
-  return ApolloReactHooks.useLazyQuery<GetCityQuery, GetCityQueryVariables>(
-    GetCityDocument,
+  return Apollo.useLazyQuery<DriverUserQuery, DriverUserQueryVariables>(
+    DriverUserDocument,
     options
   );
 }
-export function useGetCitySuspenseQuery(
-  baseOptions?:
-    | ApolloReactHooks.SkipToken
-    | ApolloReactHooks.SuspenseQueryHookOptions<
-        GetCityQuery,
-        GetCityQueryVariables
-      >
-) {
-  const options =
-    baseOptions === ApolloReactHooks.skipToken
-      ? baseOptions
-      : { ...defaultOptions, ...baseOptions };
-  return ApolloReactHooks.useSuspenseQuery<GetCityQuery, GetCityQueryVariables>(
-    GetCityDocument,
-    options
-  );
-}
-export type GetCityQueryHookResult = ReturnType<typeof useGetCityQuery>;
-export type GetCityLazyQueryHookResult = ReturnType<typeof useGetCityLazyQuery>;
-export type GetCitySuspenseQueryHookResult = ReturnType<
-  typeof useGetCitySuspenseQuery
+export type DriverUserQueryHookResult = ReturnType<typeof useDriverUserQuery>;
+export type DriverUserLazyQueryHookResult = ReturnType<
+  typeof useDriverUserLazyQuery
 >;
-export type GetCityQueryResult = Apollo.QueryResult<
-  GetCityQuery,
-  GetCityQueryVariables
+export type DriverUserQueryResult = Apollo.QueryResult<
+  DriverUserQuery,
+  DriverUserQueryVariables
 >;
-export const GetProvincesDocument = gql`
-  query GetProvinces($input: ProvincesInput!) {
-    provinces(input: $input) {
-      provinces {
-        ...ProvinceFragment
-      }
-    }
-  }
-  ${ProvinceFragmentFragmentDoc}
-`;
-
-/**
- * __useGetProvincesQuery__
- *
- * To run a query within a React component, call `useGetProvincesQuery` and pass it any options that fit your needs.
- * When your component renders, `useGetProvincesQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useGetProvincesQuery({
- *   variables: {
- *      input: // value for 'input'
- *   },
- * });
- */
-export function useGetProvincesQuery(
-  baseOptions: ApolloReactHooks.QueryHookOptions<
-    GetProvincesQuery,
-    GetProvincesQueryVariables
-  > &
-    (
-      | { variables: GetProvincesQueryVariables; skip?: boolean }
-      | { skip: boolean }
-    )
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return ApolloReactHooks.useQuery<
-    GetProvincesQuery,
-    GetProvincesQueryVariables
-  >(GetProvincesDocument, options);
-}
-export function useGetProvincesLazyQuery(
-  baseOptions?: ApolloReactHooks.LazyQueryHookOptions<
-    GetProvincesQuery,
-    GetProvincesQueryVariables
-  >
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return ApolloReactHooks.useLazyQuery<
-    GetProvincesQuery,
-    GetProvincesQueryVariables
-  >(GetProvincesDocument, options);
-}
-export function useGetProvincesSuspenseQuery(
-  baseOptions?:
-    | ApolloReactHooks.SkipToken
-    | ApolloReactHooks.SuspenseQueryHookOptions<
-        GetProvincesQuery,
-        GetProvincesQueryVariables
-      >
-) {
-  const options =
-    baseOptions === ApolloReactHooks.skipToken
-      ? baseOptions
-      : { ...defaultOptions, ...baseOptions };
-  return ApolloReactHooks.useSuspenseQuery<
-    GetProvincesQuery,
-    GetProvincesQueryVariables
-  >(GetProvincesDocument, options);
-}
-export type GetProvincesQueryHookResult = ReturnType<
-  typeof useGetProvincesQuery
->;
-export type GetProvincesLazyQueryHookResult = ReturnType<
-  typeof useGetProvincesLazyQuery
->;
-export type GetProvincesSuspenseQueryHookResult = ReturnType<
-  typeof useGetProvincesSuspenseQuery
->;
-export type GetProvincesQueryResult = Apollo.QueryResult<
-  GetProvincesQuery,
-  GetProvincesQueryVariables
->;
-export const GetProvinceDocument = gql`
-  query GetProvince($input: ProvinceInput!) {
-    province(input: $input) {
-      province {
-        ...ProvinceFragment
-      }
-    }
-  }
-  ${ProvinceFragmentFragmentDoc}
-`;
-
-/**
- * __useGetProvinceQuery__
- *
- * To run a query within a React component, call `useGetProvinceQuery` and pass it any options that fit your needs.
- * When your component renders, `useGetProvinceQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useGetProvinceQuery({
- *   variables: {
- *      input: // value for 'input'
- *   },
- * });
- */
-export function useGetProvinceQuery(
-  baseOptions: ApolloReactHooks.QueryHookOptions<
-    GetProvinceQuery,
-    GetProvinceQueryVariables
-  > &
-    (
-      | { variables: GetProvinceQueryVariables; skip?: boolean }
-      | { skip: boolean }
-    )
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return ApolloReactHooks.useQuery<GetProvinceQuery, GetProvinceQueryVariables>(
-    GetProvinceDocument,
-    options
-  );
-}
-export function useGetProvinceLazyQuery(
-  baseOptions?: ApolloReactHooks.LazyQueryHookOptions<
-    GetProvinceQuery,
-    GetProvinceQueryVariables
-  >
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return ApolloReactHooks.useLazyQuery<
-    GetProvinceQuery,
-    GetProvinceQueryVariables
-  >(GetProvinceDocument, options);
-}
-export function useGetProvinceSuspenseQuery(
-  baseOptions?:
-    | ApolloReactHooks.SkipToken
-    | ApolloReactHooks.SuspenseQueryHookOptions<
-        GetProvinceQuery,
-        GetProvinceQueryVariables
-      >
-) {
-  const options =
-    baseOptions === ApolloReactHooks.skipToken
-      ? baseOptions
-      : { ...defaultOptions, ...baseOptions };
-  return ApolloReactHooks.useSuspenseQuery<
-    GetProvinceQuery,
-    GetProvinceQueryVariables
-  >(GetProvinceDocument, options);
-}
-export type GetProvinceQueryHookResult = ReturnType<typeof useGetProvinceQuery>;
-export type GetProvinceLazyQueryHookResult = ReturnType<
-  typeof useGetProvinceLazyQuery
->;
-export type GetProvinceSuspenseQueryHookResult = ReturnType<
-  typeof useGetProvinceSuspenseQuery
->;
-export type GetProvinceQueryResult = Apollo.QueryResult<
-  GetProvinceQuery,
-  GetProvinceQueryVariables
->;
-export const GetMunicipalitiesDocument = gql`
-  query GetMunicipalities($input: MunicipalitiesInput!) {
-    municipalities(input: $input) {
-      municipalities {
-        ...MunicipalityFragment
-      }
-    }
-  }
-  ${MunicipalityFragmentFragmentDoc}
-`;
-
-/**
- * __useGetMunicipalitiesQuery__
- *
- * To run a query within a React component, call `useGetMunicipalitiesQuery` and pass it any options that fit your needs.
- * When your component renders, `useGetMunicipalitiesQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useGetMunicipalitiesQuery({
- *   variables: {
- *      input: // value for 'input'
- *   },
- * });
- */
-export function useGetMunicipalitiesQuery(
-  baseOptions: ApolloReactHooks.QueryHookOptions<
-    GetMunicipalitiesQuery,
-    GetMunicipalitiesQueryVariables
-  > &
-    (
-      | { variables: GetMunicipalitiesQueryVariables; skip?: boolean }
-      | { skip: boolean }
-    )
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return ApolloReactHooks.useQuery<
-    GetMunicipalitiesQuery,
-    GetMunicipalitiesQueryVariables
-  >(GetMunicipalitiesDocument, options);
-}
-export function useGetMunicipalitiesLazyQuery(
-  baseOptions?: ApolloReactHooks.LazyQueryHookOptions<
-    GetMunicipalitiesQuery,
-    GetMunicipalitiesQueryVariables
-  >
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return ApolloReactHooks.useLazyQuery<
-    GetMunicipalitiesQuery,
-    GetMunicipalitiesQueryVariables
-  >(GetMunicipalitiesDocument, options);
-}
-export function useGetMunicipalitiesSuspenseQuery(
-  baseOptions?:
-    | ApolloReactHooks.SkipToken
-    | ApolloReactHooks.SuspenseQueryHookOptions<
-        GetMunicipalitiesQuery,
-        GetMunicipalitiesQueryVariables
-      >
-) {
-  const options =
-    baseOptions === ApolloReactHooks.skipToken
-      ? baseOptions
-      : { ...defaultOptions, ...baseOptions };
-  return ApolloReactHooks.useSuspenseQuery<
-    GetMunicipalitiesQuery,
-    GetMunicipalitiesQueryVariables
-  >(GetMunicipalitiesDocument, options);
-}
-export type GetMunicipalitiesQueryHookResult = ReturnType<
-  typeof useGetMunicipalitiesQuery
->;
-export type GetMunicipalitiesLazyQueryHookResult = ReturnType<
-  typeof useGetMunicipalitiesLazyQuery
->;
-export type GetMunicipalitiesSuspenseQueryHookResult = ReturnType<
-  typeof useGetMunicipalitiesSuspenseQuery
->;
-export type GetMunicipalitiesQueryResult = Apollo.QueryResult<
-  GetMunicipalitiesQuery,
-  GetMunicipalitiesQueryVariables
->;
-export const GetMunicipalityDocument = gql`
-  query GetMunicipality($input: MunicipalityInput!) {
-    municipality(input: $input) {
-      municipality {
-        ...MunicipalityFragment
-      }
-    }
-  }
-  ${MunicipalityFragmentFragmentDoc}
-`;
-
-/**
- * __useGetMunicipalityQuery__
- *
- * To run a query within a React component, call `useGetMunicipalityQuery` and pass it any options that fit your needs.
- * When your component renders, `useGetMunicipalityQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useGetMunicipalityQuery({
- *   variables: {
- *      input: // value for 'input'
- *   },
- * });
- */
-export function useGetMunicipalityQuery(
-  baseOptions: ApolloReactHooks.QueryHookOptions<
-    GetMunicipalityQuery,
-    GetMunicipalityQueryVariables
-  > &
-    (
-      | { variables: GetMunicipalityQueryVariables; skip?: boolean }
-      | { skip: boolean }
-    )
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return ApolloReactHooks.useQuery<
-    GetMunicipalityQuery,
-    GetMunicipalityQueryVariables
-  >(GetMunicipalityDocument, options);
-}
-export function useGetMunicipalityLazyQuery(
-  baseOptions?: ApolloReactHooks.LazyQueryHookOptions<
-    GetMunicipalityQuery,
-    GetMunicipalityQueryVariables
-  >
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return ApolloReactHooks.useLazyQuery<
-    GetMunicipalityQuery,
-    GetMunicipalityQueryVariables
-  >(GetMunicipalityDocument, options);
-}
-export function useGetMunicipalitySuspenseQuery(
-  baseOptions?:
-    | ApolloReactHooks.SkipToken
-    | ApolloReactHooks.SuspenseQueryHookOptions<
-        GetMunicipalityQuery,
-        GetMunicipalityQueryVariables
-      >
-) {
-  const options =
-    baseOptions === ApolloReactHooks.skipToken
-      ? baseOptions
-      : { ...defaultOptions, ...baseOptions };
-  return ApolloReactHooks.useSuspenseQuery<
-    GetMunicipalityQuery,
-    GetMunicipalityQueryVariables
-  >(GetMunicipalityDocument, options);
-}
-export type GetMunicipalityQueryHookResult = ReturnType<
-  typeof useGetMunicipalityQuery
->;
-export type GetMunicipalityLazyQueryHookResult = ReturnType<
-  typeof useGetMunicipalityLazyQuery
->;
-export type GetMunicipalitySuspenseQueryHookResult = ReturnType<
-  typeof useGetMunicipalitySuspenseQuery
->;
-export type GetMunicipalityQueryResult = Apollo.QueryResult<
-  GetMunicipalityQuery,
-  GetMunicipalityQueryVariables
->;
-export const GetNeighborhoodsDocument = gql`
-  query GetNeighborhoods($input: NeighborhoodsInput!) {
-    neighborhoods(input: $input) {
-      neighborhoods {
-        ...NeighborhoodFragment
-      }
-    }
-  }
-  ${NeighborhoodFragmentFragmentDoc}
-`;
-
-/**
- * __useGetNeighborhoodsQuery__
- *
- * To run a query within a React component, call `useGetNeighborhoodsQuery` and pass it any options that fit your needs.
- * When your component renders, `useGetNeighborhoodsQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useGetNeighborhoodsQuery({
- *   variables: {
- *      input: // value for 'input'
- *   },
- * });
- */
-export function useGetNeighborhoodsQuery(
-  baseOptions: ApolloReactHooks.QueryHookOptions<
-    GetNeighborhoodsQuery,
-    GetNeighborhoodsQueryVariables
-  > &
-    (
-      | { variables: GetNeighborhoodsQueryVariables; skip?: boolean }
-      | { skip: boolean }
-    )
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return ApolloReactHooks.useQuery<
-    GetNeighborhoodsQuery,
-    GetNeighborhoodsQueryVariables
-  >(GetNeighborhoodsDocument, options);
-}
-export function useGetNeighborhoodsLazyQuery(
-  baseOptions?: ApolloReactHooks.LazyQueryHookOptions<
-    GetNeighborhoodsQuery,
-    GetNeighborhoodsQueryVariables
-  >
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return ApolloReactHooks.useLazyQuery<
-    GetNeighborhoodsQuery,
-    GetNeighborhoodsQueryVariables
-  >(GetNeighborhoodsDocument, options);
-}
-export function useGetNeighborhoodsSuspenseQuery(
-  baseOptions?:
-    | ApolloReactHooks.SkipToken
-    | ApolloReactHooks.SuspenseQueryHookOptions<
-        GetNeighborhoodsQuery,
-        GetNeighborhoodsQueryVariables
-      >
-) {
-  const options =
-    baseOptions === ApolloReactHooks.skipToken
-      ? baseOptions
-      : { ...defaultOptions, ...baseOptions };
-  return ApolloReactHooks.useSuspenseQuery<
-    GetNeighborhoodsQuery,
-    GetNeighborhoodsQueryVariables
-  >(GetNeighborhoodsDocument, options);
-}
-export type GetNeighborhoodsQueryHookResult = ReturnType<
-  typeof useGetNeighborhoodsQuery
->;
-export type GetNeighborhoodsLazyQueryHookResult = ReturnType<
-  typeof useGetNeighborhoodsLazyQuery
->;
-export type GetNeighborhoodsSuspenseQueryHookResult = ReturnType<
-  typeof useGetNeighborhoodsSuspenseQuery
->;
-export type GetNeighborhoodsQueryResult = Apollo.QueryResult<
-  GetNeighborhoodsQuery,
-  GetNeighborhoodsQueryVariables
->;
-export const GetNeighborhoodDocument = gql`
-  query GetNeighborhood($input: NeighborhoodInput!) {
-    neighborhood(input: $input) {
-      neighborhood {
-        ...NeighborhoodFragment
-      }
-    }
-  }
-  ${NeighborhoodFragmentFragmentDoc}
-`;
-
-/**
- * __useGetNeighborhoodQuery__
- *
- * To run a query within a React component, call `useGetNeighborhoodQuery` and pass it any options that fit your needs.
- * When your component renders, `useGetNeighborhoodQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useGetNeighborhoodQuery({
- *   variables: {
- *      input: // value for 'input'
- *   },
- * });
- */
-export function useGetNeighborhoodQuery(
-  baseOptions: ApolloReactHooks.QueryHookOptions<
-    GetNeighborhoodQuery,
-    GetNeighborhoodQueryVariables
-  > &
-    (
-      | { variables: GetNeighborhoodQueryVariables; skip?: boolean }
-      | { skip: boolean }
-    )
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return ApolloReactHooks.useQuery<
-    GetNeighborhoodQuery,
-    GetNeighborhoodQueryVariables
-  >(GetNeighborhoodDocument, options);
-}
-export function useGetNeighborhoodLazyQuery(
-  baseOptions?: ApolloReactHooks.LazyQueryHookOptions<
-    GetNeighborhoodQuery,
-    GetNeighborhoodQueryVariables
-  >
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return ApolloReactHooks.useLazyQuery<
-    GetNeighborhoodQuery,
-    GetNeighborhoodQueryVariables
-  >(GetNeighborhoodDocument, options);
-}
-export function useGetNeighborhoodSuspenseQuery(
-  baseOptions?:
-    | ApolloReactHooks.SkipToken
-    | ApolloReactHooks.SuspenseQueryHookOptions<
-        GetNeighborhoodQuery,
-        GetNeighborhoodQueryVariables
-      >
-) {
-  const options =
-    baseOptions === ApolloReactHooks.skipToken
-      ? baseOptions
-      : { ...defaultOptions, ...baseOptions };
-  return ApolloReactHooks.useSuspenseQuery<
-    GetNeighborhoodQuery,
-    GetNeighborhoodQueryVariables
-  >(GetNeighborhoodDocument, options);
-}
-export type GetNeighborhoodQueryHookResult = ReturnType<
-  typeof useGetNeighborhoodQuery
->;
-export type GetNeighborhoodLazyQueryHookResult = ReturnType<
-  typeof useGetNeighborhoodLazyQuery
->;
-export type GetNeighborhoodSuspenseQueryHookResult = ReturnType<
-  typeof useGetNeighborhoodSuspenseQuery
->;
-export type GetNeighborhoodQueryResult = Apollo.QueryResult<
-  GetNeighborhoodQuery,
-  GetNeighborhoodQueryVariables
->;
-export const GetOrdersDocument = gql`
-  query GetOrders($input: OrdersInput!) {
+export const OrdersDocument = gql`
+  query Orders($input: OrdersInput!) {
     orders(input: $input) {
+      total
       orders {
         id
-        status
+        code
+        externalId
         serviceType
+        status
+        subtotal
+        discount
+        vat
+        total
+        createdAt
+        client {
+          id
+          firstName
+          lastName
+        }
+        driver {
+          id
+          firstName
+          lastName
+          vehicle {
+            id
+            make
+            model
+            year
+            color
+            plate
+          }
+        }
+        partner {
+          id
+          name
+        }
+        sender {
+          firstName
+          lastName
+          phone
+          email
+          address {
+            line1
+            line2
+            city
+            state
+            zipCode
+            coordinates {
+              latitude
+              longitude
+            }
+          }
+        }
+        ... on DeliveryOrder {
+          recipient {
+            firstName
+            lastName
+            phone
+            email
+            identityCardNumber
+            address {
+              line1
+              line2
+              neighborhood
+              municipality
+              province
+              postalCode
+              coordinates {
+                latitude
+                longitude
+              }
+            }
+            notes
+          }
+        }
+        paymentMethod {
+          ... on OrderCard {
+            id
+            type
+            brand
+            last4
+            expMonth
+            expYear
+          }
+          ... on OrderPartnerBalance {
+            id
+            type
+          }
+        }
+        items {
+          id
+          quantity
+          total
+          product {
+            ... on OrderArticle {
+              id
+              type
+              price
+              name
+              description
+              imagePath
+              variant {
+                id
+                name
+              }
+              deliveryType {
+                id
+                name
+              }
+            }
+            ... on OrderLuggage {
+              type
+              price
+              size {
+                id
+                price
+              }
+            }
+          }
+        }
+        addons {
+          ... on OrderHomePickupAddon {
+            id
+            type
+            total
+            price
+            freeThresholdAmount
+            date
+            hourRange {
+              startAt
+              endAt
+            }
+          }
+          ... on OrderHomeWrappingAddon {
+            id
+            type
+            total
+            price
+            freeThresholdAmount
+            date
+            hourRange {
+              startAt
+              endAt
+            }
+          }
+        }
       }
     }
   }
 `;
 
 /**
- * __useGetOrdersQuery__
+ * __useOrdersQuery__
  *
- * To run a query within a React component, call `useGetOrdersQuery` and pass it any options that fit your needs.
- * When your component renders, `useGetOrdersQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * To run a query within a React component, call `useOrdersQuery` and pass it any options that fit your needs.
+ * When your component renders, `useOrdersQuery` returns an object from Apollo Client that contains loading, error, and data properties
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
  *
  * @example
- * const { data, loading, error } = useGetOrdersQuery({
+ * const { data, loading, error } = useOrdersQuery({
  *   variables: {
  *      input: // value for 'input'
  *   },
  * });
  */
-export function useGetOrdersQuery(
-  baseOptions: ApolloReactHooks.QueryHookOptions<
-    GetOrdersQuery,
-    GetOrdersQueryVariables
-  > &
-    ({ variables: GetOrdersQueryVariables; skip?: boolean } | { skip: boolean })
+export function useOrdersQuery(
+  baseOptions: Apollo.QueryHookOptions<OrdersQuery, OrdersQueryVariables>
 ) {
   const options = { ...defaultOptions, ...baseOptions };
-  return ApolloReactHooks.useQuery<GetOrdersQuery, GetOrdersQueryVariables>(
-    GetOrdersDocument,
+  return Apollo.useQuery<OrdersQuery, OrdersQueryVariables>(
+    OrdersDocument,
     options
   );
 }
-export function useGetOrdersLazyQuery(
-  baseOptions?: ApolloReactHooks.LazyQueryHookOptions<
-    GetOrdersQuery,
-    GetOrdersQueryVariables
-  >
+export function useOrdersLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<OrdersQuery, OrdersQueryVariables>
 ) {
   const options = { ...defaultOptions, ...baseOptions };
-  return ApolloReactHooks.useLazyQuery<GetOrdersQuery, GetOrdersQueryVariables>(
-    GetOrdersDocument,
+  return Apollo.useLazyQuery<OrdersQuery, OrdersQueryVariables>(
+    OrdersDocument,
     options
   );
 }
-export function useGetOrdersSuspenseQuery(
-  baseOptions?:
-    | ApolloReactHooks.SkipToken
-    | ApolloReactHooks.SuspenseQueryHookOptions<
-        GetOrdersQuery,
-        GetOrdersQueryVariables
-      >
-) {
-  const options =
-    baseOptions === ApolloReactHooks.skipToken
-      ? baseOptions
-      : { ...defaultOptions, ...baseOptions };
-  return ApolloReactHooks.useSuspenseQuery<
-    GetOrdersQuery,
-    GetOrdersQueryVariables
-  >(GetOrdersDocument, options);
-}
-export type GetOrdersQueryHookResult = ReturnType<typeof useGetOrdersQuery>;
-export type GetOrdersLazyQueryHookResult = ReturnType<
-  typeof useGetOrdersLazyQuery
+export type OrdersQueryHookResult = ReturnType<typeof useOrdersQuery>;
+export type OrdersLazyQueryHookResult = ReturnType<typeof useOrdersLazyQuery>;
+export type OrdersQueryResult = Apollo.QueryResult<
+  OrdersQuery,
+  OrdersQueryVariables
 >;
-export type GetOrdersSuspenseQueryHookResult = ReturnType<
-  typeof useGetOrdersSuspenseQuery
->;
-export type GetOrdersQueryResult = Apollo.QueryResult<
-  GetOrdersQuery,
-  GetOrdersQueryVariables
->;
-export const GetOrderDocument = gql`
-  query GetOrder($input: OrderInput!) {
+export const OrderDocument = gql`
+  query Order($input: OrderInput!) {
     order(input: $input) {
       order {
         id
-        status
+        code
+        externalId
         serviceType
+        status
+        subtotal
+        discount
+        vat
+        total
+        createdAt
+        client {
+          id
+          firstName
+          lastName
+        }
+        driver {
+          id
+          firstName
+          lastName
+          vehicle {
+            id
+            make
+            model
+            year
+            color
+            plate
+          }
+        }
+        partner {
+          id
+          name
+        }
+        sender {
+          firstName
+          lastName
+          phone
+          email
+          address {
+            line1
+            line2
+            city
+            state
+            zipCode
+            coordinates {
+              latitude
+              longitude
+            }
+          }
+        }
+        ... on DeliveryOrder {
+          recipient {
+            firstName
+            lastName
+            phone
+            email
+            identityCardNumber
+            address {
+              line1
+              line2
+              neighborhood
+              municipality
+              province
+              postalCode
+              coordinates {
+                latitude
+                longitude
+              }
+            }
+            notes
+          }
+        }
+        paymentMethod {
+          ... on OrderCard {
+            id
+            type
+            brand
+            last4
+            expMonth
+            expYear
+          }
+          ... on OrderPartnerBalance {
+            id
+            type
+          }
+        }
+        items {
+          id
+          quantity
+          total
+          product {
+            ... on OrderArticle {
+              id
+              type
+              price
+              name
+              description
+              imagePath
+              variant {
+                id
+                name
+              }
+              deliveryType {
+                id
+                name
+              }
+            }
+            ... on OrderLuggage {
+              type
+              price
+              size {
+                id
+                price
+              }
+            }
+          }
+        }
+        addons {
+          ... on OrderHomePickupAddon {
+            id
+            type
+            total
+            price
+            freeThresholdAmount
+            date
+            hourRange {
+              startAt
+              endAt
+            }
+          }
+          ... on OrderHomeWrappingAddon {
+            id
+            type
+            total
+            price
+            freeThresholdAmount
+            date
+            hourRange {
+              startAt
+              endAt
+            }
+          }
+        }
       }
     }
   }
 `;
 
 /**
- * __useGetOrderQuery__
+ * __useOrderQuery__
  *
- * To run a query within a React component, call `useGetOrderQuery` and pass it any options that fit your needs.
- * When your component renders, `useGetOrderQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * To run a query within a React component, call `useOrderQuery` and pass it any options that fit your needs.
+ * When your component renders, `useOrderQuery` returns an object from Apollo Client that contains loading, error, and data properties
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
  *
  * @example
- * const { data, loading, error } = useGetOrderQuery({
+ * const { data, loading, error } = useOrderQuery({
  *   variables: {
  *      input: // value for 'input'
  *   },
  * });
  */
-export function useGetOrderQuery(
-  baseOptions: ApolloReactHooks.QueryHookOptions<
-    GetOrderQuery,
-    GetOrderQueryVariables
-  > &
-    ({ variables: GetOrderQueryVariables; skip?: boolean } | { skip: boolean })
+export function useOrderQuery(
+  baseOptions: Apollo.QueryHookOptions<OrderQuery, OrderQueryVariables>
 ) {
   const options = { ...defaultOptions, ...baseOptions };
-  return ApolloReactHooks.useQuery<GetOrderQuery, GetOrderQueryVariables>(
-    GetOrderDocument,
+  return Apollo.useQuery<OrderQuery, OrderQueryVariables>(
+    OrderDocument,
     options
   );
 }
-export function useGetOrderLazyQuery(
-  baseOptions?: ApolloReactHooks.LazyQueryHookOptions<
-    GetOrderQuery,
-    GetOrderQueryVariables
-  >
+export function useOrderLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<OrderQuery, OrderQueryVariables>
 ) {
   const options = { ...defaultOptions, ...baseOptions };
-  return ApolloReactHooks.useLazyQuery<GetOrderQuery, GetOrderQueryVariables>(
-    GetOrderDocument,
+  return Apollo.useLazyQuery<OrderQuery, OrderQueryVariables>(
+    OrderDocument,
     options
   );
 }
-export function useGetOrderSuspenseQuery(
-  baseOptions?:
-    | ApolloReactHooks.SkipToken
-    | ApolloReactHooks.SuspenseQueryHookOptions<
-        GetOrderQuery,
-        GetOrderQueryVariables
-      >
-) {
-  const options =
-    baseOptions === ApolloReactHooks.skipToken
-      ? baseOptions
-      : { ...defaultOptions, ...baseOptions };
-  return ApolloReactHooks.useSuspenseQuery<
-    GetOrderQuery,
-    GetOrderQueryVariables
-  >(GetOrderDocument, options);
-}
-export type GetOrderQueryHookResult = ReturnType<typeof useGetOrderQuery>;
-export type GetOrderLazyQueryHookResult = ReturnType<
-  typeof useGetOrderLazyQuery
+export type OrderQueryHookResult = ReturnType<typeof useOrderQuery>;
+export type OrderLazyQueryHookResult = ReturnType<typeof useOrderLazyQuery>;
+export type OrderQueryResult = Apollo.QueryResult<
+  OrderQuery,
+  OrderQueryVariables
 >;
-export type GetOrderSuspenseQueryHookResult = ReturnType<
-  typeof useGetOrderSuspenseQuery
->;
-export type GetOrderQueryResult = Apollo.QueryResult<
-  GetOrderQuery,
-  GetOrderQueryVariables
->;
-export const GetPartnersDocument = gql`
-  query GetPartners($input: PartnersInput!) {
-    partners(input: $input) {
-      partners {
-        ...PartnerFragment
+export const ArticlesDocument = gql`
+  query Articles($input: ArticlesInput!) {
+    articles(input: $input) {
+      articles {
+        id
+        name
+        description
+        imagePath
+        isEnabled
+        variants {
+          id
+          name
+          isEnabled
+        }
       }
     }
   }
-  ${PartnerFragmentFragmentDoc}
 `;
 
 /**
- * __useGetPartnersQuery__
+ * __useArticlesQuery__
  *
- * To run a query within a React component, call `useGetPartnersQuery` and pass it any options that fit your needs.
- * When your component renders, `useGetPartnersQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * To run a query within a React component, call `useArticlesQuery` and pass it any options that fit your needs.
+ * When your component renders, `useArticlesQuery` returns an object from Apollo Client that contains loading, error, and data properties
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
  *
  * @example
- * const { data, loading, error } = useGetPartnersQuery({
+ * const { data, loading, error } = useArticlesQuery({
  *   variables: {
  *      input: // value for 'input'
  *   },
  * });
  */
-export function useGetPartnersQuery(
-  baseOptions: ApolloReactHooks.QueryHookOptions<
-    GetPartnersQuery,
-    GetPartnersQueryVariables
-  > &
-    (
-      | { variables: GetPartnersQueryVariables; skip?: boolean }
-      | { skip: boolean }
-    )
+export function useArticlesQuery(
+  baseOptions: Apollo.QueryHookOptions<ArticlesQuery, ArticlesQueryVariables>
 ) {
   const options = { ...defaultOptions, ...baseOptions };
-  return ApolloReactHooks.useQuery<GetPartnersQuery, GetPartnersQueryVariables>(
-    GetPartnersDocument,
+  return Apollo.useQuery<ArticlesQuery, ArticlesQueryVariables>(
+    ArticlesDocument,
     options
   );
 }
-export function useGetPartnersLazyQuery(
-  baseOptions?: ApolloReactHooks.LazyQueryHookOptions<
-    GetPartnersQuery,
-    GetPartnersQueryVariables
+export function useArticlesLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    ArticlesQuery,
+    ArticlesQueryVariables
   >
 ) {
   const options = { ...defaultOptions, ...baseOptions };
-  return ApolloReactHooks.useLazyQuery<
-    GetPartnersQuery,
-    GetPartnersQueryVariables
-  >(GetPartnersDocument, options);
+  return Apollo.useLazyQuery<ArticlesQuery, ArticlesQueryVariables>(
+    ArticlesDocument,
+    options
+  );
 }
-export function useGetPartnersSuspenseQuery(
-  baseOptions?:
-    | ApolloReactHooks.SkipToken
-    | ApolloReactHooks.SuspenseQueryHookOptions<
-        GetPartnersQuery,
-        GetPartnersQueryVariables
-      >
-) {
-  const options =
-    baseOptions === ApolloReactHooks.skipToken
-      ? baseOptions
-      : { ...defaultOptions, ...baseOptions };
-  return ApolloReactHooks.useSuspenseQuery<
-    GetPartnersQuery,
-    GetPartnersQueryVariables
-  >(GetPartnersDocument, options);
-}
-export type GetPartnersQueryHookResult = ReturnType<typeof useGetPartnersQuery>;
-export type GetPartnersLazyQueryHookResult = ReturnType<
-  typeof useGetPartnersLazyQuery
+export type ArticlesQueryHookResult = ReturnType<typeof useArticlesQuery>;
+export type ArticlesLazyQueryHookResult = ReturnType<
+  typeof useArticlesLazyQuery
 >;
-export type GetPartnersSuspenseQueryHookResult = ReturnType<
-  typeof useGetPartnersSuspenseQuery
+export type ArticlesQueryResult = Apollo.QueryResult<
+  ArticlesQuery,
+  ArticlesQueryVariables
 >;
-export type GetPartnersQueryResult = Apollo.QueryResult<
-  GetPartnersQuery,
-  GetPartnersQueryVariables
->;
-export const GetPartnerDocument = gql`
-  query GetPartner($input: PartnerInput!) {
-    partner(input: $input) {
-      partner {
-        ...PartnerFragment
+export const ArticleDocument = gql`
+  query Article($input: ArticleInput!) {
+    article(input: $input) {
+      article {
+        id
+        name
+        description
+        imagePath
+        isEnabled
+        variants {
+          id
+          name
+          isEnabled
+        }
       }
     }
   }
-  ${PartnerFragmentFragmentDoc}
 `;
 
 /**
- * __useGetPartnerQuery__
+ * __useArticleQuery__
  *
- * To run a query within a React component, call `useGetPartnerQuery` and pass it any options that fit your needs.
- * When your component renders, `useGetPartnerQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * To run a query within a React component, call `useArticleQuery` and pass it any options that fit your needs.
+ * When your component renders, `useArticleQuery` returns an object from Apollo Client that contains loading, error, and data properties
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
  *
  * @example
- * const { data, loading, error } = useGetPartnerQuery({
+ * const { data, loading, error } = useArticleQuery({
  *   variables: {
  *      input: // value for 'input'
  *   },
  * });
  */
-export function useGetPartnerQuery(
-  baseOptions: ApolloReactHooks.QueryHookOptions<
-    GetPartnerQuery,
-    GetPartnerQueryVariables
-  > &
-    (
-      | { variables: GetPartnerQueryVariables; skip?: boolean }
-      | { skip: boolean }
-    )
+export function useArticleQuery(
+  baseOptions: Apollo.QueryHookOptions<ArticleQuery, ArticleQueryVariables>
 ) {
   const options = { ...defaultOptions, ...baseOptions };
-  return ApolloReactHooks.useQuery<GetPartnerQuery, GetPartnerQueryVariables>(
-    GetPartnerDocument,
+  return Apollo.useQuery<ArticleQuery, ArticleQueryVariables>(
+    ArticleDocument,
     options
   );
 }
-export function useGetPartnerLazyQuery(
-  baseOptions?: ApolloReactHooks.LazyQueryHookOptions<
-    GetPartnerQuery,
-    GetPartnerQueryVariables
+export function useArticleLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<ArticleQuery, ArticleQueryVariables>
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<ArticleQuery, ArticleQueryVariables>(
+    ArticleDocument,
+    options
+  );
+}
+export type ArticleQueryHookResult = ReturnType<typeof useArticleQuery>;
+export type ArticleLazyQueryHookResult = ReturnType<typeof useArticleLazyQuery>;
+export type ArticleQueryResult = Apollo.QueryResult<
+  ArticleQuery,
+  ArticleQueryVariables
+>;
+export const DeliveryTypesDocument = gql`
+  query DeliveryTypes($input: DeliveryTypesInput!) {
+    deliveryTypes(input: $input) {
+      deliveryTypes {
+        id
+        name
+        icon
+        description
+        isEnabled
+      }
+    }
+  }
+`;
+
+/**
+ * __useDeliveryTypesQuery__
+ *
+ * To run a query within a React component, call `useDeliveryTypesQuery` and pass it any options that fit your needs.
+ * When your component renders, `useDeliveryTypesQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useDeliveryTypesQuery({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useDeliveryTypesQuery(
+  baseOptions: Apollo.QueryHookOptions<
+    DeliveryTypesQuery,
+    DeliveryTypesQueryVariables
   >
 ) {
   const options = { ...defaultOptions, ...baseOptions };
-  return ApolloReactHooks.useLazyQuery<
-    GetPartnerQuery,
-    GetPartnerQueryVariables
-  >(GetPartnerDocument, options);
+  return Apollo.useQuery<DeliveryTypesQuery, DeliveryTypesQueryVariables>(
+    DeliveryTypesDocument,
+    options
+  );
 }
-export function useGetPartnerSuspenseQuery(
-  baseOptions?:
-    | ApolloReactHooks.SkipToken
-    | ApolloReactHooks.SuspenseQueryHookOptions<
-        GetPartnerQuery,
-        GetPartnerQueryVariables
-      >
+export function useDeliveryTypesLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    DeliveryTypesQuery,
+    DeliveryTypesQueryVariables
+  >
 ) {
-  const options =
-    baseOptions === ApolloReactHooks.skipToken
-      ? baseOptions
-      : { ...defaultOptions, ...baseOptions };
-  return ApolloReactHooks.useSuspenseQuery<
-    GetPartnerQuery,
-    GetPartnerQueryVariables
-  >(GetPartnerDocument, options);
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<DeliveryTypesQuery, DeliveryTypesQueryVariables>(
+    DeliveryTypesDocument,
+    options
+  );
 }
-export type GetPartnerQueryHookResult = ReturnType<typeof useGetPartnerQuery>;
-export type GetPartnerLazyQueryHookResult = ReturnType<
-  typeof useGetPartnerLazyQuery
+export type DeliveryTypesQueryHookResult = ReturnType<
+  typeof useDeliveryTypesQuery
 >;
-export type GetPartnerSuspenseQueryHookResult = ReturnType<
-  typeof useGetPartnerSuspenseQuery
+export type DeliveryTypesLazyQueryHookResult = ReturnType<
+  typeof useDeliveryTypesLazyQuery
 >;
-export type GetPartnerQueryResult = Apollo.QueryResult<
-  GetPartnerQuery,
-  GetPartnerQueryVariables
+export type DeliveryTypesQueryResult = Apollo.QueryResult<
+  DeliveryTypesQuery,
+  DeliveryTypesQueryVariables
 >;
-export const GetPricingRulesDocument = gql`
-  query GetPricingRules($input: PricingRulesInput!) {
+export const DeliveryTypeDocument = gql`
+  query DeliveryType($input: DeliveryTypeInput!) {
+    deliveryType(input: $input) {
+      deliveryType {
+        id
+        name
+        icon
+        description
+        isEnabled
+      }
+    }
+  }
+`;
+
+/**
+ * __useDeliveryTypeQuery__
+ *
+ * To run a query within a React component, call `useDeliveryTypeQuery` and pass it any options that fit your needs.
+ * When your component renders, `useDeliveryTypeQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useDeliveryTypeQuery({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useDeliveryTypeQuery(
+  baseOptions: Apollo.QueryHookOptions<
+    DeliveryTypeQuery,
+    DeliveryTypeQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<DeliveryTypeQuery, DeliveryTypeQueryVariables>(
+    DeliveryTypeDocument,
+    options
+  );
+}
+export function useDeliveryTypeLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    DeliveryTypeQuery,
+    DeliveryTypeQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<DeliveryTypeQuery, DeliveryTypeQueryVariables>(
+    DeliveryTypeDocument,
+    options
+  );
+}
+export type DeliveryTypeQueryHookResult = ReturnType<
+  typeof useDeliveryTypeQuery
+>;
+export type DeliveryTypeLazyQueryHookResult = ReturnType<
+  typeof useDeliveryTypeLazyQuery
+>;
+export type DeliveryTypeQueryResult = Apollo.QueryResult<
+  DeliveryTypeQuery,
+  DeliveryTypeQueryVariables
+>;
+export const PricingRulesDocument = gql`
+  query PricingRules($input: PricingRulesInput!) {
     pricingRules(input: $input) {
       pricingRules {
         ... on ArticlePricingRule {
           id
           type
           isEnabled
+          price
+          partner {
+            id
+            name
+          }
+          location {
+            id
+            name
+          }
+          deliveryType {
+            id
+            name
+          }
+          article {
+            id
+            name
+          }
+          articleVariant {
+            id
+            name
+          }
         }
       }
     }
@@ -5298,87 +6673,84 @@ export const GetPricingRulesDocument = gql`
 `;
 
 /**
- * __useGetPricingRulesQuery__
+ * __usePricingRulesQuery__
  *
- * To run a query within a React component, call `useGetPricingRulesQuery` and pass it any options that fit your needs.
- * When your component renders, `useGetPricingRulesQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * To run a query within a React component, call `usePricingRulesQuery` and pass it any options that fit your needs.
+ * When your component renders, `usePricingRulesQuery` returns an object from Apollo Client that contains loading, error, and data properties
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
  *
  * @example
- * const { data, loading, error } = useGetPricingRulesQuery({
+ * const { data, loading, error } = usePricingRulesQuery({
  *   variables: {
  *      input: // value for 'input'
  *   },
  * });
  */
-export function useGetPricingRulesQuery(
-  baseOptions: ApolloReactHooks.QueryHookOptions<
-    GetPricingRulesQuery,
-    GetPricingRulesQueryVariables
-  > &
-    (
-      | { variables: GetPricingRulesQueryVariables; skip?: boolean }
-      | { skip: boolean }
-    )
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return ApolloReactHooks.useQuery<
-    GetPricingRulesQuery,
-    GetPricingRulesQueryVariables
-  >(GetPricingRulesDocument, options);
-}
-export function useGetPricingRulesLazyQuery(
-  baseOptions?: ApolloReactHooks.LazyQueryHookOptions<
-    GetPricingRulesQuery,
-    GetPricingRulesQueryVariables
+export function usePricingRulesQuery(
+  baseOptions: Apollo.QueryHookOptions<
+    PricingRulesQuery,
+    PricingRulesQueryVariables
   >
 ) {
   const options = { ...defaultOptions, ...baseOptions };
-  return ApolloReactHooks.useLazyQuery<
-    GetPricingRulesQuery,
-    GetPricingRulesQueryVariables
-  >(GetPricingRulesDocument, options);
+  return Apollo.useQuery<PricingRulesQuery, PricingRulesQueryVariables>(
+    PricingRulesDocument,
+    options
+  );
 }
-export function useGetPricingRulesSuspenseQuery(
-  baseOptions?:
-    | ApolloReactHooks.SkipToken
-    | ApolloReactHooks.SuspenseQueryHookOptions<
-        GetPricingRulesQuery,
-        GetPricingRulesQueryVariables
-      >
+export function usePricingRulesLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    PricingRulesQuery,
+    PricingRulesQueryVariables
+  >
 ) {
-  const options =
-    baseOptions === ApolloReactHooks.skipToken
-      ? baseOptions
-      : { ...defaultOptions, ...baseOptions };
-  return ApolloReactHooks.useSuspenseQuery<
-    GetPricingRulesQuery,
-    GetPricingRulesQueryVariables
-  >(GetPricingRulesDocument, options);
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<PricingRulesQuery, PricingRulesQueryVariables>(
+    PricingRulesDocument,
+    options
+  );
 }
-export type GetPricingRulesQueryHookResult = ReturnType<
-  typeof useGetPricingRulesQuery
+export type PricingRulesQueryHookResult = ReturnType<
+  typeof usePricingRulesQuery
 >;
-export type GetPricingRulesLazyQueryHookResult = ReturnType<
-  typeof useGetPricingRulesLazyQuery
+export type PricingRulesLazyQueryHookResult = ReturnType<
+  typeof usePricingRulesLazyQuery
 >;
-export type GetPricingRulesSuspenseQueryHookResult = ReturnType<
-  typeof useGetPricingRulesSuspenseQuery
+export type PricingRulesQueryResult = Apollo.QueryResult<
+  PricingRulesQuery,
+  PricingRulesQueryVariables
 >;
-export type GetPricingRulesQueryResult = Apollo.QueryResult<
-  GetPricingRulesQuery,
-  GetPricingRulesQueryVariables
->;
-export const GetPricingRuleDocument = gql`
-  query GetPricingRule($input: PricingRuleInput!) {
+export const PricingRuleDocument = gql`
+  query PricingRule($input: PricingRuleInput!) {
     pricingRule(input: $input) {
       pricingRule {
         ... on ArticlePricingRule {
           id
           type
           isEnabled
+          price
+          partner {
+            id
+            name
+          }
+          location {
+            id
+            name
+          }
+          deliveryType {
+            id
+            name
+          }
+          article {
+            id
+            name
+          }
+          articleVariant {
+            id
+            name
+          }
         }
       }
     }
@@ -5386,76 +6758,713 @@ export const GetPricingRuleDocument = gql`
 `;
 
 /**
- * __useGetPricingRuleQuery__
+ * __usePricingRuleQuery__
  *
- * To run a query within a React component, call `useGetPricingRuleQuery` and pass it any options that fit your needs.
- * When your component renders, `useGetPricingRuleQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * To run a query within a React component, call `usePricingRuleQuery` and pass it any options that fit your needs.
+ * When your component renders, `usePricingRuleQuery` returns an object from Apollo Client that contains loading, error, and data properties
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
  *
  * @example
- * const { data, loading, error } = useGetPricingRuleQuery({
+ * const { data, loading, error } = usePricingRuleQuery({
  *   variables: {
  *      input: // value for 'input'
  *   },
  * });
  */
-export function useGetPricingRuleQuery(
-  baseOptions: ApolloReactHooks.QueryHookOptions<
-    GetPricingRuleQuery,
-    GetPricingRuleQueryVariables
-  > &
-    (
-      | { variables: GetPricingRuleQueryVariables; skip?: boolean }
-      | { skip: boolean }
-    )
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return ApolloReactHooks.useQuery<
-    GetPricingRuleQuery,
-    GetPricingRuleQueryVariables
-  >(GetPricingRuleDocument, options);
-}
-export function useGetPricingRuleLazyQuery(
-  baseOptions?: ApolloReactHooks.LazyQueryHookOptions<
-    GetPricingRuleQuery,
-    GetPricingRuleQueryVariables
+export function usePricingRuleQuery(
+  baseOptions: Apollo.QueryHookOptions<
+    PricingRuleQuery,
+    PricingRuleQueryVariables
   >
 ) {
   const options = { ...defaultOptions, ...baseOptions };
-  return ApolloReactHooks.useLazyQuery<
-    GetPricingRuleQuery,
-    GetPricingRuleQueryVariables
-  >(GetPricingRuleDocument, options);
+  return Apollo.useQuery<PricingRuleQuery, PricingRuleQueryVariables>(
+    PricingRuleDocument,
+    options
+  );
 }
-export function useGetPricingRuleSuspenseQuery(
-  baseOptions?:
-    | ApolloReactHooks.SkipToken
-    | ApolloReactHooks.SuspenseQueryHookOptions<
-        GetPricingRuleQuery,
-        GetPricingRuleQueryVariables
-      >
+export function usePricingRuleLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    PricingRuleQuery,
+    PricingRuleQueryVariables
+  >
 ) {
-  const options =
-    baseOptions === ApolloReactHooks.skipToken
-      ? baseOptions
-      : { ...defaultOptions, ...baseOptions };
-  return ApolloReactHooks.useSuspenseQuery<
-    GetPricingRuleQuery,
-    GetPricingRuleQueryVariables
-  >(GetPricingRuleDocument, options);
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<PricingRuleQuery, PricingRuleQueryVariables>(
+    PricingRuleDocument,
+    options
+  );
 }
-export type GetPricingRuleQueryHookResult = ReturnType<
-  typeof useGetPricingRuleQuery
+export type PricingRuleQueryHookResult = ReturnType<typeof usePricingRuleQuery>;
+export type PricingRuleLazyQueryHookResult = ReturnType<
+  typeof usePricingRuleLazyQuery
 >;
-export type GetPricingRuleLazyQueryHookResult = ReturnType<
-  typeof useGetPricingRuleLazyQuery
+export type PricingRuleQueryResult = Apollo.QueryResult<
+  PricingRuleQuery,
+  PricingRuleQueryVariables
 >;
-export type GetPricingRuleSuspenseQueryHookResult = ReturnType<
-  typeof useGetPricingRuleSuspenseQuery
+export const CountriesDocument = gql`
+  query Countries($input: CountriesInput!) {
+    countries(input: $input) {
+      countries {
+        id
+        name
+      }
+    }
+  }
+`;
+
+/**
+ * __useCountriesQuery__
+ *
+ * To run a query within a React component, call `useCountriesQuery` and pass it any options that fit your needs.
+ * When your component renders, `useCountriesQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useCountriesQuery({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useCountriesQuery(
+  baseOptions: Apollo.QueryHookOptions<CountriesQuery, CountriesQueryVariables>
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<CountriesQuery, CountriesQueryVariables>(
+    CountriesDocument,
+    options
+  );
+}
+export function useCountriesLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    CountriesQuery,
+    CountriesQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<CountriesQuery, CountriesQueryVariables>(
+    CountriesDocument,
+    options
+  );
+}
+export type CountriesQueryHookResult = ReturnType<typeof useCountriesQuery>;
+export type CountriesLazyQueryHookResult = ReturnType<
+  typeof useCountriesLazyQuery
 >;
-export type GetPricingRuleQueryResult = Apollo.QueryResult<
-  GetPricingRuleQuery,
-  GetPricingRuleQueryVariables
+export type CountriesQueryResult = Apollo.QueryResult<
+  CountriesQuery,
+  CountriesQueryVariables
+>;
+export const CountryDocument = gql`
+  query Country($input: CountryInput!) {
+    country(input: $input) {
+      country {
+        id
+        name
+      }
+    }
+  }
+`;
+
+/**
+ * __useCountryQuery__
+ *
+ * To run a query within a React component, call `useCountryQuery` and pass it any options that fit your needs.
+ * When your component renders, `useCountryQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useCountryQuery({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useCountryQuery(
+  baseOptions: Apollo.QueryHookOptions<CountryQuery, CountryQueryVariables>
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<CountryQuery, CountryQueryVariables>(
+    CountryDocument,
+    options
+  );
+}
+export function useCountryLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<CountryQuery, CountryQueryVariables>
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<CountryQuery, CountryQueryVariables>(
+    CountryDocument,
+    options
+  );
+}
+export type CountryQueryHookResult = ReturnType<typeof useCountryQuery>;
+export type CountryLazyQueryHookResult = ReturnType<typeof useCountryLazyQuery>;
+export type CountryQueryResult = Apollo.QueryResult<
+  CountryQuery,
+  CountryQueryVariables
+>;
+export const StatesDocument = gql`
+  query States($input: StatesInput!) {
+    states(input: $input) {
+      states {
+        id
+        name
+      }
+    }
+  }
+`;
+
+/**
+ * __useStatesQuery__
+ *
+ * To run a query within a React component, call `useStatesQuery` and pass it any options that fit your needs.
+ * When your component renders, `useStatesQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useStatesQuery({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useStatesQuery(
+  baseOptions: Apollo.QueryHookOptions<StatesQuery, StatesQueryVariables>
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<StatesQuery, StatesQueryVariables>(
+    StatesDocument,
+    options
+  );
+}
+export function useStatesLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<StatesQuery, StatesQueryVariables>
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<StatesQuery, StatesQueryVariables>(
+    StatesDocument,
+    options
+  );
+}
+export type StatesQueryHookResult = ReturnType<typeof useStatesQuery>;
+export type StatesLazyQueryHookResult = ReturnType<typeof useStatesLazyQuery>;
+export type StatesQueryResult = Apollo.QueryResult<
+  StatesQuery,
+  StatesQueryVariables
+>;
+export const StateDocument = gql`
+  query State($input: StateInput!) {
+    state(input: $input) {
+      state {
+        id
+        name
+      }
+    }
+  }
+`;
+
+/**
+ * __useStateQuery__
+ *
+ * To run a query within a React component, call `useStateQuery` and pass it any options that fit your needs.
+ * When your component renders, `useStateQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useStateQuery({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useStateQuery(
+  baseOptions: Apollo.QueryHookOptions<StateQuery, StateQueryVariables>
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<StateQuery, StateQueryVariables>(
+    StateDocument,
+    options
+  );
+}
+export function useStateLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<StateQuery, StateQueryVariables>
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<StateQuery, StateQueryVariables>(
+    StateDocument,
+    options
+  );
+}
+export type StateQueryHookResult = ReturnType<typeof useStateQuery>;
+export type StateLazyQueryHookResult = ReturnType<typeof useStateLazyQuery>;
+export type StateQueryResult = Apollo.QueryResult<
+  StateQuery,
+  StateQueryVariables
+>;
+export const CitiesDocument = gql`
+  query Cities($input: CitiesInput!) {
+    cities(input: $input) {
+      cities {
+        id
+        name
+        zipCodes
+      }
+    }
+  }
+`;
+
+/**
+ * __useCitiesQuery__
+ *
+ * To run a query within a React component, call `useCitiesQuery` and pass it any options that fit your needs.
+ * When your component renders, `useCitiesQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useCitiesQuery({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useCitiesQuery(
+  baseOptions: Apollo.QueryHookOptions<CitiesQuery, CitiesQueryVariables>
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<CitiesQuery, CitiesQueryVariables>(
+    CitiesDocument,
+    options
+  );
+}
+export function useCitiesLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<CitiesQuery, CitiesQueryVariables>
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<CitiesQuery, CitiesQueryVariables>(
+    CitiesDocument,
+    options
+  );
+}
+export type CitiesQueryHookResult = ReturnType<typeof useCitiesQuery>;
+export type CitiesLazyQueryHookResult = ReturnType<typeof useCitiesLazyQuery>;
+export type CitiesQueryResult = Apollo.QueryResult<
+  CitiesQuery,
+  CitiesQueryVariables
+>;
+export const CityDocument = gql`
+  query City($input: CityInput!) {
+    city(input: $input) {
+      city {
+        id
+        name
+        zipCodes
+      }
+    }
+  }
+`;
+
+/**
+ * __useCityQuery__
+ *
+ * To run a query within a React component, call `useCityQuery` and pass it any options that fit your needs.
+ * When your component renders, `useCityQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useCityQuery({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useCityQuery(
+  baseOptions: Apollo.QueryHookOptions<CityQuery, CityQueryVariables>
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<CityQuery, CityQueryVariables>(CityDocument, options);
+}
+export function useCityLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<CityQuery, CityQueryVariables>
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<CityQuery, CityQueryVariables>(
+    CityDocument,
+    options
+  );
+}
+export type CityQueryHookResult = ReturnType<typeof useCityQuery>;
+export type CityLazyQueryHookResult = ReturnType<typeof useCityLazyQuery>;
+export type CityQueryResult = Apollo.QueryResult<CityQuery, CityQueryVariables>;
+export const ProvincesDocument = gql`
+  query Provinces($input: ProvincesInput!) {
+    provinces(input: $input) {
+      provinces {
+        id
+        name
+      }
+    }
+  }
+`;
+
+/**
+ * __useProvincesQuery__
+ *
+ * To run a query within a React component, call `useProvincesQuery` and pass it any options that fit your needs.
+ * When your component renders, `useProvincesQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useProvincesQuery({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useProvincesQuery(
+  baseOptions: Apollo.QueryHookOptions<ProvincesQuery, ProvincesQueryVariables>
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<ProvincesQuery, ProvincesQueryVariables>(
+    ProvincesDocument,
+    options
+  );
+}
+export function useProvincesLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    ProvincesQuery,
+    ProvincesQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<ProvincesQuery, ProvincesQueryVariables>(
+    ProvincesDocument,
+    options
+  );
+}
+export type ProvincesQueryHookResult = ReturnType<typeof useProvincesQuery>;
+export type ProvincesLazyQueryHookResult = ReturnType<
+  typeof useProvincesLazyQuery
+>;
+export type ProvincesQueryResult = Apollo.QueryResult<
+  ProvincesQuery,
+  ProvincesQueryVariables
+>;
+export const ProvinceDocument = gql`
+  query Province($input: ProvinceInput!) {
+    province(input: $input) {
+      province {
+        id
+        name
+      }
+    }
+  }
+`;
+
+/**
+ * __useProvinceQuery__
+ *
+ * To run a query within a React component, call `useProvinceQuery` and pass it any options that fit your needs.
+ * When your component renders, `useProvinceQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useProvinceQuery({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useProvinceQuery(
+  baseOptions: Apollo.QueryHookOptions<ProvinceQuery, ProvinceQueryVariables>
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<ProvinceQuery, ProvinceQueryVariables>(
+    ProvinceDocument,
+    options
+  );
+}
+export function useProvinceLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    ProvinceQuery,
+    ProvinceQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<ProvinceQuery, ProvinceQueryVariables>(
+    ProvinceDocument,
+    options
+  );
+}
+export type ProvinceQueryHookResult = ReturnType<typeof useProvinceQuery>;
+export type ProvinceLazyQueryHookResult = ReturnType<
+  typeof useProvinceLazyQuery
+>;
+export type ProvinceQueryResult = Apollo.QueryResult<
+  ProvinceQuery,
+  ProvinceQueryVariables
+>;
+export const MunicipalitiesDocument = gql`
+  query Municipalities($input: MunicipalitiesInput!) {
+    municipalities(input: $input) {
+      municipalities {
+        id
+        name
+      }
+    }
+  }
+`;
+
+/**
+ * __useMunicipalitiesQuery__
+ *
+ * To run a query within a React component, call `useMunicipalitiesQuery` and pass it any options that fit your needs.
+ * When your component renders, `useMunicipalitiesQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useMunicipalitiesQuery({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useMunicipalitiesQuery(
+  baseOptions: Apollo.QueryHookOptions<
+    MunicipalitiesQuery,
+    MunicipalitiesQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<MunicipalitiesQuery, MunicipalitiesQueryVariables>(
+    MunicipalitiesDocument,
+    options
+  );
+}
+export function useMunicipalitiesLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    MunicipalitiesQuery,
+    MunicipalitiesQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<MunicipalitiesQuery, MunicipalitiesQueryVariables>(
+    MunicipalitiesDocument,
+    options
+  );
+}
+export type MunicipalitiesQueryHookResult = ReturnType<
+  typeof useMunicipalitiesQuery
+>;
+export type MunicipalitiesLazyQueryHookResult = ReturnType<
+  typeof useMunicipalitiesLazyQuery
+>;
+export type MunicipalitiesQueryResult = Apollo.QueryResult<
+  MunicipalitiesQuery,
+  MunicipalitiesQueryVariables
+>;
+export const MunicipalityDocument = gql`
+  query Municipality($input: MunicipalityInput!) {
+    municipality(input: $input) {
+      municipality {
+        id
+        name
+      }
+    }
+  }
+`;
+
+/**
+ * __useMunicipalityQuery__
+ *
+ * To run a query within a React component, call `useMunicipalityQuery` and pass it any options that fit your needs.
+ * When your component renders, `useMunicipalityQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useMunicipalityQuery({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useMunicipalityQuery(
+  baseOptions: Apollo.QueryHookOptions<
+    MunicipalityQuery,
+    MunicipalityQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<MunicipalityQuery, MunicipalityQueryVariables>(
+    MunicipalityDocument,
+    options
+  );
+}
+export function useMunicipalityLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    MunicipalityQuery,
+    MunicipalityQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<MunicipalityQuery, MunicipalityQueryVariables>(
+    MunicipalityDocument,
+    options
+  );
+}
+export type MunicipalityQueryHookResult = ReturnType<
+  typeof useMunicipalityQuery
+>;
+export type MunicipalityLazyQueryHookResult = ReturnType<
+  typeof useMunicipalityLazyQuery
+>;
+export type MunicipalityQueryResult = Apollo.QueryResult<
+  MunicipalityQuery,
+  MunicipalityQueryVariables
+>;
+export const NeighborhoodsDocument = gql`
+  query Neighborhoods($input: NeighborhoodsInput!) {
+    neighborhoods(input: $input) {
+      neighborhoods {
+        id
+        name
+      }
+    }
+  }
+`;
+
+/**
+ * __useNeighborhoodsQuery__
+ *
+ * To run a query within a React component, call `useNeighborhoodsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useNeighborhoodsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useNeighborhoodsQuery({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useNeighborhoodsQuery(
+  baseOptions: Apollo.QueryHookOptions<
+    NeighborhoodsQuery,
+    NeighborhoodsQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<NeighborhoodsQuery, NeighborhoodsQueryVariables>(
+    NeighborhoodsDocument,
+    options
+  );
+}
+export function useNeighborhoodsLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    NeighborhoodsQuery,
+    NeighborhoodsQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<NeighborhoodsQuery, NeighborhoodsQueryVariables>(
+    NeighborhoodsDocument,
+    options
+  );
+}
+export type NeighborhoodsQueryHookResult = ReturnType<
+  typeof useNeighborhoodsQuery
+>;
+export type NeighborhoodsLazyQueryHookResult = ReturnType<
+  typeof useNeighborhoodsLazyQuery
+>;
+export type NeighborhoodsQueryResult = Apollo.QueryResult<
+  NeighborhoodsQuery,
+  NeighborhoodsQueryVariables
+>;
+export const NeighborhoodDocument = gql`
+  query Neighborhood($input: NeighborhoodInput!) {
+    neighborhood(input: $input) {
+      neighborhood {
+        id
+        name
+      }
+    }
+  }
+`;
+
+/**
+ * __useNeighborhoodQuery__
+ *
+ * To run a query within a React component, call `useNeighborhoodQuery` and pass it any options that fit your needs.
+ * When your component renders, `useNeighborhoodQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useNeighborhoodQuery({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useNeighborhoodQuery(
+  baseOptions: Apollo.QueryHookOptions<
+    NeighborhoodQuery,
+    NeighborhoodQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<NeighborhoodQuery, NeighborhoodQueryVariables>(
+    NeighborhoodDocument,
+    options
+  );
+}
+export function useNeighborhoodLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    NeighborhoodQuery,
+    NeighborhoodQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<NeighborhoodQuery, NeighborhoodQueryVariables>(
+    NeighborhoodDocument,
+    options
+  );
+}
+export type NeighborhoodQueryHookResult = ReturnType<
+  typeof useNeighborhoodQuery
+>;
+export type NeighborhoodLazyQueryHookResult = ReturnType<
+  typeof useNeighborhoodLazyQuery
+>;
+export type NeighborhoodQueryResult = Apollo.QueryResult<
+  NeighborhoodQuery,
+  NeighborhoodQueryVariables
 >;

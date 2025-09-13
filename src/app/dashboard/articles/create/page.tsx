@@ -45,7 +45,7 @@ export default function CreateArticlePage() {
   const [createArticle, { loading: creating }] = useCreateArticleMutation({
     onCompleted: (data) => {
       toast.success('Artículo creado exitosamente');
-      router.push(`/dashboard/articles/${data.createArticle.id}`);
+      router.push(`/dashboard/articles/${data.createArticle.article.id}`);
     },
     onError: (error) => {
       toast.error('Error al crear el artículo');
@@ -105,7 +105,7 @@ export default function CreateArticlePage() {
           input: {
             name: formData.name.trim(),
             description: formData.description.trim(),
-            imagePath: formData.imagePath,
+            imagePath: formData.imagePath || '',
             isEnabled: formData.isEnabled,
           },
         },

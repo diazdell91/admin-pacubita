@@ -46,17 +46,19 @@ import {
 // TODO: Replace with GraphQL when backend is ready
 // import { GET_COUNTRIES } from '@/lib/graphql/queries/locations';
 // import { DELETE_COUNTRY } from '@/lib/graphql/mutations/locations';
-import { useMockCountriesQuery, createMockMutationHook } from '@/lib/mock-data';
+import { useCountriesQuery} from "@/lib/graphql/generated";
 import Link from 'next/link';
 
 export default function CountriesPage() {
   const [searchTerm, setSearchTerm] = useState('');
 
   // TODO: Replace with GraphQL when backend is ready
-  const { data, loading, error, refetch } = useMockCountriesQuery();
+  const { data, loading, error, refetch } = useCountriesQuery({
+    variables: { input: { _: null } },
+  });
 
   // TODO: Replace with GraphQL when backend is ready
-  const [deleteCountry] = createMockMutationHook();
+  // TODO: Add proper mutation
 
   const handleDelete = async (countryId: string) => {
     if (window.confirm('¿Estás seguro de que quieres eliminar este país?')) {
@@ -82,7 +84,7 @@ export default function CountriesPage() {
     );
   }
 
-  const countries = data?.countries?.data || [];
+  const countries = data?.countries?.countries || [];
   const filteredCountries = countries.filter((country: any) =>
     country.name.toLowerCase().includes(searchTerm.toLowerCase())
   );

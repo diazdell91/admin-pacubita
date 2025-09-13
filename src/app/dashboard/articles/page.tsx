@@ -8,7 +8,7 @@ import { LoadingSpinner } from '@/components/common/LoadingSpinner';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
-import { useGetArticlesQuery, type Article } from '@/lib/graphql/generated';
+import { useArticlesQuery, type Article } from '@/lib/graphql/generated';
 import {
   Eye,
   Edit,
@@ -47,7 +47,7 @@ export default function ArticlesPage() {
   const [statusFilter, setStatusFilter] = useState<string>('all');
   const router = useRouter();
 
-  const { loading, error, data, refetch } = useGetArticlesQuery({
+  const { loading, error, data, refetch } = useArticlesQuery({
     variables: {
       input: {
         _: undefined, // ArticlesInput only has _ field

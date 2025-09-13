@@ -1,8 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-// TODO: Replace with GraphQL when backend is ready
-// import { useMutation, useQuery } from '@apollo/client/react';
+import { useMutation, useQuery } from '@apollo/client';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { ArrowLeft, Building2, Save, X, Plus, Trash2 } from 'lucide-react';
 
@@ -23,14 +22,9 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
-// TODO: Replace with GraphQL when backend is ready
-// import { CREATE_CITY } from '@/lib/graphql/mutations/locations';
-// import { GET_COUNTRIES, GET_STATES } from '@/lib/graphql/queries/locations';
-import { 
-  useMockCountriesQuery, 
-  useMockStatesQuery, 
-  useMockCreateCityMutation 
-} from '@/lib/mock-data';
+// import { CREATE_CITY } from '@/lib/graphql/generated';
+// import { GET_COUNTRIES, GET_STATES } from '@/lib/graphql/generated';
+// import { useCountriesQuery, useStatesQuery, CREATE_CITY } from '@/lib/graphql/generated';
 import Link from 'next/link';
 
 export default function CreateCityPage() {
@@ -46,15 +40,19 @@ export default function CreateCityPage() {
     zipCodes: [''],
   });
 
-  // TODO: Replace with GraphQL when backend is ready
-  const { data: countriesData } = useMockCountriesQuery();
-  const { data: statesData } = useMockStatesQuery();
+  // TODO: Implement with real GraphQL queries from codegen
+  // const { data: countriesData } = useQuery(GET_COUNTRIES, {
+  //   variables: { input: {} },
+  // });
+  // const { data: statesData } = useQuery(GET_STATES);
+  // const [createCity] = useMutation(CREATE_CITY);
 
-  // TODO: Replace with GraphQL when backend is ready
-  const [createCity] = useMockCreateCityMutation();
+  const countriesData = null;
+  const statesData = null;
+  const createCity = () => Promise.resolve();
 
-  const countries = countriesData?.countries?.data || [];
-  const states = statesData?.states?.data || [];
+  const countries: any[] = [];
+  const states: any[] = [];
   const selectedState = states.find((s: any) => s.id === formData.stateId);
 
   const handleSubmit = async (e: React.FormEvent) => {
