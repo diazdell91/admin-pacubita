@@ -16,6 +16,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Calendar } from '@/components/ui/calendar';
+import { formatCurrency } from '@/lib/utils';
 import {
   Popover,
   PopoverContent,
@@ -599,15 +600,15 @@ export function OrderForm({ step, data, onUpdate }: OrderFormProps) {
                 <div className="space-y-2">
                   <div className="flex justify-between">
                     <span>Subtotal:</span>
-                    <span>${((data.subtotal || 0) / 100).toFixed(2)}</span>
+                    <span>{formatCurrency(data.subtotal || 0)}</span>
                   </div>
                   <div className="flex justify-between">
                     <span>IVA (13%):</span>
-                    <span>${((data.vat || 0) / 100).toFixed(2)}</span>
+                    <span>{formatCurrency(data.vat || 0)}</span>
                   </div>
                   <div className="border-t pt-2 flex justify-between font-semibold text-lg">
                     <span>Total:</span>
-                    <span>${((data.total || 0) / 100).toFixed(2)}</span>
+                    <span>{formatCurrency(data.total || 0)}</span>
                   </div>
                 </div>
               </CardContent>

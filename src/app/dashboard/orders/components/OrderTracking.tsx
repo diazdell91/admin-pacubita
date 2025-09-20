@@ -6,7 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { OrderStatusBadge, OrderStatus } from '@/components/common/StatusBadge';
-import { UPDATE_ORDER_STATUS } from '@/lib/graphql/mutations/orders';
+// import { UPDATE_ORDER_STATUS } from '@/lib/graphql/mutations/orders';
 import {
   Select,
   SelectContent,
@@ -137,21 +137,9 @@ export function OrderTracking({
   const [newStatus, setNewStatus] = useState<OrderStatus | ''>('');
   const [notes, setNotes] = useState('');
 
-  const [updateOrderStatus, { loading: updating }] = useMutation(
-    UPDATE_ORDER_STATUS,
-    {
-      onCompleted: () => {
-        toast.success('Estado del pedido actualizado');
-        setIsChangingStatus(false);
-        setNewStatus('');
-        setNotes('');
-      },
-      onError: (error) => {
-        console.error('Error updating order status:', error);
-        toast.error('Error al actualizar el estado');
-      },
-    }
-  );
+  // TODO: Implement order status update mutation when available
+  const updateOrderStatus = null;
+  const updating = false;
 
   // TODO: Use real timeline data from GraphQL
   const actualTimeline = timeline.length > 0 ? timeline : [];
@@ -176,17 +164,15 @@ export function OrderTracking({
       if (onStatusChange) {
         onStatusChange(newStatus as OrderStatus, notes);
       } else {
-        updateOrderStatus({
-          variables: {
-            input: {
-              orderId: order.id,
-              status: newStatus,
-              notes: notes || undefined,
-            },
-          },
+        // TODO: Implement updateOrderStatus mutation when available
+        toast.error('Actualización de estado no disponible temporalmente');
+        console.log('Would update order status:', {
+          orderId: order.id,
+          status: newStatus,
+          notes: notes || undefined,
         });
       }
-    } catch {
+    } catch (error) {
       console.error('Error in handleStatusChange:', error);
     }
   };

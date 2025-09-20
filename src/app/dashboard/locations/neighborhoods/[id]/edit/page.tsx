@@ -1,7 +1,7 @@
 'use client';
 
-import { useState } from 'react';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useState, useEffect } from 'react';
+import { useRouter, useParams } from 'next/navigation';
 import { ArrowLeft, Home, Save, X } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
@@ -21,23 +21,31 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
-import { useMunicipalitiesQuery, useCreateNeighborhoodMutation } from '@/lib/graphql';
+import { LoadingPage } from '@/components/common/LoadingSpinner';
+import { useNeighborhoodQuery, useMunicipalitiesQuery, useUpdateNeighborhoodMutation } from '@/lib/graphql';
 import { toast } from 'sonner';
 import Link from 'next/link';
 
-export default function CreateNeighborhoodPage() {
+export default function EditNeighborhoodPage() {
   const router = useRouter();
-  const searchParams = useSearchParams();
-  const preselectedMunicipalityId = searchParams.get('municipalityId');
+  const params = useParams();
+  const neighborhoodId = params.id as string;
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
-    id: '',
-    municipalityId: preselectedMunicipalityId || '',
+    municipalityId: '',
   });
 
-  // Load municipalities using generated hook
+  // Load neighborhood data
+  const { data: neighborhoodData, loading: neighborhoodLoading, error: neighborhoodError } = useNeighborhoodQuery({
+    variables: {
+      input: { id: neighborhoodId }
+    },
+    skip: !neighborhoodId
+  });
+
+  // Load municipalities
   const { data: municipalitiesData, loading: municipalitiesLoading } = useMunicipalitiesQuery({
     variables: {
       input: {
@@ -46,39 +54,48 @@ export default function CreateNeighborhoodPage() {
     }
   });
 
-  // Create neighborhood mutation
-  const [createNeighborhoodMutation, { loading: isCreating }] = useCreateNeighborhoodMutation({
+  // Update neighborhood mutation
+  const [updateNeighborhoodMutation, { loading: isUpdating }] = useUpdateNeighborhoodMutation({
     onCompleted: () => {
-      toast.success('Barrio creado exitosamente');
+      toast.success('Barrio actualizado exitosamente');
       router.push('/dashboard/locations/neighborhoods');
     },
     onError: (error) => {
-      console.error('Error creating neighborhood:', error);
-      toast.error('Error al crear el barrio');
+      console.error('Error updating neighborhood:', error);
+      toast.error('Error al actualizar el barrio');
     }
   });
 
+  const neighborhood = neighborhoodData?.neighborhood?.neighborhood;
   const municipalities = municipalitiesData?.municipalities?.municipalities || [];
-  const selectedMunicipality = municipalities.find(
-    (m: any) => m.id === formData.municipalityId
-  );
+  const selectedMunicipality = municipalities.find((m: any) => m.id === formData.municipalityId);
+
+  // Populate form when neighborhood data loads
+  useEffect(() => {
+    if (neighborhood) {
+      setFormData({
+        name: neighborhood.name || '',
+        municipalityId: neighborhood.municipality?.id || ''
+      });
+    }
+  }, [neighborhood]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
 
     try {
-      await createNeighborhoodMutation({
+      await updateNeighborhoodMutation({
         variables: {
           input: {
+            id: neighborhoodId,
             name: formData.name,
-            municipalityId: formData.municipalityId,
-            ...(formData.id && { id: formData.id })
+            municipalityId: formData.municipalityId
           }
         }
       });
     } catch (error) {
-      console.error('Error creating neighborhood:', error);
+      console.error('Error updating neighborhood:', error);
       setIsSubmitting(false);
     }
   };
@@ -89,6 +106,19 @@ export default function CreateNeighborhoodPage() {
       [field]: value,
     }));
   };
+
+  if (neighborhoodLoading || municipalitiesLoading) {
+    return <LoadingPage />;
+  }
+
+  if (neighborhoodError || !neighborhood) {
+    return (
+      <div className="text-center py-12">
+        <p className="text-red-600 mb-4">Error al cargar el barrio</p>
+        <Button onClick={() => router.back()}>Volver</Button>
+      </div>
+    );
+  }
 
   return (
     <div className="space-y-6">
@@ -102,11 +132,9 @@ export default function CreateNeighborhoodPage() {
             </Link>
           </Button>
           <div>
-            <h1 className="text-3xl font-bold tracking-tight">Crear Barrio</h1>
+            <h1 className="text-3xl font-bold tracking-tight">Editar Barrio</h1>
             <p className="text-muted-foreground">
-              {selectedMunicipality
-                ? `Agrega un nuevo barrio para ${selectedMunicipality.name}`
-                : 'Agrega un nuevo barrio al sistema'}
+              Modifica la información de {neighborhood.name}
             </p>
           </div>
         </div>
@@ -122,7 +150,7 @@ export default function CreateNeighborhoodPage() {
             <div>
               <CardTitle>Información del Barrio</CardTitle>
               <CardDescription>
-                Completa la información básica del barrio
+                Actualiza la información básica del barrio
               </CardDescription>
             </div>
           </div>
@@ -134,9 +162,7 @@ export default function CreateNeighborhoodPage() {
                 <Label htmlFor="municipalityId">Municipio *</Label>
                 <Select
                   value={formData.municipalityId}
-                  onValueChange={(value) =>
-                    handleInputChange('municipalityId', value)
-                  }
+                  onValueChange={(value) => handleInputChange('municipalityId', value)}
                 >
                   <SelectTrigger>
                     <SelectValue placeholder="Seleccionar municipio" />
@@ -144,7 +170,7 @@ export default function CreateNeighborhoodPage() {
                   <SelectContent>
                     {municipalities.map((municipality: any) => (
                       <SelectItem key={municipality.id} value={municipality.id}>
-                        {municipality.name}
+                        {municipality.name} - {municipality.province?.name}
                       </SelectItem>
                     ))}
                   </SelectContent>
@@ -161,35 +187,15 @@ export default function CreateNeighborhoodPage() {
                   required
                 />
               </div>
-
-              <div className="space-y-2">
-                <Label htmlFor="id">ID del Barrio (opcional)</Label>
-                <Input
-                  id="id"
-                  placeholder="Ej: vedado, miramar, nuevo-vedado"
-                  value={formData.id}
-                  onChange={(e) =>
-                    handleInputChange(
-                      'id',
-                      e.target.value.toLowerCase().replace(/\s+/g, '-')
-                    )
-                  }
-                />
-                <p className="text-sm text-muted-foreground">
-                  Si no se especifica, se generará automáticamente
-                </p>
-              </div>
             </div>
 
             <div className="flex items-center gap-4 pt-6">
               <Button
                 type="submit"
-                disabled={
-                  isSubmitting || isCreating || !formData.name || !formData.municipalityId
-                }
+                disabled={isSubmitting || isUpdating || !formData.name || !formData.municipalityId}
               >
                 <Save className="h-4 w-4 mr-2" />
-                {isSubmitting || isCreating ? 'Creando...' : 'Crear Barrio'}
+                {isSubmitting || isUpdating ? 'Guardando...' : 'Guardar Cambios'}
               </Button>
               <Button type="button" variant="outline" asChild>
                 <Link href="/dashboard/locations/neighborhoods">
@@ -202,41 +208,33 @@ export default function CreateNeighborhoodPage() {
         </CardContent>
       </Card>
 
-      {/* Help Information */}
+      {/* Neighborhood Information */}
       <Card>
         <CardHeader>
-          <CardTitle className="text-lg">Información Adicional</CardTitle>
+          <CardTitle className="text-lg">Información del Barrio</CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
-          <div>
-            <h4 className="font-medium mb-2">
-              ¿Qué sucede después de crear el barrio?
-            </h4>
-            <ul className="text-sm text-muted-foreground space-y-1 ml-4">
-              <li>
-                • El barrio estará disponible para asignación de direcciones
-              </li>
-              <li>• Se habilitará la entrega precisa en esta zona</li>
-              <li>• Estará visible en todos los filtros de ubicación</li>
-            </ul>
-          </div>
-          <div>
-            <h4 className="font-medium mb-2">
-              Ejemplos de barrios famosos en Cuba:
-            </h4>
-            <ul className="text-sm text-muted-foreground space-y-1 ml-4">
-              <li>• La Habana: Vedado, Miramar, Habana Vieja, Centro</li>
-              <li>• Santiago: Vista Alegre, Sueño, Los Olmos</li>
-              <li>• Matanzas: Pueblo Nuevo, Versalles, Playa</li>
-            </ul>
-          </div>
-          <div>
-            <h4 className="font-medium mb-2">Consejos:</h4>
-            <ul className="text-sm text-muted-foreground space-y-1 ml-4">
-              <li>• Usa nombres oficiales o reconocidos localmente</li>
-              <li>• Evita abreviaciones confusas</li>
-              <li>• Considera la geografía y límites naturales</li>
-            </ul>
+          <div className="grid grid-cols-2 gap-4 text-sm">
+            <div>
+              <span className="font-medium">ID:</span>
+              <p className="text-muted-foreground">{neighborhood.id}</p>
+            </div>
+            <div>
+              <span className="font-medium">Municipio actual:</span>
+              <p className="text-muted-foreground">{neighborhood.municipality?.name}</p>
+            </div>
+            <div>
+              <span className="font-medium">Provincia:</span>
+              <p className="text-muted-foreground">{neighborhood.municipality?.province?.name}</p>
+            </div>
+            <div>
+              <span className="font-medium">Estado:</span>
+              <p className="text-muted-foreground">{neighborhood.municipality?.province?.state?.name}</p>
+            </div>
+            <div>
+              <span className="font-medium">País:</span>
+              <p className="text-muted-foreground">{neighborhood.municipality?.province?.state?.country?.name}</p>
+            </div>
           </div>
         </CardContent>
       </Card>

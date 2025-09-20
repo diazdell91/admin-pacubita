@@ -54,7 +54,7 @@ export default function CountriesPage() {
 
   // TODO: Replace with GraphQL when backend is ready
   const { data, loading, error, refetch } = useCountriesQuery({
-    variables: { input: { _: null } },
+    variables: { input: { _: undefined } },
   });
 
   // TODO: Replace with GraphQL when backend is ready

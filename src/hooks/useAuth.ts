@@ -62,11 +62,18 @@ export function useAuth() {
       }
 
       // TODO: Implement currentUser query with Apollo Client
-      // Mock removed - implement real user query
+      // For now, set a basic user object if tokens exist to enable authentication
       if (token && refreshToken) {
-        // TODO: Query current user from server
-        // For now, just keep null
-        setUser(null);
+        // Temporary user object - should be replaced with real user query
+        const tempUser: User = {
+          id: 'temp',
+          firstName: 'Staff',
+          lastName: 'Admin',
+          email: 'staff@pacubita.com',
+          phone: '+53 5555 5555',
+          createdAt: new Date().toISOString(),
+        };
+        setUser(tempUser);
       }
     } catch (error) {
       console.error('Auth check failed:', error);

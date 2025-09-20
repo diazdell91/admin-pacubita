@@ -1,15 +1,13 @@
 'use client';
 
 import { useState } from 'react';
-import { useQuery } from '@apollo/client/react';
 import { PageHeader } from '@/components/common/PageHeader';
 import { DataTable } from '@/components/common/DataTable';
 import { LoadingSpinner } from '@/components/common/LoadingSpinner';
 import { OrderStatusBadge } from '@/components/common/StatusBadge';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { graphql } from '@/generated';
-import type { GetOrdersQuery, OrderFragment } from '@/generated/graphql';
+import { useOrdersQuery, type OrdersQuery, type Order } from '@/lib/graphql';
 import {
   Eye,
   Edit,
@@ -28,7 +26,7 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { OrderFilters } from './components/OrderFilters';
-import { formatDate } from '@/lib/utils';
+import { formatDate, formatCurrency } from '@/lib/utils';
 import { toast } from 'sonner';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
@@ -40,55 +38,32 @@ export default function OrdersPage() {
   const [filters, setFilters] = useState({});
   const router = useRouter();
 
-  const { loading, error, data, refetch } = useQuery(
-    graphql(`
-      query GetOrders($input: OrdersInput!) {
-        orders(input: $input) {
-          total
-          orders {
-            ...OrderFragment
-            client {
-              ...OrderClientFragment
-            }
-            driver {
-              ...OrderDriverFragment
-            }
-            partner {
-              ...OrderPartnerFragment
-            }
-          }
-        }
-      }
-    `),
-    {
-      variables: {
-        input: {
+  const { loading, error, data, refetch } = useOrdersQuery({
+    variables: {
+      input: {
+        pagination: {
           page: currentPage,
-          limit: pageSize,
-          ...filters,
+          size: pageSize,
         },
+        ...filters,
       },
-      errorPolicy: 'all',
-    }
-  );
+    },
+    errorPolicy: 'all',
+  });
 
   const orders = data?.orders?.orders || [];
   const totalOrders = data?.orders?.total || 0;
 
   const handleCreateOrder = () => {
-    router.push('/orders/create');
+    router.push('/dashboard/orders/create');
   };
 
-  const handleViewOrder = (
-    order: NonNullable<GetOrdersQuery['orders']>['orders'][0]
-  ) => {
-    router.push(`/orders/${order.id}`);
+  const handleViewOrder = (order: Order) => {
+    router.push(`/dashboard/orders/${order.id}`);
   };
 
-  const handleEditOrder = (
-    order: NonNullable<GetOrdersQuery['orders']>['orders'][0]
-  ) => {
-    router.push(`/orders/${order.id}/edit`);
+  const handleEditOrder = (order: Order) => {
+    router.push(`/dashboard/orders/${order.id}/edit`);
   };
 
   const handleFiltersChange = (newFilters: any) => {
@@ -128,7 +103,7 @@ export default function OrdersPage() {
       sortable: true,
       render: (value: any, order: Order) => (
         <Link
-          href={`/orders/${order.id}`}
+          href={`/dashboard/orders/${order.id}`}
           className="font-medium text-blue-600 hover:text-blue-800"
         >
           {value}
@@ -192,7 +167,7 @@ export default function OrdersPage() {
       label: 'Total',
       sortable: true,
       render: (value: any) => (
-        <span className="font-medium">${value.toFixed(2)}</span>
+        <span className="font-medium">{formatCurrency(value || 0)}</span>
       ),
     },
     {

@@ -80,7 +80,7 @@ export default function CitiesPage() {
 
   // TODO: Replace with GraphQL when backend is ready
   const { data: countriesData } = useCountriesQuery({
-    variables: { input: { _: null } },
+    variables: { input: { _: undefined } },
   });
 
   // TODO: Replace with GraphQL when backend is ready

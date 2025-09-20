@@ -1,7 +1,7 @@
 'use client';
 
-import { useState } from 'react';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useState, useEffect } from 'react';
+import { useRouter, useParams } from 'next/navigation';
 import { ArrowLeft, MapPin, Save, X } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
@@ -21,23 +21,31 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
-import { useProvincesQuery, useCreateMunicipalityMutation } from '@/lib/graphql';
+import { LoadingPage } from '@/components/common/LoadingSpinner';
+import { useMunicipalityQuery, useProvincesQuery, useUpdateMunicipalityMutation } from '@/lib/graphql';
 import { toast } from 'sonner';
 import Link from 'next/link';
 
-export default function CreateMunicipalityPage() {
+export default function EditMunicipalityPage() {
   const router = useRouter();
-  const searchParams = useSearchParams();
-  const preselectedProvinceId = searchParams.get('provinceId');
+  const params = useParams();
+  const municipalityId = params.id as string;
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
-    id: '',
-    provinceId: preselectedProvinceId || '',
+    provinceId: '',
   });
 
-  // Load provinces using generated hook
+  // Load municipality data
+  const { data: municipalityData, loading: municipalityLoading, error: municipalityError } = useMunicipalityQuery({
+    variables: {
+      input: { id: municipalityId }
+    },
+    skip: !municipalityId
+  });
+
+  // Load provinces
   const { data: provincesData, loading: provincesLoading } = useProvincesQuery({
     variables: {
       input: {
@@ -46,39 +54,48 @@ export default function CreateMunicipalityPage() {
     }
   });
 
-  // Create municipality mutation
-  const [createMunicipalityMutation, { loading: isCreating }] = useCreateMunicipalityMutation({
+  // Update municipality mutation
+  const [updateMunicipalityMutation, { loading: isUpdating }] = useUpdateMunicipalityMutation({
     onCompleted: () => {
-      toast.success('Municipio creado exitosamente');
+      toast.success('Municipio actualizado exitosamente');
       router.push('/dashboard/locations/municipalities');
     },
     onError: (error) => {
-      console.error('Error creating municipality:', error);
-      toast.error('Error al crear el municipio');
+      console.error('Error updating municipality:', error);
+      toast.error('Error al actualizar el municipio');
     }
   });
 
+  const municipality = municipalityData?.municipality?.municipality;
   const provinces = provincesData?.provinces?.provinces || [];
-  const selectedProvince = provinces.find(
-    (p: any) => p.id === formData.provinceId
-  );
+  const selectedProvince = provinces.find((p: any) => p.id === formData.provinceId);
+
+  // Populate form when municipality data loads
+  useEffect(() => {
+    if (municipality) {
+      setFormData({
+        name: municipality.name || '',
+        provinceId: municipality.province?.id || ''
+      });
+    }
+  }, [municipality]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
 
     try {
-      await createMunicipalityMutation({
+      await updateMunicipalityMutation({
         variables: {
           input: {
+            id: municipalityId,
             name: formData.name,
-            provinceId: formData.provinceId,
-            ...(formData.id && { id: formData.id })
+            provinceId: formData.provinceId
           }
         }
       });
     } catch (error) {
-      console.error('Error creating municipality:', error);
+      console.error('Error updating municipality:', error);
       setIsSubmitting(false);
     }
   };
@@ -89,6 +106,19 @@ export default function CreateMunicipalityPage() {
       [field]: value,
     }));
   };
+
+  if (municipalityLoading || provincesLoading) {
+    return <LoadingPage />;
+  }
+
+  if (municipalityError || !municipality) {
+    return (
+      <div className="text-center py-12">
+        <p className="text-red-600 mb-4">Error al cargar el municipio</p>
+        <Button onClick={() => router.back()}>Volver</Button>
+      </div>
+    );
+  }
 
   return (
     <div className="space-y-6">
@@ -102,13 +132,9 @@ export default function CreateMunicipalityPage() {
             </Link>
           </Button>
           <div>
-            <h1 className="text-3xl font-bold tracking-tight">
-              Crear Municipio
-            </h1>
+            <h1 className="text-3xl font-bold tracking-tight">Editar Municipio</h1>
             <p className="text-muted-foreground">
-              {selectedProvince
-                ? `Agrega un nuevo municipio para ${selectedProvince.name}`
-                : 'Agrega un nuevo municipio al sistema'}
+              Modifica la información de {municipality.name}
             </p>
           </div>
         </div>
@@ -124,7 +150,7 @@ export default function CreateMunicipalityPage() {
             <div>
               <CardTitle>Información del Municipio</CardTitle>
               <CardDescription>
-                Completa la información básica del municipio
+                Actualiza la información básica del municipio
               </CardDescription>
             </div>
           </div>
@@ -136,9 +162,7 @@ export default function CreateMunicipalityPage() {
                 <Label htmlFor="provinceId">Provincia *</Label>
                 <Select
                   value={formData.provinceId}
-                  onValueChange={(value) =>
-                    handleInputChange('provinceId', value)
-                  }
+                  onValueChange={(value) => handleInputChange('provinceId', value)}
                 >
                   <SelectTrigger>
                     <SelectValue placeholder="Seleccionar provincia" />
@@ -163,35 +187,15 @@ export default function CreateMunicipalityPage() {
                   required
                 />
               </div>
-
-              <div className="space-y-2">
-                <Label htmlFor="id">ID del Municipio (opcional)</Label>
-                <Input
-                  id="id"
-                  placeholder="Ej: plaza, vedado, miramar"
-                  value={formData.id}
-                  onChange={(e) =>
-                    handleInputChange(
-                      'id',
-                      e.target.value.toLowerCase().replace(/\s+/g, '-')
-                    )
-                  }
-                />
-                <p className="text-sm text-muted-foreground">
-                  Si no se especifica, se generará automáticamente
-                </p>
-              </div>
             </div>
 
             <div className="flex items-center gap-4 pt-6">
               <Button
                 type="submit"
-                disabled={
-                  isSubmitting || isCreating || !formData.name || !formData.provinceId
-                }
+                disabled={isSubmitting || isUpdating || !formData.name || !formData.provinceId}
               >
                 <Save className="h-4 w-4 mr-2" />
-                {isSubmitting || isCreating ? 'Creando...' : 'Crear Municipio'}
+                {isSubmitting || isUpdating ? 'Guardando...' : 'Guardar Cambios'}
               </Button>
               <Button type="button" variant="outline" asChild>
                 <Link href="/dashboard/locations/municipalities">
@@ -204,31 +208,29 @@ export default function CreateMunicipalityPage() {
         </CardContent>
       </Card>
 
-      {/* Help Information */}
+      {/* Municipality Information */}
       <Card>
         <CardHeader>
-          <CardTitle className="text-lg">Información Adicional</CardTitle>
+          <CardTitle className="text-lg">Información del Municipio</CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
-          <div>
-            <h4 className="font-medium mb-2">
-              ¿Qué sucede después de crear el municipio?
-            </h4>
-            <ul className="text-sm text-muted-foreground space-y-1 ml-4">
-              <li>• Podrás agregar barrios para este municipio</li>
-              <li>• Estará disponible en los filtros de ubicación</li>
-              <li>• Se habilitará la gestión detallada de direcciones</li>
-            </ul>
-          </div>
-          <div>
-            <h4 className="font-medium mb-2">
-              Ejemplos de municipios en Cuba:
-            </h4>
-            <ul className="text-sm text-muted-foreground space-y-1 ml-4">
-              <li>• La Habana: Plaza, Centro Habana, Habana Vieja</li>
-              <li>• Santiago: Santiago de Cuba, Palma Soriano</li>
-              <li>• Matanzas: Matanzas, Cárdenas, Varadero</li>
-            </ul>
+          <div className="grid grid-cols-2 gap-4 text-sm">
+            <div>
+              <span className="font-medium">ID:</span>
+              <p className="text-muted-foreground">{municipality.id}</p>
+            </div>
+            <div>
+              <span className="font-medium">Provincia actual:</span>
+              <p className="text-muted-foreground">{municipality.province?.name}</p>
+            </div>
+            <div>
+              <span className="font-medium">Estado/País:</span>
+              <p className="text-muted-foreground">{municipality.province?.state?.name}</p>
+            </div>
+            <div>
+              <span className="font-medium">País:</span>
+              <p className="text-muted-foreground">{municipality.province?.state?.country?.name}</p>
+            </div>
           </div>
         </CardContent>
       </Card>

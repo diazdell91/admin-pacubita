@@ -164,18 +164,6 @@ export function LoginForm() {
             </Button>
           </form>
         </Form>
-
-        <div className="mt-6 text-center">
-          <p className="text-sm text-gray-600">
-            ¿No tienes cuenta?{' '}
-            <Link
-              href="/register"
-              className="text-blue-600 hover:text-blue-500 font-medium"
-            >
-              Crear cuenta
-            </Link>
-          </p>
-        </div>
       </CardContent>
     </Card>
   );

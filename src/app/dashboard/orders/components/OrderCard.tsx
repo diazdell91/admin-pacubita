@@ -12,6 +12,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
+import { formatCurrency } from '@/lib/utils';
 import {
   MoreHorizontal,
   Eye,
@@ -67,7 +68,7 @@ export function OrderCard({ order, onView, onEdit }: OrderCardProps) {
           </div>
 
           <div className="flex items-center space-x-2">
-            <span className="text-lg font-bold">${order.total.toFixed(2)}</span>
+            <span className="text-lg font-bold">{formatCurrency(order.total)}</span>
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button variant="ghost" className="h-8 w-8 p-0">

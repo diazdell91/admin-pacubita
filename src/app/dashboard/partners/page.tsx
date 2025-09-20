@@ -11,7 +11,7 @@ import { DataTable } from '@/components/common/DataTable';
 import { PageHeader } from '@/components/common/PageHeader';
 import { LoadingSpinner } from '@/components/common/LoadingSpinner';
 import { EmptyState } from '@/components/common/EmptyState';
-import { usePartnersQuery } from '@/lib/graphql/generated';
+import { Partner, usePartnersQuery } from '@/lib/graphql/generated';
 import { usePartnerStore } from '@/stores/partnerStore';
 
 export default function PartnersPage() {
@@ -19,15 +19,15 @@ export default function PartnersPage() {
   const [searchTerm, setSearchTerm] = useState('');
   const { setSelectedPartner } = usePartnerStore();
 
-  const { data, loading, error, refetch } = usePartnersQuery({
+  const { data, loading, error } = usePartnersQuery({
     variables: {
       input: {
-        _: null, // Required placeholder field
+        _: null,
       },
     },
   });
 
-  const handlePartnerSelect = (partner: any) => {
+  const handlePartnerSelect = (partner: Partner) => {
     setSelectedPartner({
       id: partner.id,
       name: partner.name,
@@ -52,7 +52,9 @@ export default function PartnersPage() {
           </div>
           <div>
             <div className="font-medium">{partner.name}</div>
-            <div className="text-sm text-muted-foreground">ID: {partner.id}</div>
+            <div className="text-sm text-muted-foreground">
+              ID: {partner.id}
+            </div>
           </div>
         </div>
       ),
@@ -145,8 +147,8 @@ export default function PartnersPage() {
               title="No partners found"
               description={
                 searchTerm
-                  ? "No partners match your search criteria"
-                  : "No partners have been added yet"
+                  ? 'No partners match your search criteria'
+                  : 'No partners have been added yet'
               }
             />
           ) : (

@@ -91,7 +91,7 @@ export default function LocationsPage() {
 
   // TODO: Replace with GraphQL when backend is ready
   const { data: countriesData, loading: countriesLoading } = useCountriesQuery({
-    variables: { input: { _: null } },
+    variables: { input: { _: undefined } },
   });
 
   const countries = countriesData?.countries?.countries || [];

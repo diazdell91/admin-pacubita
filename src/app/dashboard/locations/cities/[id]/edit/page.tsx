@@ -1,7 +1,7 @@
 'use client';
 
-import { useState } from 'react';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useState, useEffect } from 'react';
+import { useRouter, useParams } from 'next/navigation';
 import { ArrowLeft, Building2, Save, X, Plus, Trash2 } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
@@ -21,24 +21,32 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
-import { useStatesQuery, useCreateCityMutation } from '@/lib/graphql';
+import { LoadingPage } from '@/components/common/LoadingSpinner';
+import { useCityQuery, useStatesQuery, useUpdateCityMutation } from '@/lib/graphql';
 import { toast } from 'sonner';
 import Link from 'next/link';
 
-export default function CreateCityPage() {
+export default function EditCityPage() {
   const router = useRouter();
-  const searchParams = useSearchParams();
-  const preselectedStateId = searchParams.get('stateId');
+  const params = useParams();
+  const cityId = params.id as string;
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
-    id: '',
-    stateId: preselectedStateId || '',
+    stateId: '',
     zipCodes: [''],
   });
 
-  // Load states using generated hook
+  // Load city data
+  const { data: cityData, loading: cityLoading, error: cityError } = useCityQuery({
+    variables: {
+      input: { id: cityId }
+    },
+    skip: !cityId
+  });
+
+  // Load states
   const { data: statesData, loading: statesLoading } = useStatesQuery({
     variables: {
       input: {
@@ -47,20 +55,32 @@ export default function CreateCityPage() {
     }
   });
 
-  // Create city mutation
-  const [createCityMutation, { loading: isCreating }] = useCreateCityMutation({
+  // Update city mutation
+  const [updateCityMutation, { loading: isUpdating }] = useUpdateCityMutation({
     onCompleted: () => {
-      toast.success('Ciudad creada exitosamente');
+      toast.success('Ciudad actualizada exitosamente');
       router.push('/dashboard/locations/cities');
     },
     onError: (error) => {
-      console.error('Error creating city:', error);
-      toast.error('Error al crear la ciudad');
+      console.error('Error updating city:', error);
+      toast.error('Error al actualizar la ciudad');
     }
   });
 
+  const city = cityData?.city?.city;
   const states = statesData?.states?.states || [];
   const selectedState = states.find((s: any) => s.id === formData.stateId);
+
+  // Populate form when city data loads
+  useEffect(() => {
+    if (city) {
+      setFormData({
+        name: city.name || '',
+        stateId: city.state?.id || '',
+        zipCodes: city.zipCodes && city.zipCodes.length > 0 ? city.zipCodes : ['']
+      });
+    }
+  }, [city]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -69,18 +89,18 @@ export default function CreateCityPage() {
     try {
       const zipCodes = formData.zipCodes.filter((code) => code.trim() !== '');
 
-      await createCityMutation({
+      await updateCityMutation({
         variables: {
           input: {
+            id: cityId,
             name: formData.name,
             stateId: formData.stateId,
-            zipCodes: zipCodes.length > 0 ? zipCodes : undefined,
-            ...(formData.id && { id: formData.id })
+            zipCodes: zipCodes.length > 0 ? zipCodes : undefined
           }
         }
       });
     } catch (error) {
-      console.error('Error creating city:', error);
+      console.error('Error updating city:', error);
       setIsSubmitting(false);
     }
   };
@@ -113,6 +133,19 @@ export default function CreateCityPage() {
     }));
   };
 
+  if (cityLoading || statesLoading) {
+    return <LoadingPage />;
+  }
+
+  if (cityError || !city) {
+    return (
+      <div className="text-center py-12">
+        <p className="text-red-600 mb-4">Error al cargar la ciudad</p>
+        <Button onClick={() => router.back()}>Volver</Button>
+      </div>
+    );
+  }
+
   return (
     <div className="space-y-6">
       {/* Page Header */}
@@ -125,11 +158,9 @@ export default function CreateCityPage() {
             </Link>
           </Button>
           <div>
-            <h1 className="text-3xl font-bold tracking-tight">Crear Ciudad</h1>
+            <h1 className="text-3xl font-bold tracking-tight">Editar Ciudad</h1>
             <p className="text-muted-foreground">
-              {selectedState
-                ? `Agrega una nueva ciudad para ${selectedState.name}`
-                : 'Agrega una nueva ciudad al sistema'}
+              Modifica la información de {city.name}
             </p>
           </div>
         </div>
@@ -145,7 +176,7 @@ export default function CreateCityPage() {
             <div>
               <CardTitle>Información de la Ciudad</CardTitle>
               <CardDescription>
-                Completa la información básica de la ciudad
+                Actualiza la información básica de la ciudad
               </CardDescription>
             </div>
           </div>
@@ -181,24 +212,6 @@ export default function CreateCityPage() {
                   onChange={(e) => handleInputChange('name', e.target.value)}
                   required
                 />
-              </div>
-
-              <div className="space-y-2">
-                <Label htmlFor="id">ID de la Ciudad (opcional)</Label>
-                <Input
-                  id="id"
-                  placeholder="Ej: habana, matanzas, santiago"
-                  value={formData.id}
-                  onChange={(e) =>
-                    handleInputChange(
-                      'id',
-                      e.target.value.toLowerCase().replace(/\s+/g, '-')
-                    )
-                  }
-                />
-                <p className="text-sm text-muted-foreground">
-                  Si no se especifica, se generará automáticamente
-                </p>
               </div>
             </div>
 
@@ -246,10 +259,10 @@ export default function CreateCityPage() {
             <div className="flex items-center gap-4 pt-6">
               <Button
                 type="submit"
-                disabled={isSubmitting || isCreating || !formData.name || !formData.stateId}
+                disabled={isSubmitting || isUpdating || !formData.name || !formData.stateId}
               >
                 <Save className="h-4 w-4 mr-2" />
-                {isSubmitting || isCreating ? 'Creando...' : 'Crear Ciudad'}
+                {isSubmitting || isUpdating ? 'Guardando...' : 'Guardar Cambios'}
               </Button>
               <Button type="button" variant="outline" asChild>
                 <Link href="/dashboard/locations/cities">
@@ -262,31 +275,33 @@ export default function CreateCityPage() {
         </CardContent>
       </Card>
 
-      {/* Help Information */}
+      {/* City Information */}
       <Card>
         <CardHeader>
-          <CardTitle className="text-lg">Información Adicional</CardTitle>
+          <CardTitle className="text-lg">Información de la Ciudad</CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
-          <div>
-            <h4 className="font-medium mb-2">
-              ¿Qué sucede después de crear la ciudad?
-            </h4>
-            <ul className="text-sm text-muted-foreground space-y-1 ml-4">
-              <li>• La ciudad estará disponible en los sistemas de entregas</li>
-              <li>• Se podrán asociar códigos postales específicos</li>
-              <li>• Estará disponible para la gestión de ubicaciones</li>
-            </ul>
-          </div>
-          <div>
-            <h4 className="font-medium mb-2">Sobre los códigos postales:</h4>
-            <ul className="text-sm text-muted-foreground space-y-1 ml-4">
-              <li>• Puedes agregar múltiples códigos postales por ciudad</li>
-              <li>
-                • Son opcionales pero ayudan con la precisión de las entregas
-              </li>
-              <li>• Formato numérico estándar (ej: 10400, 11300)</li>
-            </ul>
+          <div className="grid grid-cols-2 gap-4 text-sm">
+            <div>
+              <span className="font-medium">ID:</span>
+              <p className="text-muted-foreground">{city.id}</p>
+            </div>
+            <div>
+              <span className="font-medium">Estado actual:</span>
+              <p className="text-muted-foreground">{city.state?.name}</p>
+            </div>
+            <div>
+              <span className="font-medium">País:</span>
+              <p className="text-muted-foreground">{city.state?.country?.name}</p>
+            </div>
+            <div>
+              <span className="font-medium">Códigos postales actuales:</span>
+              <p className="text-muted-foreground">
+                {city.zipCodes && city.zipCodes.length > 0
+                  ? city.zipCodes.join(', ')
+                  : 'Ninguno definido'}
+              </p>
+            </div>
           </div>
         </CardContent>
       </Card>

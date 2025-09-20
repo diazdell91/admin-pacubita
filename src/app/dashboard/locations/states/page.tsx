@@ -65,7 +65,7 @@ export default function StatesPage() {
   const [activeTab, setActiveTab] = useState<'states' | 'provinces'>('states');
 
   const { data: countriesData } = useCountriesQuery({
-    variables: { input: { _: null } },
+    variables: { input: { _: undefined } },
   });
 
   const {
