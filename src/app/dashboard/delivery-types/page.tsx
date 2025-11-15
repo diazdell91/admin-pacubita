@@ -99,14 +99,14 @@ export default function DeliveryTypesPage() {
 
   const loading = false;
   const error = null;
-  const data: { deliveryTypes?: { data?: DeliveryType[] } } | null = null;
+  const data: { deliveryTypes?: { data?: DeliveryType[] } } = {};
   const refetch = () => Promise.resolve();
   const createDeliveryType = () => Promise.resolve();
   const updateDeliveryType = () => Promise.resolve();
   const creating = false;
   const updating = false;
 
-  const deliveryTypes = data?.deliveryTypes?.data || [];
+  const deliveryTypes = (data?.deliveryTypes?.data as DeliveryType[]) || [];
   const totalTypes = deliveryTypes.length;
 
   const resetForm = () => {
@@ -232,7 +232,7 @@ export default function DeliveryTypesPage() {
             })}
           </div>
           <div>
-            <div className="font-medium">{value}</div>
+            <div className="font-medium">{String(value)}</div>
             {type.description && (
               <p className="text-sm text-muted-foreground line-clamp-1">
                 {type.description}
@@ -406,8 +406,8 @@ export default function DeliveryTypesPage() {
 
       <div className="rounded-md border bg-white">
         <DataTable
-          data={deliveryTypes as Record<string, unknown>[]}
-          columns={columns as any}
+          data={deliveryTypes as unknown as Record<string, unknown>[]}
+          columns={columns as unknown as any}
           searchPlaceholder="Buscar tipos de entrega..."
           pageSize={pageSize}
           totalItems={totalTypes}

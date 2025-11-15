@@ -3,21 +3,10 @@ import type { CodegenConfig } from "@graphql-codegen/cli";
 const config: CodegenConfig = {
   overwrite: true,
   schema: "https://api.stag.pacubita.click/staff/v1/graphql",
-  documents: [
-    "src/lib/graphql/mutations.graphql", 
-    "src/lib/graphql/queries.graphql"
-  ],
+  // NOTE: Queries and mutations files are generated on demand
+  // To use codegen, create src/lib/graphql/queries.graphql and src/lib/graphql/mutations.graphql
+  documents: [],
   generates: {
-    "./src/lib/graphql/generated.ts": {
-      plugins: [
-        "typescript",
-        "typescript-operations",
-        "typescript-react-apollo",
-      ],
-      config: {
-        withHooks: true,
-      },
-    },
     "./src/lib/graphql/schema.json": {
       plugins: ["introspection"],
     },
