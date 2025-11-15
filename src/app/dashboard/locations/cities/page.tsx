@@ -84,10 +84,10 @@ export default function CitiesPage() {
   });
 
   // TODO: Replace with GraphQL when backend is ready
-  const { data: statesData } = useStatesQuery();
+  const { data: statesData } = useStatesQuery({ variables: { input: {} } });
 
   // TODO: Replace with GraphQL when backend is ready
-  const { data: citiesData, loading, error, refetch } = useCitiesQuery();
+  const { data: citiesData, loading, error, refetch } = useCitiesQuery({ variables: { input: {} } });
 
   // TODO: Replace with GraphQL when backend is ready
   // TODO: Add proper mutation
@@ -95,7 +95,8 @@ export default function CitiesPage() {
   const handleDelete = async (cityId: string) => {
     if (window.confirm('¿Estás seguro de que quieres eliminar esta ciudad?')) {
       // TODO: Replace with real mutation when backend is ready
-      await deleteCity();
+      console.log('Delete city:', cityId);
+      // await deleteCity();
     }
   };
 

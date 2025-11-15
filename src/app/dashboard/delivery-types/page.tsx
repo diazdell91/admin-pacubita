@@ -66,6 +66,7 @@ interface DeliveryType {
   description?: string;
   icon?: string;
   isEnabled: boolean;
+  actions?: never; // Para la columna de acciones del DataTable
 }
 
 const iconOptions = [
@@ -98,7 +99,7 @@ export default function DeliveryTypesPage() {
 
   const loading = false;
   const error = null;
-  const data = null;
+  const data: { deliveryTypes?: { data?: DeliveryType[] } } | null = null;
   const refetch = () => Promise.resolve();
   const createDeliveryType = () => Promise.resolve();
   const updateDeliveryType = () => Promise.resolve();
@@ -213,12 +214,17 @@ export default function DeliveryTypesPage() {
     return iconOption?.icon || Truck;
   };
 
-  const columns = [
+  const columns: Array<{
+    key: keyof DeliveryType;
+    label: string;
+    sortable?: boolean;
+    render?: (value: unknown, row: DeliveryType) => React.ReactNode;
+  }> = [
     {
       key: 'name' as keyof DeliveryType,
       label: 'Tipo de Entrega',
       sortable: true,
-      render: (value: any, type: DeliveryType) => (
+      render: (value: unknown, type: DeliveryType) => (
         <div className="flex items-center space-x-3">
           <div className="w-10 h-10 rounded-lg border bg-gray-50 flex items-center justify-center">
             {React.createElement(getIcon(type.icon || 'truck'), {
@@ -239,7 +245,7 @@ export default function DeliveryTypesPage() {
     {
       key: 'icon' as keyof DeliveryType,
       label: 'Icono',
-      render: (value: any) => {
+      render: (value: unknown) =>{
         const iconOption = iconOptions.find((option) => option.value === value);
         return (
           <div className="flex items-center space-x-2">
@@ -254,7 +260,7 @@ export default function DeliveryTypesPage() {
     {
       key: 'isEnabled' as keyof DeliveryType,
       label: 'Estado',
-      render: (value: any) => (
+      render: (value: unknown) =>(
         <Badge
           variant={value ? 'default' : 'secondary'}
           className={
@@ -268,7 +274,7 @@ export default function DeliveryTypesPage() {
     {
       key: 'actions' as keyof DeliveryType,
       label: 'Acciones',
-      render: (value: any, type: DeliveryType) => (
+      render: (value: unknown, type: DeliveryType) => (
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="ghost" className="h-8 w-8 p-0">
@@ -400,8 +406,8 @@ export default function DeliveryTypesPage() {
 
       <div className="rounded-md border bg-white">
         <DataTable
-          data={deliveryTypes}
-          columns={columns}
+          data={deliveryTypes as Record<string, unknown>[]}
+          columns={columns as any}
           searchPlaceholder="Buscar tipos de entrega..."
           pageSize={pageSize}
           totalItems={totalTypes}

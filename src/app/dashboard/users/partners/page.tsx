@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { useQuery } from '@apollo/client/react';
+import { usePartnersQuery } from '@/lib/graphql/generated';
 import {
   Shield,
   Plus,
@@ -65,10 +65,9 @@ export default function PartnersPage() {
   const [currentPage, setCurrentPage] = useState(1);
   const pageSize = 20;
 
-  const { data, loading, error, refetch } = useQuery(GET_USERS, {
+  const { data, loading, error, refetch } = usePartnersQuery({
     variables: {
       input: {
-        type: 'PARTNER',
         isEnabled:
           statusFilter === 'enabled'
             ? true

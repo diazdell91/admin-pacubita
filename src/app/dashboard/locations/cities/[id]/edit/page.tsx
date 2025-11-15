@@ -49,9 +49,7 @@ export default function EditCityPage() {
   // Load states
   const { data: statesData, loading: statesLoading } = useStatesQuery({
     variables: {
-      input: {
-        pagination: { page: 1, size: 100 }
-      }
+      input: {}
     }
   });
 
@@ -76,8 +74,8 @@ export default function EditCityPage() {
     if (city) {
       setFormData({
         name: city.name || '',
-        stateId: city.state?.id || '',
-        zipCodes: city.zipCodes && city.zipCodes.length > 0 ? city.zipCodes : ['']
+        stateId: (city as any).state?.id || '',
+        zipCodes: city.zipCodes && city.zipCodes.length > 0 ? [...city.zipCodes] : ['']
       });
     }
   }, [city]);
@@ -288,11 +286,11 @@ export default function EditCityPage() {
             </div>
             <div>
               <span className="font-medium">Estado actual:</span>
-              <p className="text-muted-foreground">{city.state?.name}</p>
+              <p className="text-muted-foreground">{(city as any).state?.name || 'N/A'}</p>
             </div>
             <div>
               <span className="font-medium">País:</span>
-              <p className="text-muted-foreground">{city.state?.country?.name}</p>
+              <p className="text-muted-foreground">{(city as any).state?.country?.name || 'N/A'}</p>
             </div>
             <div>
               <span className="font-medium">Códigos postales actuales:</span>

@@ -48,9 +48,7 @@ export default function EditMunicipalityPage() {
   // Load provinces
   const { data: provincesData, loading: provincesLoading } = useProvincesQuery({
     variables: {
-      input: {
-        pagination: { page: 1, size: 100 }
-      }
+      input: {}
     }
   });
 
@@ -75,7 +73,7 @@ export default function EditMunicipalityPage() {
     if (municipality) {
       setFormData({
         name: municipality.name || '',
-        provinceId: municipality.province?.id || ''
+        provinceId: (municipality as any).province?.id || ''
       });
     }
   }, [municipality]);
@@ -221,15 +219,15 @@ export default function EditMunicipalityPage() {
             </div>
             <div>
               <span className="font-medium">Provincia actual:</span>
-              <p className="text-muted-foreground">{municipality.province?.name}</p>
+              <p className="text-muted-foreground">{(municipality as any).province?.name || 'N/A'}</p>
             </div>
             <div>
               <span className="font-medium">Estado/País:</span>
-              <p className="text-muted-foreground">{municipality.province?.state?.name}</p>
+              <p className="text-muted-foreground">{(municipality as any).province?.state?.name || 'N/A'}</p>
             </div>
             <div>
               <span className="font-medium">País:</span>
-              <p className="text-muted-foreground">{municipality.province?.state?.country?.name}</p>
+              <p className="text-muted-foreground">{(municipality as any).province?.state?.country?.name || 'N/A'}</p>
             </div>
           </div>
         </CardContent>

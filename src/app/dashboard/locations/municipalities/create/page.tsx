@@ -40,9 +40,7 @@ export default function CreateMunicipalityPage() {
   // Load provinces using generated hook
   const { data: provincesData, loading: provincesLoading } = useProvincesQuery({
     variables: {
-      input: {
-        pagination: { page: 1, size: 100 }
-      }
+      input: {}
     }
   });
 

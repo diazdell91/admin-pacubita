@@ -1,7 +1,6 @@
 'use client';
 
 import { useState } from 'react';
-import { useQuery } from '@apollo/client/react';
 import { Button } from '@/components/ui/button';
 import {
   Card,
@@ -29,9 +28,7 @@ import {
   Users,
 } from 'lucide-react';
 import Link from 'next/link';
-import { GET_ARTICLES } from '@/lib/graphql/queries/articles';
-import { GET_PARTNERS } from '@/lib/graphql/queries/partners';
-import { GET_PRICING_RULES } from '@/lib/graphql/queries/pricing';
+import { useArticlesQuery, usePartnersQuery, usePricingRulesQuery } from '@/lib/graphql/generated';
 import { toast } from 'sonner';
 
 interface CalculationResult {
@@ -66,15 +63,15 @@ export default function PricingCalculatorPage() {
     { id: '5', name: 'Santa Clara' },
   ];
 
-  const { data: articlesData } = useQuery(GET_ARTICLES, {
+  const { data: articlesData } = useArticlesQuery({
     variables: { input: { isEnabled: true } },
   });
 
-  const { data: partnersData } = useQuery(GET_PARTNERS, {
+  const { data: partnersData } = usePartnersQuery({
     variables: { input: {} },
   });
 
-  const { data: pricingRulesData } = useQuery(GET_PRICING_RULES, {
+  const { data: pricingRulesData } = usePricingRulesQuery({
     variables: { input: { isEnabled: true } },
   });
 

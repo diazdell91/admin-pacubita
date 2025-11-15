@@ -63,7 +63,8 @@ export default function CountriesPage() {
   const handleDelete = async (countryId: string) => {
     if (window.confirm('¿Estás seguro de que quieres eliminar este país?')) {
       // TODO: Replace with real mutation when backend is ready
-      await deleteCountry();
+      // await deleteCountry(); // TODO: Implement when backend is ready
+      console.log('Deleting country:', countryId);
       refetch();
     }
   };

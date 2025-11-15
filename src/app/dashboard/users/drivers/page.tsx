@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { useQuery } from '@apollo/client/react';
+import { useDriverUsersQuery } from '@/lib/graphql/generated';
 import {
   Truck,
   Plus,
@@ -67,10 +67,9 @@ export default function DriversPage() {
   const [currentPage, setCurrentPage] = useState(1);
   const pageSize = 20;
 
-  const { data, loading, error, refetch } = useQuery(GET_USERS, {
+  const { data, loading, error, refetch } = useDriverUsersQuery({
     variables: {
       input: {
-        type: 'DRIVER',
         isEnabled:
           statusFilter === 'enabled'
             ? true

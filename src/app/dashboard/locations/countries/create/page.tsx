@@ -38,7 +38,8 @@ export default function CreateCountryPage() {
 
     try {
       // TODO: Replace with real mutation when backend is ready
-      await createCountry();
+      // await createCountry(); // TODO: Implement when backend is ready
+      console.log('Creating country:', formData);
       router.push('/dashboard/locations/countries');
     } catch (createError) {
       console.error('Error creating country:', createError);

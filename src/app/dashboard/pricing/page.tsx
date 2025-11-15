@@ -1,14 +1,13 @@
 'use client';
 
 import { useState } from 'react';
-import { useQuery } from '@apollo/client/react';
 import { PageHeader } from '@/components/common/PageHeader';
 import { DataTable } from '@/components/common/DataTable';
 import { LoadingSpinner } from '@/components/common/LoadingSpinner';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
-import { GET_PRICING_RULES } from '@/lib/graphql/queries/pricing';
+import { usePricingRulesQuery } from '@/lib/graphql/generated';
 import {
   Eye,
   Edit,
@@ -80,7 +79,7 @@ export default function PricingPage() {
   const [typeFilter, setTypeFilter] = useState<string>('all');
   const router = useRouter();
 
-  const { loading, error, data, refetch } = useQuery(GET_PRICING_RULES, {
+  const { loading, error, data, refetch } = usePricingRulesQuery({
     variables: {
       input: {
         isEnabled:

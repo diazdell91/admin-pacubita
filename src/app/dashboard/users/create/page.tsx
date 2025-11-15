@@ -1,7 +1,8 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { useMutation, useQuery } from '@apollo/client/react';
+import { useMutation } from '@apollo/client/react';
+import { usePartnersQuery } from '@/lib/graphql/generated';
 import { useRouter, useSearchParams } from 'next/navigation';
 import {
   ArrowLeft,
@@ -121,7 +122,7 @@ export default function CreateUserPage() {
     notes: '',
   });
 
-  const { data: partnersData } = useQuery(GET_PARTNERS, {
+  const { data: partnersData } = usePartnersQuery({
     variables: { input: {} },
   });
 

@@ -13,12 +13,12 @@ import { Label } from '@/components/ui/label';
 import { Loader2, MapPin } from 'lucide-react';
 import { graphql } from '@/generated';
 import type {
-  GetCountriesQuery,
-  GetStatesQuery,
-  GetCitiesQuery,
-  GetProvincesQuery,
-  GetMunicipalitiesQuery,
-  GetNeighborhoodsQuery,
+  CountriesQuery,
+  StatesQuery,
+  CitiesQuery,
+  ProvincesQuery,
+  MunicipalitiesQuery,
+  NeighborhoodsQuery,
 } from '@/generated/graphql';
 
 interface LocationSelectorProps {

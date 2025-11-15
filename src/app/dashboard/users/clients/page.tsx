@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { useQuery } from '@apollo/client/react';
+import { useClientUsersQuery } from '@/lib/graphql/generated';
 import {
   Users,
   Plus,
@@ -66,10 +66,9 @@ export default function ClientsPage() {
   const [currentPage, setCurrentPage] = useState(1);
   const pageSize = 20;
 
-  const { data, loading, error, refetch } = useQuery(GET_USERS, {
+  const { data, loading, error, refetch } = useClientUsersQuery({
     variables: {
       input: {
-        type: 'CLIENT',
         isEnabled:
           statusFilter === 'enabled'
             ? true

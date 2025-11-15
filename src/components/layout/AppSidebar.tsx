@@ -11,6 +11,7 @@ import {
   Settings,
   Home,
   FileText,
+  Bell,
 } from 'lucide-react';
 
 import {
@@ -183,6 +184,11 @@ const data = {
     },
   ],
   navSecondary: [
+    {
+      title: 'Notificaciones',
+      url: '/dashboard/notifications',
+      icon: Bell,
+    },
     {
       title: 'Analíticas',
       url: '/dashboard/analytics',

@@ -48,9 +48,7 @@ export default function EditNeighborhoodPage() {
   // Load municipalities
   const { data: municipalitiesData, loading: municipalitiesLoading } = useMunicipalitiesQuery({
     variables: {
-      input: {
-        pagination: { page: 1, size: 100 }
-      }
+      input: {}
     }
   });
 
@@ -75,7 +73,7 @@ export default function EditNeighborhoodPage() {
     if (neighborhood) {
       setFormData({
         name: neighborhood.name || '',
-        municipalityId: neighborhood.municipality?.id || ''
+        municipalityId: (neighborhood as any).municipality?.id || ''
       });
     }
   }, [neighborhood]);

@@ -5,7 +5,7 @@
  */
 
 // Old way with manual types and gql
-import { useQuery, useMutation, gql } from '@apollo/client';
+import { gql } from '@apollo/client';
 
 const SIGN_IN_OLD = gql`
   mutation SignIn($input: SignInInput!) {

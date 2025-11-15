@@ -41,9 +41,7 @@ export default function CreateCityPage() {
   // Load states using generated hook
   const { data: statesData, loading: statesLoading } = useStatesQuery({
     variables: {
-      input: {
-        pagination: { page: 1, size: 100 }
-      }
+      input: {}
     }
   });
 
@@ -74,7 +72,7 @@ export default function CreateCityPage() {
           input: {
             name: formData.name,
             stateId: formData.stateId,
-            zipCodes: zipCodes.length > 0 ? zipCodes : undefined,
+            zipCodes: zipCodes.length > 0 ? zipCodes : [],
             ...(formData.id && { id: formData.id })
           }
         }

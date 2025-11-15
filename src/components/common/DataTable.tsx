@@ -221,7 +221,7 @@ export function DataTable<T extends Record<string, unknown>>({
                     <TableCell key={String(column.key)}>
                       {column.render
                         ? column.render(row[column.key], row)
-                        : row[column.key]}
+                        : String(row[column.key] ?? '')}
                     </TableCell>
                   ))}
                 </TableRow>
